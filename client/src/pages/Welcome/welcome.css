@@ -1,0 +1,75 @@
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: black;
+  color: #bb64ff;
+  font-family: "Anek Bangla";
+  position: relative;
+  background-size: cover;
+}
+
+.group-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.login-btn {
+  background-color: rgba(100, 153, 255, 1);
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: lighter;
+  margin-top: 0;
+}
+.signup-btn {
+  background-color: rgba(100, 153, 255, 1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: lighter;
+  margin-top: 0;
+}
+
+.font-style {
+  font-size: 10vw;
+  color: white;
+  margin-top: 5%;
+  margin-bottom: 0;
+  font-family: "Anek Bangla", sans-serif;
+}
+
+.logo-devlog {
+  width: 308px;
+  margin-bottom: 20px;
+}
+
+span {
+  display: flex;
+  align-items: center;
+  font-size: 3.5em;
+  color: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(39, 39, 39, 1) 100%);
+  margin: 10px 0;
+}
+
+.AutoAwesomeIcon {
+  margin: 0 10px;
+  color: yellow;
+}
+
+text {
+  color: white;
+  font-style: italic;
+  margin-bottom: 30px;
+}
