@@ -14,6 +14,15 @@ class UserRepository extends AbstractRepository {
     return result.insertId;
   }
 
+  async login(item) {
+    const [result] = await this.database.query(
+      "SELECT * FROM user WHERE username=? AND password=?",
+      [item.username, item.password]
+    );
+
+    return result;
+  }
+
   async getById(id) {
     const [result] = await this.database.query(
       "SELECT * FROM user WHERE id=?",

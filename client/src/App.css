@@ -1,15 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&display=swap");
 
-:root{
-  --main-bg-color:#494949;
-  --secondary-bg-color:#E3E3E3;
-  --text-color:#BB64FF;
-  --button-color:#6499FF;
-  --main-bg-gradient:linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(39,39,39,1) 100%);
-  --text-gradient:linear-gradient(90deg, rgba(100,153,255,1) 0%, rgba(187,100,255,1) 100%);
+:root {
+  --main-bg-color: #494949;
+  --secondary-bg-color: #e3e3e3;
+  --text-color: #bb64ff;
+  --button-color: #6499ff;
+  --main-bg-gradient: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(39, 39, 39, 1) 100%
+  );
+  --text-gradient: linear-gradient(
+    90deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
 }
 
-*{
+* {
   font-family: "Anek Bangla", sans-serif;
   font-weight: 500;
 }
@@ -18,10 +26,14 @@ h1 {
   font-weight: 700;
 }
 
-h2, h3, h4, h5, h6{
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
 }
 
-p{
+p {
   font-weight: 400;
 }
