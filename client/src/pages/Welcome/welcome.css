@@ -4,11 +4,19 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: black;
-  color: #bb64ff;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(39, 39, 39, 1) 100%
+  );
   font-family: "Anek Bangla";
   position: relative;
   background-size: cover;
+  color: linear-gradient(
+    70deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
 }
 
 .group-button {
@@ -18,8 +26,12 @@
 }
 
 .login-btn {
-  background-color: rgba(100, 153, 255, 1);
-  color: white;
+  background: linear-gradient(
+    70deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
+  color: #e8e8e8;
   border: none;
   padding: 10px 30px;
   margin-left: 10px;
@@ -30,8 +42,12 @@
   margin-top: 0;
 }
 .signup-btn {
-  background-color: rgba(100, 153, 255, 1);
-  color: white;
+  background: linear-gradient(
+    70deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
+  color: #e8e8e8;
   border: none;
   padding: 10px 20px;
   margin-left: 10px;
@@ -43,10 +59,11 @@
 }
 
 .font-style {
+  font-weight: 900;
   font-size: 10vw;
-  color: white;
+  color: #d3cdee;
   margin-top: 5%;
-  margin-bottom: 0;
+  margin-bottom: -55px;
   font-family: "Anek Bangla", sans-serif;
 }
 
@@ -58,18 +75,31 @@
 span {
   display: flex;
   align-items: center;
-  font-size: 3.5em;
-  color: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(39, 39, 39, 1) 100%);
-  margin: 10px 0;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: "Anek Bangla", sans-serif;
+  margin: 0 0;
+}
+
+span.gradient-text {
+  background: linear-gradient(
+    70deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
 }
 
 .AutoAwesomeIcon {
-  margin: 0 10px;
+  margin: 10px 10px;
   color: yellow;
 }
 
 text {
   color: white;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 30px;
+  font-size: 15px;
 }

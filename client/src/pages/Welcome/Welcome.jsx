@@ -29,7 +29,7 @@ function Welcome() {
       <img src={logo} className="logo-devlog" alt="Logo DevLog with slogan" />
       <span>
         <AutoAwesomeIcon style={{ color: "yellow" }} />
-        "MADE BY DEVS FOR DEVS"
+        <span className="gradient-text">"MADE BY DEVS FOR DEVS"</span>
         <AutoAwesomeIcon style={{ color: "yellow" }} />
       </span>
       <text>(DAMN, Did I write that myself??)</text>
