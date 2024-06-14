@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  height: fit-content;
 }
 :root {
   --main-bg-color: #494949;

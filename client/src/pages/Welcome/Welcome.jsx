@@ -1,9 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useNavigate } from "react-router-dom";
 import "./welcome.css";
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import logo from "../../assets/images/logo-welcome.png";
-
 
 function Welcome() {
   const navigate = useNavigate();
@@ -24,14 +23,20 @@ function Welcome() {
         >
           Sign Up
         </button>
-      </section>
+        </section>
       <p className="font-style">DEV LOG</p>
       <img src={logo} className="logo-devlog" alt="Logo DevLog with slogan" />
-      <span>
-        <AutoAwesomeIcon style={{ color: "yellow" }} />
-        <span className="gradient-text">"MADE BY DEVS FOR DEVS"</span>
-        <AutoAwesomeIcon style={{ color: "yellow" }} />
-      </span>
+
+      <div className="test-logo">
+
+      <AutoAwesomeIcon className="left-icon" style={{ color: "yellow" , fontSize:'50px' }} />
+
+      <span className="gradient-text">"MADE BY DEVS FOR DEVS"</span>
+
+      <AutoAwesomeIcon className="right-icon" style={{ color: "yellow" , fontSize:'50px'}} />
+
+      </div>
+
       <text>(DAMN, Did I write that myself??)</text>
     </div>
   );
