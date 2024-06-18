@@ -1,46 +1,116 @@
-create table user (
-  id int primary key auto_increment not null,
-  username varchar(50) not null,
-  email varchar(100) not null unique,
-  password varchar(80) not null,
-  is_admin TINYINT not null default 0
-);
+-- MySQL Workbench Forward Engineering
 
-create table team (
-  id int primary key auto_increment not null,
-  team_name varchar(255) not null
-);
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-create table project (
-  id int primary key auto_increment not null,
-  name varchar(50) not null,
-  team_id int,
-  foreign key (team_id) references team(id)
-);
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
 
-create table task (
-  id int primary key auto_increment not null,
-  name varchar(50) not null,
-  description varchar(250),
-  is_archived TINYINT not null default 0,
-  project_id int not null,
-  team_id int not null,
-  foreign key (project_id) references project(id),
-  foreign key (team_id) references team(id)
-);
+-- -----------------------------------------------------
+-- Table `User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `User` (
+  `id` INT NOT NULL,
+  `username` VARCHAR(50) NULL,
+  `Email` VARCHAR(100) NULL,
+  `password` VARCHAR(80) NULL,
+  `Is_admin` TINYINT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
-create table user_has_team(
-  user_id int,
-  team_id int,
-  primary key (user_id, team_id),
-  foreign key (user_id) references user(id),
-  foreign key (team_id) references team(id)
-);
 
-create table user_has_task(
-  user_id int,
-  task_id int,
-  primary key (user_id, task_id),
-  foreign key (user_id) references user(id),
-  foreign key (task_id) references task(id)
-);
+-- -----------------------------------------------------
+-- Table `Team`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Team` (
+  `id` INT NOT NULL,
+  `Team_Name` VARCHAR(55) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Project`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Project` (
+  `id` INT NOT NULL,
+  `Name` VARCHAR(50) NULL,
+  `Is_Archived` TINYINT NULL,
+  `Team_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `Team_id`),
+  INDEX `fk_Project_Team1_idx` (`Team_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Project_Team1`
+    FOREIGN KEY (`Team_id`)
+    REFERENCES `Team` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Task`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Task` (
+  `id` INT NOT NULL,
+  `Name` VARCHAR(50) NULL,
+  `Description` VARCHAR(250) NULL,
+  `Is_Achived` TINYINT NULL,
+  `Project_id1` INT NOT NULL,
+  `Project_Team_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `Project_id1`, `Project_Team_id`),
+  INDEX `fk_Task_Project1_idx` (`Project_id1` ASC, `Project_Team_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Task_Project1`
+    FOREIGN KEY (`Project_id1` , `Project_Team_id`)
+    REFERENCES `Project` (`id` , `Team_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `User_has_Team`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `User_has_Team` (
+  `User_id` INT NOT NULL,
+  `Team_id` INT NOT NULL,
+  PRIMARY KEY (`User_id`, `Team_id`),
+  INDEX `fk_User_has_Team_Team1_idx` (`Team_id` ASC) VISIBLE,
+  INDEX `fk_User_has_Team_User1_idx` (`User_id` ASC) VISIBLE,
+  CONSTRAINT `fk_User_has_Team_User1`
+    FOREIGN KEY (`User_id`)
+    REFERENCES `User` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_User_has_Team_Team1`
+    FOREIGN KEY (`Team_id`)
+    REFERENCES `Team` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `User_has_Task`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `User_has_Task` (
+  `User_id` INT NOT NULL,
+  `Task_id` INT NOT NULL,
+  `Task_Project_id` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`User_id`, `Task_id`, `Task_Project_id`),
+  INDEX `fk_User_has_Task_Task1_idx` (`Task_id` ASC, `Task_Project_id` ASC) VISIBLE,
+  INDEX `fk_User_has_Task_User1_idx` (`User_id` ASC) VISIBLE,
+  CONSTRAINT `fk_User_has_Task_User1`
+    FOREIGN KEY (`User_id`)
+    REFERENCES `User` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_User_has_Task_Task1`
+    FOREIGN KEY (`Task_id`)
+    REFERENCES `Task` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
