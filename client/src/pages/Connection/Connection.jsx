@@ -1,7 +1,6 @@
-import "./connexion.css";
+import "./connection.css";
 
-
-function Connexion() {
+function Connection() {
     return (
       <div>
         <h1>connexion</h1>
@@ -10,4 +9,4 @@ function Connexion() {
     );
   }
   
-  export default Connexion;
+  export default Connection;

@@ -1,42 +1,42 @@
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import HomePage from "./pages/Home/Home";
+import Home from "./pages/Home/Home";
 import Archive from "./pages/Archive/Archive";
-import Menber from "./pages/Menber/Menber";
-import Tableau from "./pages/Tableau/Tableau";
+import Member from "./pages/Member/Menber";
+import Table from "./pages/Table/Table";
 
 import App from "./App";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter ([
   {
     path: "/",
     element: <App />,
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <Home />,
       },
       {
         path: "/archive",
         element: <Archive />,
       },
       {
-        path: "/menber",
-        element: <Menber />,
+        path: "/member",
+        element: <Member />,
       },
       {
-        path: "/tableau",
-        element: <Tableau />,
+        path: "/table",
+        element: <Table />,
       },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />

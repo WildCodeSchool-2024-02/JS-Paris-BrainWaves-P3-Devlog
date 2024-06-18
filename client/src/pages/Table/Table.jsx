@@ -1,6 +1,6 @@
-import "./tableau.css";
+import "./table.css";
 
-function Tableau() {
+function Table() {
     return (
       <div>
         
@@ -10,4 +10,4 @@ function Tableau() {
     );
   }
   
-  export default Tableau;
+  export default Table;
