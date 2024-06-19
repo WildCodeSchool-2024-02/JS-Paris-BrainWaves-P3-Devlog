@@ -5,7 +5,7 @@ function Table() {
       <div>
         
        
-        <h1>tableau</h1>
+        <h1>table</h1>
       </div>
     );
   }

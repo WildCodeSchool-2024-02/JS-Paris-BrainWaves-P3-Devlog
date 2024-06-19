@@ -13,10 +13,10 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `User` (
   `id` INT NOT NULL,
-  `username` VARCHAR(50) NULL,
-  `Email` VARCHAR(100) NULL,
-  `password` VARCHAR(80) NULL,
-  `Is_admin` TINYINT NULL,
+  `username` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `is_admin` TINYINT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -26,7 +26,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Team` (
   `id` INT NOT NULL,
-  `Team_Name` VARCHAR(55) NULL,
+  `team_Name` VARCHAR(55) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -36,8 +36,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Project` (
   `id` INT NOT NULL,
-  `Name` VARCHAR(50) NULL,
-  `Is_Archived` TINYINT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `is_archived` TINYINT NULL,
   `Team_id` INT NOT NULL,
   PRIMARY KEY (`id`, `Team_id`),
   INDEX `fk_Project_Team1_idx` (`Team_id` ASC) VISIBLE,
@@ -54,9 +54,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Task` (
   `id` INT NOT NULL,
-  `Name` VARCHAR(50) NULL,
-  `Description` VARCHAR(250) NULL,
-  `Is_Achived` TINYINT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(250) NOT NULL,
+  `is_achived` TINYINT NULL,
   `Project_id1` INT NOT NULL,
   `Project_Team_id` INT NOT NULL,
   PRIMARY KEY (`id`, `Project_id1`, `Project_Team_id`),

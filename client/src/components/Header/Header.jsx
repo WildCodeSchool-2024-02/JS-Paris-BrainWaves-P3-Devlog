@@ -4,7 +4,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import "./header.css";
 import logo from "../../assets/images/logo.png";
-import profil from "../../assets/images/profil.jpg";
+import profile from "../../assets/images/profile.jpg";
 
 function Header() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function Header() {
   return (
     <header>
       <div id="header">
-        <div className="logo-acceuil">
+        <div className="logo-home">
           <img
             src={logo}
             role="presentation"
@@ -62,18 +62,18 @@ function Header() {
           role="presentation"
           onClick={togglePopover}
         >
-          <img src={profil} alt="profil" className="profil" />
+          <img src={profile} alt="profile" className="profile" />
           {/* Popover */}
           {showPopover && (
             <div className="popover">
-              <div className="popoverEcrit">
+              <div className="popoverWriting">
                 <ul>
                   <li>Compte</li>
                   <div className="popoverMailImg">
                     <li>
-                      <img src={profil} alt="profil" className="profil" />
+                      <img src={profile} alt="profile" className="profile" />
                     </li>
-                    <div className="popoverNom">
+                    <div className="popoverName">
                       <p>John Doe</p>
                       <p>John.Doe@gmail.com</p>
                     </div>

@@ -17,7 +17,7 @@ header {
   width: 100px;
   cursor: pointer;
 }
-.profil {
+.profile {
   width: 70px;
   border-radius: 50%;
   cursor: pointer;
@@ -33,7 +33,7 @@ header {
   padding: 10px 30px;
 }
 
-.logo-acceuil {
+.logo-home {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -86,7 +86,7 @@ header {
   border-radius: 20px;
 }
 
-.popoverEcrit {
+.popoverWriting {
   display: flex;
   justify-content: space-around;
 }
@@ -96,12 +96,12 @@ header {
   flex-direction: row;
 }
 
-.popoverNom {
+.popoverName {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.popoverEcrit ul {
+.popoverWriting ul {
   list-style: none;
 }
