@@ -1,0 +1,107 @@
+header {
+  background-color: #494949;
+  color: white;
+  padding-top: 0.1%;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 100px;
+  cursor: pointer;
+}
+.profile {
+  width: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.rounded-button {
+  border-radius: 14px;
+  color: #e3e3e3;
+  background-color: #6499ff;
+  width: 100px;
+  cursor: pointer;
+  margin-left: 150px;
+  padding: 10px 30px;
+}
+
+.logo-home {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 150px;
+}
+
+.search-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0px;
+  margin-left: 20px;
+  background-color: transparent;
+  color: aliceblue;
+}
+
+#header input[type="text"] {
+  border-radius: 30px;
+  background-color: #494949;
+  border-color: #6499ff;
+  border-width: 3px;
+  border-style: solid;
+  padding: 8px 16px 8px 40px;
+  width: 300px;
+  color: white;
+}
+
+#header input[type="text"]::placeholder {
+  color: #e3e3e3;
+}
+
+.img-container {
+  position: relative;
+  margin-right: 50px;
+}
+
+.popover {
+  position: absolute;
+  background-color: #2c2c2c;
+  width: 300px;
+  padding-bottom: 50px;
+  right: 2.5px;
+  border-radius: 20px;
+}
+
+.popoverWriting {
+  display: flex;
+  justify-content: space-around;
+}
+
+.popoverMailImg {
+  display: flex;
+  flex-direction: row;
+}
+
+.popoverName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.popoverWriting ul {
+  list-style: none;
+}
