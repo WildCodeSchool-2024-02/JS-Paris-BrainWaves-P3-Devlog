@@ -1,12 +1,13 @@
 import "./home.css";
+import TaskManager from "../../components/TaskManager/TaskManger";
 
 function Home() {
-    return (
-      <div>
-         
-        <h1>Accueil</h1>
-      </div>
-    );
-  }
-  
-  export default Home;
+  return (
+    <div className="home-page">
+      <p>Accueil</p>
+      <TaskManager />
+    </div>
+  );
+}
+
+export default Home;

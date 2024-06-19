@@ -1,0 +1,75 @@
+.task-manager {
+  background-color: transparent;
+  color: white;
+  font-family: "Anek Bangla", sans-serif;
+  padding-left: 350px;
+  margin-top: 250px;
+  border-radius: 5px solid #6499ff;
+}
+.span {
+  display: flex;
+  font-size: 20px;
+  color: #6499ff;
+  margin-bottom: 5px;
+}
+.tabs {
+  display: felx;
+  justify-content: space-around;
+  margin-bottom: 0px;
+}
+
+.tabs button {
+  background-color: transparent;
+  border: none;
+  color: rgba(187, 100, 255, 1);
+  padding: 0px 30px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tabs button.active {
+  color: rgba(187, 100, 255, 1);
+}
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+.task-item {
+  background: #3a3a3c;
+  margin-bottom: 10px;
+  padding: 5px 250px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item p {
+  margin: 0;
+  padding-left: 10px;
+  color: #ffffff;
+}
+
+.delete-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(187, 100, 255, 1);
+}
+
+.add-task-btn {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 10px 0px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+.add-task-btn svg {
+  margin-right: 15px;
+}
