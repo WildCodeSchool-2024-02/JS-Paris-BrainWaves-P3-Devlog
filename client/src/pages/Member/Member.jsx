@@ -1,6 +1,5 @@
 import "./member.css";
 
-
 function Member() {
     return (
       <div>
