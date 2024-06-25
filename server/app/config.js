@@ -25,8 +25,8 @@ const app = express();
 // 4. Be sure to only have URLs in the array with domains from which you want to allow requests.
 // For example: ["http://mysite.com", "http://another-domain.com"]
 
-/*
-const cors = require("cors");
+
+/* const cors = require("cors");
 
 app.use(
   cors({
@@ -37,8 +37,7 @@ app.use(
     ]
   })
 );
-*/
-
+/*
 /* ************************************************************************* */
 
 // Request Parsing: Understanding the purpose of this part

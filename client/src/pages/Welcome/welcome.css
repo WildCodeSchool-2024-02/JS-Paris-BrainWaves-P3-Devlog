@@ -38,7 +38,7 @@
   border-radius: 50px;
   cursor: pointer;
   font-size: 20px;
-  font-weight: lighter;
+  font-weight: bold;
   margin-top: 0;
 }
 .signup-btn {
@@ -54,7 +54,7 @@
   border-radius: 50px;
   cursor: pointer;
   font-size: 20px;
-  font-weight: lighter;
+  font-weight: bold;
   margin-top: 0;
 }
 
@@ -81,12 +81,14 @@
 
 span.gradient-text {
   background: linear-gradient(
-    70deg,
+    to right,
     rgba(100, 153, 255, 1) 0%,
     rgba(187, 100, 255, 1) 100%
   );
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
   display: inline;
   font-size: 45px;
   font-weight: bold;
@@ -113,4 +115,55 @@ text {
   font-style: normal;
   margin-bottom: 30px;
   font-size: 15px;
+}
+
+@media (max-width: 668px) {
+  .font-style {
+    font-size: 8vw;
+  }
+  .login-btn,
+  .signup-btn {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
+  .group-button {
+    top: 10px;
+    right: 10px;
+  }
+  .logo-devlog {
+    width: 150px;
+  }
+
+  span.gradient-text {
+    font-size: 6vw;
+  }
+  text {
+    font-size: 14px;
+  }
+  .test-logo {
+    width: fit-content;
+  }
+}
+@media (max-width: 1240px) {
+  .font-style {
+    font-size: 6vw;
+  }
+  .login-btn,
+  .signup-btn {
+    padding: 12px 25px;
+    font-size: 18px;
+  }
+  .group-button {
+    top: 15px;
+    right: 15px;
+  }
+  .logo-devlog {
+    width: 150px;
+  }
+  span.gradient-text {
+    font-size: 3.5vw;
+  }
+  text {
+    font-size: 12px;
+  }
 }
