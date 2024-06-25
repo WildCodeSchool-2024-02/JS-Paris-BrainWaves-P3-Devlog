@@ -117,37 +117,66 @@ text {
   font-size: 15px;
 }
 
-@media (max-width: 668px) {
+@media (max-width: 768px) {
   .font-style {
-    font-size: 8vw;
+    font-weight: 900;
+    font-size: 10vw;
+    color: #d3cdee;
+    font-family: "Anek Bangla", sans-serif;
+    margin-bottom: -30px;
   }
+}
+
+.login-btn,
+.signup-btn {
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+.logo-devlog {
+  width: 150px;
+}
+.test-logo {
+  width: 1rem;
+}
+
+@media (max-width: 480px) {
   .login-btn,
   .signup-btn {
-    padding: 8px 15px;
-    font-size: 16px;
+    padding: 6px 15px;
+    font-size: 14px;
   }
-  .group-button {
-    top: 10px;
-    right: 10px;
-  }
+
   .logo-devlog {
+    width: 150px;
+    width: 150px;
+
     width: 150px;
   }
 
+  .test-logo,
+  .group-button {
+    width: 70%;
+  }
   span.gradient-text {
-    font-size: 6vw;
+    font-size: 1.8vw;
   }
-  text {
-    font-size: 14px;
+  .left-icon {
+    left: -20px;
   }
-  .test-logo {
-    width: fit-content;
+  .right-icon {
+    right: -20px;
   }
 }
 @media (max-width: 1240px) {
   .font-style {
-    font-size: 6vw;
+    font-weight: 900;
+    font-size: 10vw;
+    color: #d3cdee;
+    font-family: "Anek Bangla", sans-serif;
+    margin-bottom: -30px;
   }
+
   .login-btn,
   .signup-btn {
     padding: 12px 25px;
@@ -159,6 +188,13 @@ text {
   }
   .logo-devlog {
     width: 150px;
+  }
+  .test-logo {
+    display: flex;
+    align-items: center;
+    width: 65%;
+    position: relative;
+    justify-content: center;
   }
   span.gradient-text {
     font-size: 3.5vw;

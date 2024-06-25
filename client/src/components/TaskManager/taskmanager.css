@@ -89,7 +89,7 @@
   background: #2c2c2c;
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1240px) {
   .tabs button {
     padding: 0px 15px; /* Smaller padding */
     font-size: 16px; /* Smaller font size */

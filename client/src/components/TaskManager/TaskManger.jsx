@@ -109,8 +109,10 @@ function TaskManager() {
               type="text"
               value={newTaskText}
               onChange={(e) => setNewTaskText(e.target.value)}
-              onKeyDown={(e) =>{
-                if (e.key === "Enter") {addTask()}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addTask();
+                }
               }}
               placeholder="Enter task description"
               autoFocus
