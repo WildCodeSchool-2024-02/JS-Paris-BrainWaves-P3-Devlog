@@ -53,7 +53,7 @@ function Footer() {
 
       <section className="footer-link">
         <div className="link-clpsm">
-          <div>
+          <div className="copyright">
             <p>Copyright 2024</p>
           </div>
 
@@ -76,11 +76,11 @@ function Footer() {
             <p>🛡️Security</p>
           </div>
 
-          <hr className="hr-line" />
+          <hr className="hr-line-2" />
 
           <div>
             {" "}
-            <p>🍪Manage Cookies</p>{" "}
+            <p className="cookies">🍪Manage Cookies</p>{" "}
           </div>
         </div>
 
@@ -90,6 +90,12 @@ function Footer() {
           <img src={faceImage} alt="DevLog" />
         </div>
       </section>
+
+      <div className="copyright-responsive">
+        <div>
+          <p>Copyright 2024</p>
+        </div>
+      </div>
     </footer>
   );
 }
