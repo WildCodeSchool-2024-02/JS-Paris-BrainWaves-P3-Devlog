@@ -1,10 +1,12 @@
 import "./home.css";
+import Project from "../../components/Project/project";
 
 function Home() {
     return (
+
       <div>
-         
-        <h1>Accueil</h1>
+        <p>Accueil</p>
+        <Project />
       </div>
     );
   }
