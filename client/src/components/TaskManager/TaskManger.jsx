@@ -1,9 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/no-autofocus */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
-import React, { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -32,6 +27,20 @@ function TaskManager() {
 
   const taskListRef = useRef(null);
 
+  // fetch Tasks from the API
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch("/api/task");
+        const data = await response.json();
+        setTasks(data);
+      } catch (error) {
+        console.error("Failed to fetch tasks", error);
+      }
+    };
+    fetchTasks();
+  }, []);
+
   const scrollToTop = () => {
     taskListRef.current.scrollTop = 0;
   };
@@ -59,11 +68,11 @@ function TaskManager() {
 
   function deleteTask(taskId) {
     const updatedTasks = {};
-    for (const project in tasks) {
+    Object.keys(tasks).forEach((project) => {
       updatedTasks[project] = tasks[project].filter(
         (task) => task.id !== taskId
       );
-    }
+    });
     setTasks(updatedTasks);
   }
 
@@ -115,8 +124,16 @@ function TaskManager() {
                 }
               }}
               placeholder="Enter task description"
-              autoFocus
             />
+            <div className="control-btn">
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="scrool-top-btn"
+              >
+                Scroll to Top
+              </button>
+            </div>
             <button type="button" onClick={addTask}>
               Add Task
             </button>
@@ -128,7 +145,11 @@ function TaskManager() {
           <div key={task.id} id={`task-${task.id}`} className="task-item">
             <p>{task.text}</p>
             <div id="button-delete">
-              <button type="button" onClick={() => deleteTask(task.id)}>
+              <button
+                type="button"
+                onClick={() => deleteTask(task.id)}
+                aria-label="Delete task"
+              >
                 <RiDeleteBin5Line />
               </button>
             </div>

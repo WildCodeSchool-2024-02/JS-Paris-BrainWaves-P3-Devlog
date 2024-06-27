@@ -26,17 +26,15 @@ const app = express();
 // For example: ["http://mysite.com", "http://another-domain.com"]
 
 
-/* const cors = require("cors");
+const cors = require("cors");
 
-app.use(
-  cors({
+ app.use(
+   cors({
     origin: [
       process.env.CLIENT_URL, // keep this one, after checking the value in `server/.env`
-      "http://mysite.com",
-      "http://another-domain.com",
-    ]
-  })
-);
+    ],
+ }) );
+
 /*
 /* ************************************************************************* */
 

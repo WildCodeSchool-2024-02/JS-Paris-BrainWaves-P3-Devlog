@@ -70,7 +70,9 @@
   justify-content: center;
   margin-top: 0px;
 }
-
+.control-btn {
+  display: none;
+}
 .add-task-btn svg {
   margin-right: 15px;
 }
