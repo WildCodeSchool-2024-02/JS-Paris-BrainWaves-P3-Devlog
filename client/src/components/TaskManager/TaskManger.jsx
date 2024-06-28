@@ -32,6 +32,9 @@ function TaskManager() {
     const fetchTasks = async () => {
       try {
         const response = await fetch("/api/task");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
         const data = await response.json();
         setTasks(data);
       } catch (error) {
