@@ -17,12 +17,12 @@ class TaskRepository extends AbstractRepository {
         return results;
     }
 
- /*   async addTask(taskDetails) {
-        const { User_id, status } = taskDetails;
+    async addTask(taskDetails) {
+        const { idUser, status } = taskDetails;
         const query = `INSERT INTO ${this.table} (User_id, status) VALUES (?, ?)`;
-        const [result] = await this.database.execute(query, [User_id, status]);
-        return { Task_id: result.insertId, User_id, status };
-    } */
+        const [result] = await this.database.execute(query, [idUser, status]);
+        return { Task_id: result.insertId, idUser, status };
+    } 
 } 
 
 module.exports = TaskRepository;

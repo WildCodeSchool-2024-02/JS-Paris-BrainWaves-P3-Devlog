@@ -19,14 +19,14 @@ const getByStatus = async (req, res, next) => {
     }
 }
 
-/* const addTask = async (req, res, next) => {
+const addTask = async (req, res, next) => {
     try {
-        const task = await tables.task.addTask(req.body);
-        res.status(201).json(task);
+        const [results] = await tables.task.addTask(req.body);
+        res.status(201).json(results);
     } catch (error) {
         next(error);
 }
-} */
+}
 
 
-module.exports = { browse, getByStatus }; 
+module.exports = { browse, getByStatus, addTask }; 
