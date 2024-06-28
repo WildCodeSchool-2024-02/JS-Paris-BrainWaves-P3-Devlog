@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "./project.css";
 import sproject from "../../assets/images/sproject.png";
 
 function Project() {
+
   const [dataProject, setDataProject] = useState([]);
-  const navigate = useNavigate();
 
   const fetchDataProject = async () => {
     try {
@@ -22,11 +21,8 @@ function Project() {
 
   useEffect(() => {
     fetchDataProject();
-  }, [])
-
-  const handleCreateProject = () => {
-    navigate('/table'); 
-  };
+  }, []);
+  
 
   return (
     <div className="project-container">
@@ -46,7 +42,7 @@ function Project() {
       <button
         className="create-project-button"
         type="button"
-        onClick={handleCreateProject}
+    
       >
         CRÉER UN PROJET
       </button>
