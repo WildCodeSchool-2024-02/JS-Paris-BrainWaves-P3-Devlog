@@ -66,6 +66,7 @@ function TaskManager() {
     setButtonVisible(true);
   }
 
+  
   function deleteTask(taskId) {
     const updatedTasks = {};
     Object.keys(tasks).forEach((project) => {

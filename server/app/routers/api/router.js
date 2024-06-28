@@ -8,7 +8,7 @@ const router = express.Router();
 
 const usersRoutes = require("./users/router"); // Management des utilisateurs
 const tablesRoutes = require("./tables/router"); // Management des tableaux
-const taskRoutes = require("./tasks/router"); 
+const taskRoutes = require("./tasks/router");
 
 router.use("/users", usersRoutes);
 router.use("/tables", tablesRoutes);

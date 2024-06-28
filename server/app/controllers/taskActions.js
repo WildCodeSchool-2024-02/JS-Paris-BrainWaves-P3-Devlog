@@ -11,12 +11,22 @@ const browse = async ({ res, next }) => {
 
 const getByStatus = async (req, res, next) => {
     try {
-        const status = req.body;
+        const { status } = req.params;
         const tasks = await tables.task.getByStatus(status);
-        res.json(tasks);
+        res.status(200).json(tasks);
     } catch (err) {
         next(err);
     }
-};
+}
 
-module.exports = { browse, getByStatus, };
+/* const addTask = async (req, res, next) => {
+    try {
+        const task = await tables.task.addTask(req.body);
+        res.status(201).json(task);
+    } catch (error) {
+        next(error);
+}
+} */
+
+
+module.exports = { browse, getByStatus }; 
