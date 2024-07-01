@@ -8,7 +8,7 @@ import Footer from "../../components/Footer/Footer";
 function Welcome() {
   const navigate = useNavigate();
   return (
-    <>
+    <main>
       <div className="welcome-page">
         <section className="group-button">
           <button
@@ -46,7 +46,7 @@ function Welcome() {
         <text>(DAMN, Did I write that myself??)</text>
       </div>
       <Footer />
-    </>
+    </main>
   );
 }
 

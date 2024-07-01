@@ -91,10 +91,8 @@ function Footer() {
         </div>
       </section>
 
-      <div className="copyright-responsive">
-        <div>
+      <div className="copyright-responsive"> 
           <p>Copyright 2024</p>
-        </div>
       </div>
     </footer>
   );

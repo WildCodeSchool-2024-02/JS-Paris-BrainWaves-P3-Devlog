@@ -3,13 +3,11 @@ import "./collaborater.css";
 function Collaborater() {
   return (
     <main>
-      <section className="Collabo-container">
-        <div>
-          <button className="add" type="submit">
-            {" "}
-            Ajouter{" "}
-          </button>
-        </div>
+      <section className="collaborater-container">
+        <button className="add" type="submit">
+          {" "}
+          Ajouter{" "}
+        </button>
       </section>
     </main>
   );

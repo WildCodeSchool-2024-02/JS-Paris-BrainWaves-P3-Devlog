@@ -10,7 +10,6 @@ import Table from "./pages/Table/Table";
 
 import App from "./App";
 import Collaborater from "./components/Collaborater/Collaborater";
-import Footer from "./components/Footer/Footer";
 import Welcome from "./pages/Welcome/Welcome";
 
 const router = createBrowserRouter([
@@ -39,16 +38,14 @@ const router = createBrowserRouter([
         path: "/table",
         element: <Table />,
       },
+      {
+        path: "/collaborater",
+        element: <Collaborater />,
+      },
+      
     ],
   },
-  {
-    path: "/Collabo",
-    element: <Collaborater />,
-  },
-  {
-    path: "/footer",
-    element: <Footer />,
-  },
+  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
