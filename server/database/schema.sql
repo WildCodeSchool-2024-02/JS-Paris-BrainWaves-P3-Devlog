@@ -15,6 +15,7 @@ USE `devlog` ;
 -- Table `devlog`.`User`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`User` ;
+
 CREATE TABLE IF NOT EXISTS `devlog`.`User` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,
@@ -28,6 +29,7 @@ ENGINE = InnoDB;
 -- Table `devlog`.`Team`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`Team` ;
+
 CREATE TABLE IF NOT EXISTS `devlog`.`Team` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(55) NOT NULL,
@@ -38,6 +40,7 @@ ENGINE = InnoDB;
 -- Table `devlog`.`Project`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`Project` ;
+
 CREATE TABLE IF NOT EXISTS `devlog`.`Project` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -56,6 +59,7 @@ ENGINE = InnoDB;
 -- Table `devlog`.`Task`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`Task` ;
+
 CREATE TABLE IF NOT EXISTS `devlog`.`Task` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -71,10 +75,12 @@ CREATE TABLE IF NOT EXISTS `devlog`.`Task` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 -- -----------------------------------------------------
 -- Table `devlog`.`User_has_Team`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`User_has_Team` ;
+
 CREATE TABLE IF NOT EXISTS `devlog`.`User_has_Team` (
   `User_id` INT NOT NULL,
   `Team_id` INT NOT NULL,
@@ -95,10 +101,12 @@ CREATE TABLE IF NOT EXISTS `devlog`.`User_has_Team` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 -- -----------------------------------------------------
 -- Table `devlog`.`User_has_Task`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`User_has_Task` ;
+
 CREATE TABLE IF NOT EXISTS `devlog`.`User_has_Task` (
   `User_id` INT NOT NULL,
   `Task_id` INT NOT NULL,
@@ -119,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `devlog`.`User_has_Task` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
