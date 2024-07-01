@@ -1,6 +1,7 @@
-
 import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
+import { GiHamburgerMenu } from "react-icons/gi"; // Import de l'icône burger
+import { IoHomeOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import "./header.css";
 import logo from "../../assets/images/logo.png";
@@ -12,7 +13,7 @@ function Header() {
   const [showPopover, setShowPopover] = useState(false);
 
   const handleNavigate = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const handleSearch = () => {};
@@ -38,6 +39,7 @@ function Header() {
             className="logo"
             onClick={handleNavigate}
           />
+          <GiHamburgerMenu className="burger-icon" onClick={handleNavigate} />
           <button
             className="rounded-button"
             type="button"
@@ -45,6 +47,7 @@ function Header() {
           >
             Accueil
           </button>
+          <IoHomeOutline className="home-icon" onClick={handleNavigate} />
         </div>
         <div className="search-container">
           <RiSearchLine className="search-icon" />

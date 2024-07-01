@@ -2,15 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import Welcome from "./pages/Welcome/Welcome";
 import Home from "./pages/Home/Home";
 import Archive from "./pages/Archive/Archive";
 import Member from "./pages/Member/Member";
 import Table from "./pages/Table/Table";
+import Collaborater from "./components/Collaborater/Collaborater";
 
 import App from "./App";
-import Collaborater from "./components/Collaborater/Collaborater";
-import Welcome from "./pages/Welcome/Welcome";
 
 const router = createBrowserRouter([
   {
@@ -42,10 +41,8 @@ const router = createBrowserRouter([
         path: "/collaborater",
         element: <Collaborater />,
       },
-      
     ],
   },
-  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

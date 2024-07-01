@@ -1,12 +1,13 @@
 import "./home.css";
+import Project from "../../components/Project/project";
 
 function Home() {
-    return (
-      <div>
-         
-        <h1>Accueil</h1>
-      </div>
-    );
-  }
-  
-  export default Home;
+  return (
+    <div>
+      <p>Accueil</p>
+      <Project />
+    </div>
+  );
+}
+
+export default Home;
