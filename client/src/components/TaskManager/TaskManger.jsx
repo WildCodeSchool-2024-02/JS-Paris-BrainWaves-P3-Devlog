@@ -33,7 +33,7 @@ function TaskManager() {
       try {
         const response = await fetch("/api/task");
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setTasks(data);
@@ -69,7 +69,6 @@ function TaskManager() {
     setButtonVisible(true);
   }
 
-  
   function deleteTask(taskId) {
     const updatedTasks = {};
     Object.keys(tasks).forEach((project) => {

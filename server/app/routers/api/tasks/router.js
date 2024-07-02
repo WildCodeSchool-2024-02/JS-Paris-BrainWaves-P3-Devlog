@@ -4,10 +4,10 @@ const router = express.Router();
 
 const { browse, getByStatus, addTask } = require("../../../controllers/taskActions");
 
-router.get("/", browse);
+router.get("/tasks", browse);
 
 router.get("/status/:status", getByStatus);
 
-router.post('/task', addTask);
+router.post("/addtask", addTask);
 
 module.exports = router;
