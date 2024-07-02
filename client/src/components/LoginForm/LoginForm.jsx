@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./LoginForm.css";
 import logo from "../../assets/images/logo.png";
 
@@ -20,9 +22,11 @@ function LoginForm() {
       })
         .then((res) => res.json())
         .then((json) => json);
-
+      if(resp.success){
+        toast("Success, logging in...");
+      }
       if (resp.error) {
-        return false;
+        toast("Invalid email or password");
       }
       return true;
     }
@@ -31,33 +35,36 @@ function LoginForm() {
   }
 
   return (
-    <form className="login-form">
-      <img src={logo} alt="logo" className="logo" />
-      <input
-        placeholder="Username"
-        className="form-input"
-        onChange={(e) => {
-          setUsername(e.target.value);
-        }}
-      />
-      <input
-        placeholder="Password"
-        className="form-input"
-        type="password"
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
-      <button type="button" className="form-btn" onClick={login}>
-        Login
-      </button>
-      <p>
-        You don't have an account?{" "}
-        <span className="signuptxt">
-          <a href="/signup">Signup</a>
-        </span>
-      </p>
-    </form>
+    <>
+      <form className="login-form">
+        <img src={logo} alt="logo" className="logo" />
+        <input
+          placeholder="Username"
+          className="form-input"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
+        <input
+          placeholder="Password"
+          className="form-input"
+          type="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button type="button" className="form-btn" onClick={login}>
+          Login
+        </button>
+        <p>
+          You don't have an account?{" "}
+          <span className="signuptxt">
+            <a href="/signup">Signup</a>
+          </span>
+        </p>
+      </form>
+      <ToastContainer />
+    </>
   );
 }
 

@@ -6,7 +6,11 @@ const signupAction = async (req, res, next) => {
 
     const dbResponse = await tables.users.create({ email, username, password });
     const createdUser = await tables.users.getById(dbResponse);
-    res.json(createdUser);
+    if(createdUser === true){
+      res.json({"success":"created"})
+    }else{
+      res.json({"error":"invalid"})
+    }
   } catch (e) {
     next(e);
   }
@@ -17,7 +21,7 @@ const loginAction = async (req, res, next) => {
     const { username, password } = req.body;
 
     const dbResponse = await tables.users.login({ username, password });
-    if (dbResponse[0] && dbResponse[0].id) {
+    if (dbResponse === true) {
       return res.json({
         success: "logged in",
         dbresponse: dbResponse,
