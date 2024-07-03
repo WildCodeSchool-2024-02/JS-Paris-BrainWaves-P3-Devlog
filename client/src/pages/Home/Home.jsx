@@ -1,20 +1,13 @@
 import "./home.css";
-<<<<<< TaskManager-Home
 import TaskManager from "../../components/TaskManager/TaskManger";
-
-function Home() {
-  return (
-    <div className="home-page">
-      <TaskManager />
-=======
 import Project from "../../components/Project/project";
 
 function Home() {
   return (
-    <div>
+    <div className="home-page">
       <p>Accueil</p>
+      <TaskManager />
       <Project />
->>>>>> dev
     </div>
   );
 }
