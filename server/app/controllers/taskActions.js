@@ -11,25 +11,29 @@ const browse = async ({ res, next }) => {
 
 const getByStatus = async (req, res, next) => {
     try {
-        const { status } = req.params;
-        const tasks = await tables.task.getByStatus(status);
+        const {status} = req.query.status;
+        if (!status) {
+            return res.status(400).json()
+        }
+        const statusArray = Array.isArray(status) ? status: status.split(',');
+        const tasks = await tables.task.getByStatus(statusArray);
         res.status(200).json(tasks);
     } catch (err) {
         next(err);
-    }
+    } return true;
 }
 
 const addTask = async (req, res, next) => {
     try {
         const { userId, status } = req.body;
         if (!userId || !status) {
-            return res.status(400).json({ message: 'Missing required information: idUser and status' });
+            return res.status(400).json({ message: 'Missing required information: userId and status' });
         }
         const [results] = await tables.task.addTask(req.body);
         res.status(201).json(results);
     } catch (error) {
         next(error);
-    } return undefined;
+    } return true;
 };
 
 module.exports = { browse, getByStatus, addTask }; 

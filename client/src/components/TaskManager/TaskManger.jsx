@@ -8,22 +8,7 @@ function TaskManager() {
   const [newTaskText, setNewTaskText] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [tasks, setTasks] = useState({
-    todo: [
-      { id: 1, text: "Navbar slide urgent issue immediately" },
-      { id: 2, text: "gitpush connection+SignUp page" },
-      { id: 3, text: "Homepage to be done before Friday" },
-    ],
-    process: [
-      { id: 1, text: "building features for Homepage" },
-      { id: 2, text: "gathering all features" },
-      { id: 3, text: "Homepage is presenting on Friday" },
-    ],
-    finish: [
-      { id: 1, text: "Completed WelcomePage, LoginPage, SignupPage" },
-      { id: 2, text: "Completed project review" },
-    ],
-  });
+  const [tasks, setTasks] = useState([]);
 
   const taskListRef = useRef(null);
 
@@ -31,21 +16,30 @@ function TaskManager() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("/api/task");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        setTasks(data);
+
+        const tasksOrganised = {
+          todo: data.filter(task => task.status === 'todo'),
+          process: data.filter(task => task.status === 'process'),
+          finish: data.filter(task => task.status === 'finish')
+        };
+        setTasks(tasksOrganised);
+
       } catch (error) {
-        console.error("Failed to fetch tasks", error);
+        console.error(error);
       }
     };
     fetchTasks();
   }, []);
 
   const scrollToTop = () => {
+    if (taskListRef.current) {
     taskListRef.current.scrollTop = 0;
+    }
   };
 
   function toggleInputVisible() {
@@ -144,13 +138,13 @@ function TaskManager() {
         )}
       </div>
       <div ref={taskListRef} className="task-list">
-        {tasks[currentTab].map((task) => (
-          <div key={task.id} id={`task-${task.id}`} className="task-item">
-            <p>{task.text}</p>
+        {(tasks[currentTab] || []).map((task) => (
+          <div key={task.Task_id} id={`task-${task.Task_id}`} className="task-item">
+            <p>Task ID: {task.Task_id}</p>
             <div id="button-delete">
               <button
                 type="button"
-                onClick={() => deleteTask(task.id)}
+                onClick={() => deleteTask(task.Task_id)}
                 aria-label="Delete task"
               >
                 <RiDeleteBin5Line />
