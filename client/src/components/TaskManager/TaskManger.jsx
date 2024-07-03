@@ -12,7 +12,7 @@ function TaskManager() {
 
   const taskListRef = useRef(null);
 
-  // fetch Tasks from the API
+  
   useEffect(() => {
     const fetchTasks = async () => {
       try {

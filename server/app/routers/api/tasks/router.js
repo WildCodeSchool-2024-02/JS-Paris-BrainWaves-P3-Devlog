@@ -2,11 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-const { browse, getByStatus, addTask } = require("../../../controllers/taskActions");
+const { browse, addTask } = require("../../../controllers/taskActions");
 
 router.get("/", browse);
-
-router.get("/status", getByStatus);
 
 router.post("/addtask", addTask);
 

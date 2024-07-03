@@ -9,19 +9,7 @@ const browse = async ({ res, next }) => {
     }
 };
 
-const getByStatus = async (req, res, next) => {
-    try {
-        const {status} = req.query.status;
-        if (!status) {
-            return res.status(400).json()
-        }
-        const statusArray = Array.isArray(status) ? status: status.split(',');
-        const tasks = await tables.task.getByStatus(statusArray);
-        res.status(200).json(tasks);
-    } catch (err) {
-        next(err);
-    } return true;
-}
+
 
 const addTask = async (req, res, next) => {
     try {
@@ -36,4 +24,4 @@ const addTask = async (req, res, next) => {
     } return true;
 };
 
-module.exports = { browse, getByStatus, addTask }; 
+module.exports = { browse, addTask }; 
