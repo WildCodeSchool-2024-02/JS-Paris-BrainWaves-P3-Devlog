@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Welcome from "./pages/Welcome/Welcome";
 import Home from "./pages/Home/Home";

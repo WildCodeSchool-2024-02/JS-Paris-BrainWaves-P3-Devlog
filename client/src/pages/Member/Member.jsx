@@ -1,11 +1,12 @@
 import "./member.css";
 
 function Member() {
-    return (
-      <div>
-        <h1>Member</h1>
-      </div>
-    );
-  }
-  
-  export default Member;
+  return (
+    <>
+      <h1>Member</h1>
+      <p>Members</p>
+    </>
+  );
+}
+
+export default Member;

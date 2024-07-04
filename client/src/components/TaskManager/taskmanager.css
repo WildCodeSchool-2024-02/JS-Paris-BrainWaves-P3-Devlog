@@ -1,0 +1,108 @@
+.task-manager {
+  background-color: transparent;
+  color: white;
+  font-family: "Anek Bangla", sans-serif;
+  border: 2px solid #6499ff;
+  border-radius: 30px 30px 30px 30px;
+  width: 75%;
+}
+.span {
+  display: flex;
+  font-size: 20px;
+  color: #6499ff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 45%;
+}
+.tabs {
+  justify-content: space-around;
+  margin-bottom: 0px;
+}
+
+.tabs button {
+  background-color: transparent;
+  color: rgba(187, 100, 255, 1);
+  padding: 0px 30px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 60px;
+  border: none;
+  border-right: 3px solid white;
+}
+
+.tabs button.active {
+  color: rgba(187, 100, 255, 1);
+}
+
+.task-item {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item p {
+  margin: 0;
+  padding-left: 10px;
+  color: #ffffff;
+}
+
+.task-item button {
+  background: #2c2c2c;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.add-task-btn {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 10px 0px;
+  margin-left: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+}
+.control-btn {
+  display: none;
+}
+.add-task-btn svg {
+  margin-right: 15px;
+}
+.task-list {
+  height: 200px;
+  overflow-y: scroll;
+  margin: 0px auto;
+  padding: 5px;
+  border-radius: 30px;
+  width: 95%;
+  scrollbar-color: rgba(187, 100, 255, 1) transparent;
+  scroll-behavior: smooth;
+}
+.task-item {
+  margin-bottom: 5px;
+  background: #2c2c2c;
+}
+
+@media screen and (max-width: 1240px) {
+  .tabs button {
+    padding: 0px 15px; /* Smaller padding */
+    font-size: 16px; /* Smaller font size */
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 800px) {
+  .tabs button {
+    padding: 0px 5px; /* Even smaller padding */
+    font-size: 14px; /* Even smaller font size */
+  }
+  .task-manager {
+    padding: 0px 50px;
+  }
+}
