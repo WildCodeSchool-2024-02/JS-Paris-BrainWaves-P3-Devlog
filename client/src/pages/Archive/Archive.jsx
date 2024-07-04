@@ -2,9 +2,10 @@ import "./archive.css";
 
 function Archive() {
   return (
-    <div>
+    <>
       <h1>Archive</h1>
-    </div>
+      <p>Need to added the Content.</p>
+    </>
   );
 }
 

@@ -8,7 +8,7 @@ function TaskManager() {
   const [newTaskText, setNewTaskText] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState({});
 
   const taskListRef = useRef(null);
 
@@ -50,7 +50,7 @@ function TaskManager() {
   function addTask() {
     if (!newTaskText.trim()) return;
     const newTask = {
-      id: Date.now(),
+      userId: 1,
       text: newTaskText,
       status: "todo",
     };

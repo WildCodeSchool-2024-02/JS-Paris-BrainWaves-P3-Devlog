@@ -6,6 +6,6 @@ const { browse, addTask } = require("../../../controllers/taskActions");
 
 router.get("/", browse);
 
-router.post("/addtask", addTask);
+router.post("/add", addTask);
 
 module.exports = router;

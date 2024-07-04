@@ -11,16 +11,6 @@ class TaskRepository extends AbstractRepository {
         return results;
     }
 
-    async getByStatus(status) {
-        if (status.length === 0) {
-            return []
-        }
-        const placeholders = status.map(() => '?').join(',');
-        const query = `SELECT * FROM ${this.table} WHERE status IN (${placeholders})`;
-        const [results] = await this.database.query(query, [status]);
-        return results;
-    }
-
     async addTask(taskDetails) {
         const { userId, status } = taskDetails;
         const query = `INSERT INTO ${this.table} (User_id, status, Task_id) VALUES (?, ?)`;

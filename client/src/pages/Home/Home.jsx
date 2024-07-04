@@ -1,5 +1,5 @@
 import "./home.css";
-import TaskManager from "../../components/TaskManager/TaskManger";
+import TaskManager from "../../components/TaskManager/TaskManager";
 import Project from "../../components/Project/project";
 
 function Home() {
