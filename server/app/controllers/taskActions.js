@@ -9,8 +9,6 @@ const browse = async ({ res, next }) => {
     }
 };
 
-
-
 const addTask = async (req, res, next) => {
     try {
         const { userId, text, status } = req.body;
