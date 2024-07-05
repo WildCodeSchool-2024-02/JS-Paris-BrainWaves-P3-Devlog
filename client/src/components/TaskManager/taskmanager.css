@@ -1,14 +1,14 @@
 .task-manager {
-  background-color: transparent;
+  background-color: #1e1e1e;
   color: white;
   font-family: "Anek Bangla", sans-serif;
   border: 2px solid #6499ff;
   border-radius: 30px 30px 30px 30px;
-  width: 75%;
+  width: 400%;
 }
 .span {
   display: flex;
-  font-size: 20px;
+  font-size: 25px;
   color: #6499ff;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -76,7 +76,7 @@
   margin-right: 15px;
 }
 .task-list {
-  height: 200px;
+  height: 100px;
   overflow-y: scroll;
   margin: 0px auto;
   padding: 5px;
