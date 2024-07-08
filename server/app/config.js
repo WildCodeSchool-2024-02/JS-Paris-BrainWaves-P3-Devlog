@@ -27,8 +27,8 @@ const app = express();
 
 const cors = require("cors");
 
-app.use(
-  cors({
+ app.use(
+   cors({
     origin: [
       process.env.CLIENT_URL, // keep this one, after checking the value in `server/.env`
       "http://mysite.com",
@@ -37,6 +37,8 @@ app.use(
   })
 );
 
+
+/*
 /* ************************************************************************* */
 
 // Request Parsing: Understanding the purpose of this part
