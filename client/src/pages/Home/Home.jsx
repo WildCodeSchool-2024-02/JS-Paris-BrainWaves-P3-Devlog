@@ -9,11 +9,13 @@ function Home() {
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState("John Doe");
   const [inputValue, setInputValue] = useState(userName);
+  const [profilePic, setProfilPic] = useState(profile);
   const userId = 1;
   const inputRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const handleEditClick = () => {
-    setIsEditing(true); 
+    setIsEditing(true);
   };
 
   const handleInputChange = (event) => {
@@ -30,17 +32,50 @@ function Home() {
       handleInputBlur();
     }
   };
+ const handleProfilePicClick = () => {
+   fileInputRef.current.Click();
+ };
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("profilePic", file);
+      formData.append("userId", userId);
+
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/update-profile-pic`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("failed to update profile picture");
+        }
+        await response.json();
+        setProfilPic(URL.createObjectURL(file));
+      } catch (error) {
+        console.error(Error);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/${userId}`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/${userId}`
+        );
         if (!response.ok) {
-          throw new Error('failed to fetch user data');
+          throw new Error("failed to fetch user data");
         }
         const data = await response.json();
         setUserName(data.userName);
-        setInputValue(data,userName);
+        setInputValue(data.userName);
+        setProfilPic(data.profilePic || profile);
       } catch (error) {
         console.error(error);
       }
@@ -57,17 +92,20 @@ function Home() {
   useEffect(() => {
     const updateUserName = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/update-name`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, newName: inputValue })
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/update-name`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId, newName: inputValue }),
+          }
+        );
         if (!response.ok) {
-          throw new Error('Failed to update user name');
+          throw new Error("Failed to update user name");
         }
-         await response.json();
-       } catch (error) {
-         console.error(error);
+        setUserName(inputValue);
+      } catch (error) {
+        console.error(error);
       }
     };
 
@@ -95,18 +133,40 @@ function Home() {
           ) : (
             <h2>{`Bonjour, ${userName}`}</h2>
           )}
-          <img src ={profile} className="user-pic" alt="User Profile" />
-          <button type="button" className="modify-btn" onClick={handleEditClick}>Modifier</button>
+          <div
+           className="user-pic"
+            role="button"
+            onClick={handleProfilePicClick}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleProfilePicClick();
+            }}
+            tabIndex="0"
+            style={{ backgroundImage: `url(${profilePic})` }}
+            aria-label="Change profile picture"
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          /> 
+          <button
+            type="button"
+            className="modify-btn"
+            onClick={handleEditClick}
+          >
+            Modifier
+          </button>
         </div>
         <div id="main-content">
           <div className="task-manager-section">
             <TaskManager />
           </div>
           <div className="projects-collaborators-section">
-              <Project />
-            </div>
+            <Project />
           </div>
         </div>
+      </div>
     </>
   );
 }

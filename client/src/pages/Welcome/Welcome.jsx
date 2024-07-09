@@ -1,4 +1,4 @@
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { useNavigate } from "react-router-dom";
 import "./welcome.css";
 import logo from "../../assets/images/logo-welcome.png";
