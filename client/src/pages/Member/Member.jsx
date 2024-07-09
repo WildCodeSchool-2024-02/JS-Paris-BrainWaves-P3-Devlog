@@ -1,11 +1,14 @@
 import "./member.css";
+import Header from "../../components/Header/Header";
 
 function Member() {
-    return (
-      <div>
-        <h1>Member</h1>
-      </div>
-    );
-  }
-  
+
+  return (
+    <>
+      <Header />
+
+      <h1>Menber</h1>
+    </>
+  );
+}
   export default Member;
