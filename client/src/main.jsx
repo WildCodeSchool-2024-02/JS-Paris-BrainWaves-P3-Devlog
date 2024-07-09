@@ -7,7 +7,7 @@ import Home from "./pages/Home/Home";
 import Archive from "./pages/Archive/Archive";
 import Member from "./pages/Member/Member";
 import Table from "./pages/Table/Table";
-import Collaborater from "./components/Collaborater/Collaborater";
+import Collaborator from "./components/Collaborator/Collaborator";
 
 import App from "./App";
 
@@ -38,8 +38,8 @@ const router = createBrowserRouter([
         element: <Table />,
       },
       {
-        path: "/collaborater",
-        element: <Collaborater />,
+        path: "/collaborator",
+        element: <Collaborator />,
       },
     ],
   },

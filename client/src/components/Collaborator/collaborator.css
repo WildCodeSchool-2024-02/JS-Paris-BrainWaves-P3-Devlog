@@ -1,0 +1,73 @@
+.collaborator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+  border: 2px solid #6499ff;
+  border-radius: 10px;
+  width: 40%;
+}
+
+.collaborator-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.collaborator-list {
+  display: grid;
+  width: 90%;
+  height: 110px;
+  grid-template-columns: 40% 40%;
+  margin-left: 0%;
+  margin-right: 0%;
+  grid-gap: 25%;
+  justify-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Pour masquer la barre de défilement sur Firefox */
+}
+
+.collaborator-list::-webkit-scrollbar {
+  display: none; /* Pour masquer la barre de défilement sur Chrome, Safari et Opera */
+}
+
+.collaborator-list > div {
+  background-color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.user-name {
+  display: flex;
+}
+
+.button-add {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px 70px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #6499ff;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.input-add {
+  margin-top: 15px;
+  padding: 10px;
+  width: 70%;
+  font-size: 16px;
+  border: 2px solid #6499ff;
+  border-radius: 5px;
+  outline: none;
+}
+
+.input-add:focus {
+  border-color: #457bff;
+  box-shadow: 0 0 5px rgba(70, 130, 180, 0.5);
+}
