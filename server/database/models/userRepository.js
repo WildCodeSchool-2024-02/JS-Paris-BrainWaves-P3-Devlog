@@ -8,7 +8,7 @@ class UserRepository extends AbstractRepository {
 
   async create(item) {
     const [result] = await this.database.query(
-      "INSERT INTO user(email, username, password, is_admin) VALUES(?, ?, ?, 0)",
+      "INSERT INTO user(email, user_name, password, is_admin) VALUES(?, ?, ?, 0)",
       [item.email, item.username, await argon2.hash(item.password)]
     );
 
@@ -20,7 +20,7 @@ class UserRepository extends AbstractRepository {
 
   async login(item) {
     const [result] = await this.database.query(
-      "SELECT password FROM user WHERE username=?",
+      "SELECT password FROM user WHERE user_name=?",
       [item.username]
     );
 
