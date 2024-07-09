@@ -1,14 +1,12 @@
 import "./archive.css";
 
-
 function Archive() {
-    return (
-      <div>
-        
-        <h1>Archive</h1>
-       
-      </div>
-    );
-  }
-  
-  export default Archive ;
+  return (
+    <>
+      <h1>Archive</h1>
+      <p>Need to added the Content.</p>
+    </>
+  );
+}
+
+export default Archive;
