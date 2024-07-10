@@ -1,4 +1,4 @@
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import { useNavigate } from "react-router-dom";
 import "./welcome.css";
 import logo from "../../assets/images/logo-welcome.png";
@@ -13,14 +13,14 @@ function Welcome() {
           <button
             type="button"
             className="login-btn"
-            onClick={() => navigate("/Connection")}
+            onClick={() => navigate("/login")}
           >
             Login
           </button>
           <button
             type="button"
             className="signup-btn"
-            onClick={() => navigate("/Connection")}
+            onClick={() => navigate("/signup")}
           >
             Sign Up
           </button>

@@ -1,3 +1,4 @@
+const argon2 = require('argon2');
 const AbstractRepository = require("./AbstractRepository");
 
 class UserRepository extends AbstractRepository {
@@ -7,11 +8,29 @@ class UserRepository extends AbstractRepository {
 
   async create(item) {
     const [result] = await this.database.query(
-      "INSERT INTO user(email, username, password, is_admin) VALUES(?, ?, ?, 0)",
-      [item.email, item.username, item.password]
+      "INSERT INTO user(email, user_name, password, is_admin) VALUES(?, ?, ?, 0)",
+      [item.email, item.username, await argon2.hash(item.password)]
     );
 
-    return result.insertId;
+    if(result.insertId){
+      return true
+    }
+    return false;
+  }
+
+  async login(item) {
+    const [result] = await this.database.query(
+      "SELECT password FROM user WHERE user_name=?",
+      [item.username]
+    );
+
+    if(result[0] && result[0].password){
+      if(await argon2.verify(result[0].password, item.password)){
+        return true
+      }
+    }
+
+    return false
   }
 
   async getById(id) {
@@ -27,7 +46,8 @@ class UserRepository extends AbstractRepository {
     const [result] = await this.database.query('UPDATE user SET username=? WHERE id=?', [newName, id]
     ); 
     return result; 
-}
+ }
+  
 }
 
 module.exports = UserRepository;

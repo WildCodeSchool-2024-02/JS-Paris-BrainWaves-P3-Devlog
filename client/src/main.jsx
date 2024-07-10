@@ -9,6 +9,9 @@ import Table from "./pages/Table/Table";
 import Collaborater from "./components/Collaborater/Collaborater";
 
 import App from "./App";
+import LoginPage from "./pages/Login/Login";
+
+import SignupPage from "./pages/Signup/Signup";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +26,6 @@ const router = createBrowserRouter([
         path: "/home",
         element: <Home />,
       },
-
       {
         path: "/archive",
         element: <Archive />,
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
         element: <Collaborater />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
   },
 ]);
 

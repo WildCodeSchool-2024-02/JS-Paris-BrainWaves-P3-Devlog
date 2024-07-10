@@ -140,7 +140,7 @@ text {
   width: 1rem;
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .login-btn,
   .signup-btn {
     padding: 6px 15px;
@@ -160,7 +160,7 @@ text {
   .right-icon {
     right: -20px;
   }
-}
+} */
 @media (max-width: 1440px) {
   .font-style {
     font-weight: 900;
