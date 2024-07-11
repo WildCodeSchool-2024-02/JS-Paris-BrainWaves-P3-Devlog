@@ -121,7 +121,9 @@
     width: 200px;
   }
   .rounded-button {
-    margin-left: 10px;
+    margin-left: 5px;
+    width: 100px;
+    font-size: medium;
   }
 
   .search-container {

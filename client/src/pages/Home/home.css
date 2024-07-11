@@ -5,34 +5,33 @@
   color: white;
   padding: 20px;
   background-color: #2c2c2c;
+  margin: 0;
+  top: 0;
 }
-
+#header {
+  position: sticky;
+}
 .home-page h1 {
   font-size: 1.7rem;
   margin-bottom: 20px;
   font-weight: 600;
 }
-
 .home-page h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
 }
-
 .home-page p {
   align-self: self-start;
   font-weight: 500;
-  font-size: x-large;
-  margin: 0;
+  font-size: xx-large;
+  margin-bottom: 20px;
 }
-
 .user-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 0px;
-  margin-top: -10px;
+  margin-top: 10px;
 }
-
 .modify-btn {
   padding: 5px 20px;
   border: none;
@@ -40,104 +39,95 @@
   background-color: #6499ff;
   color: white;
   cursor: pointer;
-  margin-top: 10px;
   font-size: large;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
-
 .edit-input {
   font-size: 1rem;
   padding: 5px;
   border-radius: 10px;
   border: 1px solid #ccc;
   text-align: center;
-  margin-bottom: 10px;
 }
-
 .user-pic {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  margin-bottom: 10px;
   background-size: cover;
   background-position: center;
 }
-
 .main-content {
   display: flex-wrap;
-  flex-direction: column;
   width: 100vw;
   max-width: 1240px;
 }
-
 .pro-collab-section {
   display: flex;
-  flex-direction: column;
   width: 100%;
   margin-bottom: 30px;
 }
+.projects-collaborators-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 20px 0 20px 0;
+}
 @media screen and (max-width: 1060px) {
+  .home-page {
+    padding: 10px;
+  }
   .home-page h1 {
     font-size: 1.5rem;
   }
-
   .home-page h2 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
-
   .home-page p {
-    font-size: large;
+    font-size: x-large;
   }
-
   .modify-btn {
     padding: 5px 15px;
     font-size: medium;
   }
-
-  .edit-input {
-    font-size: 0.9rem;
-  }
-
   .user-pic {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
   }
-
   .main-content {
-    padding: 15px;
-  }
-  .projects-section {
-    padding: 15px;
+    max-width: 90vw;
   }
 }
-
 @media screen and (max-width: 600px) {
+  .home-page {
+    padding: 5px;
+  }
   .home-page h1 {
     font-size: 1.2rem;
   }
-
   .home-page h2 {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
-
   .home-page p {
-    font-size: medium;
+    font-size: large;
   }
-
   .modify-btn {
     padding: 5px 10px;
     font-size: small;
   }
-
-  .edit-input {
-    font-size: 0.8rem;
-  }
-
   .user-pic {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
-
   .main-content {
-    max-width: 100%;
+    max-width: 80vw;
+  }
+  .pro-collab-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .projects-collaborators-section {
+    flex-direction: column;
+    align-items: center;
   }
 }

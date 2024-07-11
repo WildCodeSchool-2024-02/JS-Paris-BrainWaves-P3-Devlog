@@ -27,7 +27,7 @@
   color: rgba(187, 100, 255, 1);
   padding: 0px 30px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 60px;
   border: none;
   border-right: 3px solid white;
@@ -65,7 +65,7 @@
   border: none;
   padding: 10px 0px;
   margin-left: 15px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
