@@ -12,12 +12,17 @@
   margin-bottom: 20px;
   font-weight: 600;
 }
+
 .home-page h2 {
   font-size: 1.5rem;
   font-weight: 300;
 }
+
 .home-page p {
   align-self: self-start;
+  font-weight: 500;
+  font-size: x-large;
+  margin: 0;
 }
 
 .user-info {
@@ -25,6 +30,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 0px;
+  margin-top: -10px;
 }
 
 .modify-btn {
@@ -46,68 +52,92 @@
   text-align: center;
   margin-bottom: 10px;
 }
+
 .user-pic {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   margin-bottom: 10px;
+  background-size: cover;
+  background-position: center;
 }
 
 .main-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  display: flex-wrap;
+  flex-direction: column;
+  width: 100vw;
   max-width: 1240px;
 }
 
-.task-manager-section {
+.pro-collab-section {
   display: flex;
   flex-direction: column;
-  width: 60%;
-  align-self: flex-start;
-  margin-left: -110px;
-  margin-bottom: 0px;
-  padding: 20px 30px;
-}
-
-.projects-collaborators-section {
-  display: flex;
-  flex-direction: row;
   width: 100%;
-  align-self: flex-start;
-  margin-left: -110px;
-  padding: 20px 30px;
+  margin-bottom: 30px;
 }
+@media screen and (max-width: 1060px) {
+  .home-page h1 {
+    font-size: 1.5rem;
+  }
 
-@media screen and (max-width: 1240px) {
+  .home-page h2 {
+    font-size: 1.3rem;
+  }
+
+  .home-page p {
+    font-size: large;
+  }
+
+  .modify-btn {
+    padding: 5px 15px;
+    font-size: medium;
+  }
+
+  .edit-input {
+    font-size: 0.9rem;
+  }
+
+  .user-pic {
+    width: 60px;
+    height: 60px;
+  }
+
   .main-content {
-    flex-direction: column;
-    align-items: center;
+    padding: 15px;
   }
-  .projects-collaborators-section {
-    flex-direction: column;
-  }
-  .projects,
-  .collaborators {
-    width: 100%;
-    margin-bottom: 20px;
+  .projects-section {
+    padding: 15px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .home-page {
-    padding: 10px;
-  }
   .home-page h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
+
+  .home-page h2 {
+    font-size: 1.1rem;
+  }
+
+  .home-page p {
+    font-size: medium;
+  }
+
+  .modify-btn {
+    padding: 5px 10px;
+    font-size: small;
+  }
+
+  .edit-input {
+    font-size: 0.8rem;
+  }
+
+  .user-pic {
+    width: 50px;
+    height: 50px;
+  }
+
   .main-content {
-    padding: 0;
-  }
-  .task-manager-section,
-  .projects,
-  .collaborators {
-    width: 100%;
-    padding: 10px;
+    max-width: 100%;
   }
 }

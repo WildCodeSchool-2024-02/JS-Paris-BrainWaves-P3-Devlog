@@ -2,17 +2,40 @@ import { useState, useRef, useEffect } from "react";
 import "./home.css";
 import TaskManager from "../../components/TaskManager/TaskManager";
 import Project from "../../components/Project/project";
+import Collaborater from "../../components/Collaborater/Collaborater";
 import Header from "../../components/Header/Header";
-import profile from "../../assets/images/profile.jpg";
+import useProfile from "../../components/Profile/Profile";
 
 function Home() {
-  const [isEditing, setIsEditing] = useState(false);
-  const [userName, setUserName] = useState("John Doe");
-  const [inputValue, setInputValue] = useState(userName);
-  const [profilePic, setProfilPic] = useState(profile);
   const userId = 1;
+  const {
+    userName,
+    profilePic,
+    fetchUserName,
+    updateUserName,
+    updateProfilePic,
+  } = useProfile(userId);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(userName);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    fetchUserName();
+  }, [fetchUserName]);
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  useEffect(() => {
+    if (!isEditing) {
+      updateUserName(inputValue);
+    }
+  }, [isEditing, inputValue, updateUserName]);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -24,7 +47,6 @@ function Home() {
 
   const handleInputBlur = () => {
     setIsEditing(false);
-    setUserName(inputValue);
   };
 
   const handleInputKeyDown = (event) => {
@@ -32,87 +54,17 @@ function Home() {
       handleInputBlur();
     }
   };
- const handleProfilePicClick = () => {
-   fileInputRef.current.Click();
- };
+
+  const handleProfilePicClick = () => {
+    fileInputRef.current.click();
+  };
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const formData = new FormData();
-      formData.append("profilePic", file);
-      formData.append("userId", userId);
-
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/update-profile-pic`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("failed to update profile picture");
-        }
-        await response.json();
-        setProfilPic(URL.createObjectURL(file));
-      } catch (error) {
-        console.error(Error);
-      }
+      await updateProfilePic(file);
     }
   };
-
-  useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/${userId}`
-        );
-        if (!response.ok) {
-          throw new Error("failed to fetch user data");
-        }
-        const data = await response.json();
-        setUserName(data.userName);
-        setInputValue(data.userName);
-        setProfilPic(data.profilePic || profile);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserName();
-  }, [userId, userName]);
-
-  useEffect(() => {
-    if (isEditing && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isEditing]);
-
-  useEffect(() => {
-    const updateUserName = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/update-name`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId, newName: inputValue }),
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Failed to update user name");
-        }
-        setUserName(inputValue);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (!isEditing) {
-      updateUserName();
-    }
-  }, [userName, userId, isEditing, inputValue]);
 
   return (
     <>
@@ -134,7 +86,7 @@ function Home() {
             <h2>{`Bonjour, ${userName}`}</h2>
           )}
           <div
-           className="user-pic"
+            className="user-pic"
             role="button"
             onClick={handleProfilePicClick}
             onKeyDown={(e) => {
@@ -149,7 +101,7 @@ function Home() {
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
-          /> 
+          />
           <button
             type="button"
             className="modify-btn"
@@ -162,8 +114,11 @@ function Home() {
           <div className="task-manager-section">
             <TaskManager />
           </div>
-          <div className="projects-collaborators-section">
+          <div id="pro-collab-section">
+            <div className="projects-collaborators-section">
             <Project />
+            <Collaborater />
+          </div>
           </div>
         </div>
       </div>

@@ -3,9 +3,11 @@
   color: white;
   font-family: "Anek Bangla", sans-serif;
   border: 2px solid #6499ff;
-  border-radius: 30px 30px 30px 30px;
-  width: 400%;
+  border-radius: 20px 20px 20px 20px;
+  width: 90vw;
+  max-width: 1200px;
 }
+
 .span {
   display: flex;
   font-size: 25px;
@@ -14,6 +16,7 @@
   margin-bottom: 10px;
   padding-left: 45%;
 }
+
 .tabs {
   justify-content: space-around;
   margin-bottom: 0px;
@@ -69,12 +72,15 @@
   justify-content: center;
   margin-top: 0px;
 }
+
 .control-btn {
   display: none;
 }
+
 .add-task-btn svg {
   margin-right: 15px;
 }
+
 .task-list {
   height: 100px;
   overflow-y: scroll;
@@ -85,24 +91,67 @@
   scrollbar-color: rgba(187, 100, 255, 1) transparent;
   scroll-behavior: smooth;
 }
+
 .task-item {
   margin-bottom: 5px;
   background: #2c2c2c;
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1060px) {
+  .task-manager {
+    width: 65vh;
+    margin-bottom: 30px;
+  }
+
+  .span {
+    padding-left: 40%;
+    font-size: 22px;
+  }
+
   .tabs button {
-    padding: 0px 15px; /* Smaller padding */
-    font-size: 16px; /* Smaller font size */
+    font-size: 14px;
+    padding: 0px 35px;
+  }
+
+  .add-task-btn {
+    font-size: 14px;
+  }
+
+  .task-list {
+    height: 90px;
   }
 }
 
-@media screen and (min-width: 400px) and (max-width: 800px) {
-  .tabs button {
-    padding: 0px 5px; /* Even smaller padding */
-    font-size: 14px; /* Even smaller font size */
-  }
+@media screen and (max-width: 600px) {
   .task-manager {
-    padding: 0px 50px;
+    width: 75vw;
+    padding: 30px;
+  }
+
+  .span {
+    padding-left: 30%;
+    font-size: 20px;
+  }
+
+  .tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tabs button {
+    padding: 5px 20px;
+    font-size: 14px;
+    border-right: none;
+    border-bottom: 2px solid white;
+  }
+
+  .add-task-btn {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  .task-list {
+    height: 80px;
+    width: 100%;
   }
 }
