@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import "./tablecard.css";
 import "./modal.css";
 
@@ -62,18 +63,29 @@ function Tablecard() {
     setIsModalOpen(true);
   };
 
+  const handleTaskDelete = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
   const renderTasks = (section) =>
     tasks
       .filter((task) => task.section === section)
       .map((task) => (
-        <li
-          key={task.id}
-          role="presentation"
-          onClick={() => handleTaskClick(task)}
-        >
-          <strong>{task.task}</strong>
+        <li key={task.id} role="presentation">
+          <div
+            className="task-item"
+            role="presentation"
+            onClick={() => handleTaskClick(task)}
+          >
+            <strong>{task.task}</strong>
+          </div>
+          <RiDeleteBin6Line
+            className="delete-icon"
+            onClick={() => handleTaskDelete(task.id)}
+          />
         </li>
       ));
+
   return (
     <>
       <div className="title">

@@ -36,6 +36,24 @@
   margin-left: 15px;
   font-size: 18px;
 }
+.task-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.task-item {
+  display: inline-block;
+}
+
+.delete-icon {
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}
 
 .table-icon {
   color: white;
