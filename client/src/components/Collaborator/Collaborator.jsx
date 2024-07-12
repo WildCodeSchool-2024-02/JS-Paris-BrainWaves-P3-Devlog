@@ -76,10 +76,10 @@ function Collaborator() {
 
   const myUserList = collab.map((coll) => (
     <div className="collaborator-content-list " key={coll.id}>
-      <figure className="collaborator-figure">
+      <div className="collaborator-figure">
         <img src={noname} alt="noname" className="collaborator-img" />
-      </figure>
-      <div>
+      </div>
+      <div className="user-content">
         <li className="user-name">
           <div>{coll.name}</div>
         </li>

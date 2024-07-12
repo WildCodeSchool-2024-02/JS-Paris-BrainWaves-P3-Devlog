@@ -23,6 +23,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 90%;
   min-height: 50%;
   margin-left: 0%;
@@ -37,19 +38,40 @@
   display: none; /* Pour masquer la barre de défilement sur Chrome, Safari et Opera */
 }
 
-.collaborator-img {
+.collaborator-figure {
   display: flex;
-  width: 30px;
-  border: 2px solid violet;
-  border-radius: 50px 50px 50px 50px;
+  justify-content: center;
+  width: 30%;
+}
+
+.user-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+
+.user-name {
+  width: 100%;
+  font-size: 18px;
+  color: red;
+  background-color: white;
+  border-radius: 50px;
+  list-style-type: none;
+}
+
+.collaborator-img {
+  width: 70%;
+  border: 2x solid violet;
+  border-radius: 20px;
 }
 
 .collaborator-content-list {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   width: 45%;
-  background-color: white;
-  border-radius: 50px;
+  height: 45%;
+  margin: 5px;
 }
 
 .collaborator-button {
