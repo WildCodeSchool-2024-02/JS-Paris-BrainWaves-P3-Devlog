@@ -13,22 +13,24 @@ function TaskManager() {
 
   const taskListRef = useRef(null);
 
+  
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/tasks`
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
 
         const tasksOrganised = {
-          todo: data.filter(task => task.status === 'todo'),
-          process: data.filter(task => task.status === 'process'),
-          finish: data.filter(task => task.status === 'finish')
+          todo: data.filter((task) => task.status === "todo"),
+          process: data.filter((task) => task.status === "process"),
+          finish: data.filter((task) => task.status === "finish"),
         };
         setTasks(tasksOrganised);
-
       } catch (error) {
         console.error(error);
       }
@@ -159,8 +161,8 @@ function TaskManager() {
       </div>
       <div ref={taskListRef} className="task-list">
         {(tasks[currentTab] || []).map((task) => (
-          <div key={task.id} id={`task-${task.id}`} className="task-item">
-            <p>Task ID: {task.id}</p>
+          <div key={task.Task_id} id={`task-${task.Task_id}`} className="task-item">
+            <p>Task ID: {task.Task_id}</p>
             <div id="button-delete">
               <button
                 type="button"

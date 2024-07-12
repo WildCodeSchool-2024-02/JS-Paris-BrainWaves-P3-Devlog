@@ -7,6 +7,7 @@ import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
 
+
 function Home() {
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState("John Doe");
