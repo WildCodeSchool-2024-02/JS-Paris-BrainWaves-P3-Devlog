@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const tables = require("../../database/tables");
 
 const signupAction = async (req, res, next) => {
@@ -6,10 +7,11 @@ const signupAction = async (req, res, next) => {
 
     const dbResponse = await tables.users.create({ email, username, password });
     const createdUser = await tables.users.getById(dbResponse);
-    if(createdUser === true){
-      res.json({"success":"created"})
-    }else{
-      res.json({"error":"invalid"})
+
+    if (createdUser[0] === true) {
+      res.json(createdUser[1]);
+    } else {
+      res.json({ error: "invalid" });
     }
   } catch (e) {
     next(e);
@@ -21,11 +23,23 @@ const loginAction = async (req, res, next) => {
     const { username, password } = req.body;
 
     const dbResponse = await tables.users.login({ username, password });
-    if (dbResponse === true) {
-      return res.json({
-        success: "logged in",
-        dbresponse: dbResponse,
-      });
+    if (dbResponse[0] === true) {
+      const refreshToken = jwt.sign(
+        { id: dbResponse[1] },
+        process.env.APP_SECRET,
+        {
+          expiresIn: "7d",
+        }
+      );
+      return res
+        .cookie("refreshToken", refreshToken, {
+          httpOnly: true,
+          sameSite: "lax",
+        })
+        .json({
+          success: "logged in",
+          dbresponse: dbResponse,
+        });
     }
     return res.json({
       error: "not found",
@@ -37,24 +51,35 @@ const loginAction = async (req, res, next) => {
   return false;
 };
 
- /* const edit = async (req, res, next) => {
-  try {
-    console.info(req.file, req.auth);
-    const uploadDest = `http://localhost:${process.env.APP_PORT}/upload/`;
-  
-    if (req.file) req.body.avatar = uploadDest + req.file.filename;
-    const [result] = await tables.user.upload(req.body, req.auth.id);
-
-    if (result.affectedRows > 0) {
-    const [[user]] = await tables.user.read(req.auth.id);
-    res.status(200).json(user);
+const refresh = async (req, res) => {
+  const { refreshToken } = req.cookies;
+  if (!refreshToken) {
+    return res.status(401).send("Access Denied.");
   }
-  else res.sendStatus(404);
- } catch (error) {
-   next(error);
- }
-} */
+  const decoded = jwt.verify(refreshToken, process.env.APP_SECRET);
+  const accessToken = jwt.sign(
+    { id: decoded.id, role: decoded.role },
+    process.env.APP_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+
+  if(decoded.id){
+    const user = await tables.users.getById(decoded.id);
+    delete user[0].password
+    return res.header("Authorization", accessToken).json(user);
+  }
+  return res.status(401).send("Access Denied.");
+};
+
+const logoutAction = async ({ res }) => {
+  res.clearCookie("refreshToken").sendStatus(200);
+};
+
 module.exports = {
   signupAction,
   loginAction,
+  logoutAction,
+  refresh,
 };
