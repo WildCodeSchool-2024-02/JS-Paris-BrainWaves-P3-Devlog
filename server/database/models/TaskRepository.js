@@ -17,6 +17,11 @@ class TaskRepository extends AbstractRepository {
         const [result] = await this.database.execute(query, [userId, status]);
         return { Task_id: result.insertId, userId, status };
     } 
+
+    async archive(taskId) {
+        const query = `UPDATE ${this.table} SET status = 'archived' WHERE Task_id = ?`;
+        await this.database.execute(query, [taskId]);
+    }
 } 
 
 module.exports = TaskRepository;

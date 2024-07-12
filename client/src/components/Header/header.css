@@ -1,16 +1,15 @@
-header {
+#header {
   background-color: #494949;
   color: white;
-  padding-top: 0.1%;
-  position: sticky;
+  padding-top: 0;
+  position: fixed;
   top: 0;
-  width: 100%;
-}
-
-#header {
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100px;
+  width: 160vh;
 }
 
 .logo {
@@ -24,13 +23,15 @@ header {
 }
 
 .rounded-button {
-  border-radius: 14px;
+  border-radius: 30px;
   color: #e3e3e3;
   background-color: #6499ff;
-  width: 100px;
+  width: 150px;
   cursor: pointer;
-  margin-left: 150px;
+  margin-left: 70px;
   padding: 10px 30px;
+  font-weight: 500;
+  font-size: x-large;
 }
 
 .logo-home {
@@ -112,51 +113,66 @@ header {
 .burger-icon {
   display: none;
 }
-
-@media (max-width: 800px) {
-  .search-container {
+@media screen and (max-width: 1060px) {
+  header {
     width: 100%;
-    margin-right: 12px;
   }
 
   #header input[type="text"] {
-    width: 90px;
-    height: 10px;
-    margin-left: 40px;
-    padding-left: 70px;
+    width: 200px;
   }
-  .search-icon {
-    margin-left: 45px;
+  .rounded-button {
+    margin-left: 5px;
+    width: 100px;
+    font-size: medium;
   }
 
+  .search-container {
+    margin-right: 100px;
+  }
+
+  .profile {
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #header {
+    width: 450px;
+    display: flex;
+    height: 70px;
+  }
+  .logo {
+    display: none;
+  }
+  .home-icon {
+    display: block;
+    padding-left: 40px;
+  }
+  .search-container {
+    width: 15vh;
+    margin-inline-start: 70px;
+  }
+  .profile {
+    width: 40px;
+  }
   .rounded-button {
     display: none;
   }
 
-  .home-icon {
-    display: block;
+  #header input[type="text"] {
+    width: 100%;
+    margin-left: 0;
     padding-left: 30px;
-    width: 20px;
   }
 
+  .search-icon {
+    margin-left: 10px;
+  }
+
+  .home-icon,
   .burger-icon {
     display: block;
-    padding-left: 10px;
     width: 20px;
-  }
-
-  .logo {
-    display: none;
-  }
-
-  .profile {
-    width: 30px;
-    border-radius: 50px;
-    margin-top: 10px;
-    margin-left: 40px;
-  }
-
-  .logo {
-    width: 50px;
   }
 }

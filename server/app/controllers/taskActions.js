@@ -22,4 +22,17 @@ const addTask = async (req, res, next) => {
     } return true;
 };
 
-module.exports = { browse, addTask }; 
+const deleteTask = async (req, res, next) => {
+    try {
+        const { taskId } = req.params;
+        if (!taskId) {
+            return res.status(400).json({ message: "missing taskId" });
+        }
+        await tables.task.archive(taskId);
+        res.status(200).json({ message: 'task archived succefully'});
+    } catch (error) {
+        next(error);
+    } return(true)
+};
+
+module.exports = { browse, addTask, deleteTask }; 

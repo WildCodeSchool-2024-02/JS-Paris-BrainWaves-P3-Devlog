@@ -23,7 +23,7 @@ function SignupForm() {
         toast("Password and confirmation are not the same");
         return false;
       }
-      await fetch("http://localhost:3310/api/users/signup", {
+      await fetch("http://localhost:3330/api/users/signup", {
         method: "POST",
         body: JSON.stringify({
           toto: "toto",
