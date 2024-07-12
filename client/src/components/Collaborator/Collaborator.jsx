@@ -40,8 +40,8 @@ function Collaborator() {
   const addNewUser = () => {
     const hasUpperCase = /[A-Z]/.test(newUser);
     if (
-      newUser.trim().length < 10 ||
-      newUser.trim().length > 15 ||
+      newUser.trim().length < 8 ||
+      newUser.trim().length > 12 ||
       !hasUpperCase
     ) {
       setWarning(true);
@@ -69,7 +69,7 @@ function Collaborator() {
   };
 
   const handleInputChange = (event) => {
-    if (event.target.value.length <= 15) {
+    if (event.target.value.length <= 12) {
       setNewUser(event.target.value);
     }
   };
@@ -80,9 +80,9 @@ function Collaborator() {
         <img src={noname} alt="noname" className="collaborator-img" />
       </div>
       <div className="user-content">
-        <li className="user-name">
+        <div className="user-name">
           <div>{coll.name}</div>
-        </li>
+        </div>
       </div>
     </div>
   ));
