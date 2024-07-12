@@ -8,6 +8,6 @@ router.get("/", browse);
 
 router.post("/add", addTask);
 
-router.delete("/delete/:taskId", deleteTask);
+router.delete("/delete", deleteTask);
 
 module.exports = router;

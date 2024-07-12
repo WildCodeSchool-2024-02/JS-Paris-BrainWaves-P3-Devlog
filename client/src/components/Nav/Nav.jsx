@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri';
+import { FiArchive } from "react-icons/fi";
 import './nav.css';
 
 const fetchTables = async () => 
@@ -40,7 +41,12 @@ function Nav() {
   return (
     <nav className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
       <div className="header">
-        <button type="button" className="toggle-btn" onClick={toggleSidebar}>
+        <button 
+          type="button" 
+          className="toggle-btn" 
+          onClick={toggleSidebar}
+          aria-label={isOpen ? 'Close sidebar' : 'Open sidebar'}
+        >
           {isOpen ? <RiArrowLeftSFill /> : <RiArrowRightSFill />}
         </button>
       </div>
@@ -52,7 +58,14 @@ function Nav() {
             <div className="board" key={table.id}>
               <span className={`board-icon ${table.color}`} />
               <p className="board-name">{table.name}</p>
-              <button type="button" className="delete-board" onClick={() => deleteTable(table.id)}>🗑️</button>
+              <button 
+                type="button" 
+                className="delete-board" 
+                onClick={() => deleteTable(table.id)}
+                aria-label={`Delete ${table.name}`}
+              >
+                <FiArchive />
+              </button>
             </div>
           ))}
         </div>
