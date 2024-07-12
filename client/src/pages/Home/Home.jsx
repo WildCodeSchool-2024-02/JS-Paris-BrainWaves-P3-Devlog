@@ -4,13 +4,14 @@ import TaskManager from "../../components/TaskManager/TaskManager";
 import Project from "../../components/Project/project";
 import Collaborater from "../../components/Collaborater/Collaborater";
 import Header from "../../components/Header/Header";
+import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
 
 function Home() {
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState("John Doe");
   const [inputValue, setInputValue] = useState(userName);
-  const [profilePic, setProfilPic] = useState(profile);
+  const [profilePic, setProfilePic] = useState(profile);
   const userId = 1;
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -33,9 +34,10 @@ function Home() {
       handleInputBlur();
     }
   };
- const handleProfilePicClick = () => {
-   fileInputRef.current.Click();
- };
+
+  const handleProfilePicClick = () => {
+    fileInputRef.current.click();
+  };
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -57,9 +59,9 @@ function Home() {
           throw new Error("failed to update profile picture");
         }
         await response.json();
-        setProfilPic(URL.createObjectURL(file));
+        setProfilePic(URL.createObjectURL(file));
       } catch (error) {
-        console.error(Error);
+        console.error(error);
       }
     }
   };
@@ -76,13 +78,13 @@ function Home() {
         const data = await response.json();
         setUserName(data.userName);
         setInputValue(data.userName);
-        setProfilPic(data.profilePic || profile);
+        setProfilePic(data.profilePic || profile);
       } catch (error) {
         console.error(error);
       }
     };
     fetchUserName();
-  }, [userId, userName]);
+  }, [userId]);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -117,6 +119,7 @@ function Home() {
 
   return (
     <>
+      <Nav />
       <Header />
       <div className="home-page">
         <p>Accueil</p>
@@ -135,7 +138,7 @@ function Home() {
             <h2>{`Bonjour, ${userName}`}</h2>
           )}
           <div
-           className="user-pic"
+            className="user-pic"
             role="button"
             onClick={handleProfilePicClick}
             onKeyDown={(e) => {
@@ -150,7 +153,8 @@ function Home() {
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
-          /> 
+            accept="image/*"
+          />
           <button
             type="button"
             className="modify-btn"
@@ -158,16 +162,16 @@ function Home() {
           >
             Modifier
           </button>
-       </div>
+        </div>
         <div id="main-content">
           <div className="task-manager-section">
             <TaskManager />
           </div>
           <div id="pro-collab-section">
             <div className="projects-collaborators-section">
-            <Project />
-            <Collaborater />
-          </div>
+              <Project />
+              <Collaborater />
+            </div>
           </div>
         </div>
       </div>
@@ -176,4 +180,3 @@ function Home() {
 }
 
 export default Home;
-
