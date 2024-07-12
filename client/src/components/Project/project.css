@@ -1,31 +1,26 @@
 .project-container {
   background-color: #1e1e1e;
-  border-radius: 8px;
-  border: solid #6499ff;
-  width: 500px;
+  border: 2px solid #6499ff;
+  border-radius: 20px 20px 20px 20px;
+  width: 570px;
   text-align: center;
-  height: 330px;
-  overflow-y: scroll;
+  height: 230px;
 }
-
 .project-container::-webkit-scrollbar {
   width: 12px;
   background: #1e1e1e;
-  border-radius: 30px;
+  border-radius: 20px;
 }
-
 .project-container::-webkit-scrollbar-thumb {
   background-color: #bb64ff;
   border-radius: 10px;
   border: 2px solid #1e1e1e;
 }
-
 h1 {
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 20px;
   color: #6499ff;
 }
-
 .project-list {
   display: flex;
   justify-content: center;
@@ -36,7 +31,6 @@ h1 {
   padding: 0;
   margin: 0 0 20px;
 }
-
 .project-item {
   background-color: #fff;
   border: 1px solid #1e1e1e;
@@ -45,68 +39,63 @@ h1 {
   transition: background-color 0.3s;
   width: 150px;
 }
-
 .project-img {
   display: flex;
   width: 30px;
   border: 2px solid violet;
 }
-
 .project-item:hover {
   background-color: #f0f0f0;
   cursor: pointer;
 }
-
 .create-project-button {
   margin-top: 20px;
-  padding: 5px 60px;
+  padding: 5px 30px;
   font-size: 16px;
   color: #fff;
   background-color: #6499ff;
   border-radius: 10px;
   cursor: pointer;
 }
-
 .container-item {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
 }
-
+@media screen and (max-width: 1060px) {
+  .project-container {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
 @media (max-width: 800px) {
   .project-container {
     background-color: #1e1e1e;
-    border-radius: 8px;
-    border: solid #6499ff;
-    width: 250px;
+    border: 2px solid #6499ff;
+    width: 380px;
     text-align: center;
     height: 330px;
     overflow-y: scroll;
   }
-
   .project-item {
     width: 120px;
     padding: 3px;
     font-size: 12px;
   }
-
   .project-img {
     display: flex;
     width: 50px;
     border: 2px solid#bb64ff;
   }
-
   .create-project-button {
     padding: 5px 30px;
     font-size: 12px;
   }
-
   .project-list {
     display: flex;
     flex-direction: column;
   }
-
   h1 {
     font-size: 18px;
   }

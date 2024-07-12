@@ -1,4 +1,7 @@
 const express = require("express");
+
+const router = express.Router();
+
 const {
   signupAction,
   loginAction,
@@ -6,7 +9,7 @@ const {
   refresh,
 } = require("../../../controllers/userAction");
 
-const router = express.Router();
+
 
 router.get("/", (req, res) => {
   res.json("working");

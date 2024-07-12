@@ -1,14 +1,15 @@
 import "./table.css";
+import Tablecard from "../../components/Tablecard/Tablecard";
 import Header from "../../components/Header/Header";
 
 function Table() {
   return (
-    <>
-      <Header />
+    <div className="table">
+    <Header />
+    <p>Tableaux</p>
+    <Tablecard/>
+    </div>
 
-      <h1>Tableau</h1>
-    </>
-  );
+  )
 }
-
 export default Table;
