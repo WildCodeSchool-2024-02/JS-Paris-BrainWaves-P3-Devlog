@@ -1,6 +1,11 @@
 // Import the repository modules responsible for handling data operations on the tables
 const UserRepository = require("./models/userRepository");
+
+const TaskRepository = require("./models/TaskRepository");
+const ItemRepository = require("./models/ItemRepository");
+
 const ProjectRepository = require("./models/ProjectRepository");
+
 
 // Create an empty object to hold data repositories for different tables
 const tables = {};
@@ -11,7 +16,10 @@ const tables = {};
 
 // Register each repository as data access point for its table
 tables.users = new UserRepository();
-tables.projects = new ProjectRepository();
+
+tables.task = new TaskRepository(); 
+tables.item = new ItemRepository();
+tables.projects = new ProjectRepository(); 
 
 /* ************************************************************************* */
 

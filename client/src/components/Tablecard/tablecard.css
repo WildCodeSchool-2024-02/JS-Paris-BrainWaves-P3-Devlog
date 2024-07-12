@@ -13,54 +13,9 @@
 .add-task-button:hover {
   background-color: #507acc;
 }
-.table-container {
-  display: flex;
-  margin-top: 20px;
-  margin-left: 135px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  border: solid #6499ff;
-  width: 80vw;
-  text-align: center;
-  height: 200px;
-}
-.table-container h1 {
-  color: #6499ff;
-  margin-left: 15px;
-  font-size: 18px;
-}
-.table-afaire {
-  display: flex;
-  margin-top: 20px;
-  margin-left: 135px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  border: solid #6499ff;
-  width: 80vw;
-  text-align: center;
-  height: 200px;
-}
-.table-afaire h1 {
-  color: #6499ff;
-  margin-left: 15px;
-  font-size: 18px;
-}
-.table-encours {
-  display: flex;
-  margin-top: 20px;
-  margin-left: 135px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  border: solid #6499ff;
-  width: 80vw;
-  text-align: center;
-  height: 200px;
-}
-.table-encours h1 {
-  color: #6499ff;
-  margin-left: 15px;
-  font-size: 18px;
-}
+.table-container,
+.table-afaire,
+.table-encours,
 .table-terminer {
   display: flex;
   margin-top: 20px;
@@ -70,13 +25,18 @@
   border: solid #6499ff;
   width: 80vw;
   text-align: center;
-  height: 200px;
+  height: 290px;
+  flex-wrap: wrap;
 }
+.table-container h1,
+.table-afaire h1,
+.table-encours h1,
 .table-terminer h1 {
   color: #6499ff;
   margin-left: 15px;
   font-size: 18px;
 }
+
 .table-icon {
   color: white;
   cursor: pointer;
@@ -85,10 +45,12 @@ hr {
   display: flex;
   align-items: center;
   margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 0;
   background-color: #bb64ff;
   border-color: #bb64ff;
   height: 1px;
-  width: 65em;
+  width: 60em;
 }
 
 .title {
@@ -104,7 +66,7 @@ hr {
   font-size: 50px;
   background-color: #bb64ff;
   text-align: center;
-  margin: 0 auto;
+  margin: 0;
   min-width: 220px;
   padding: 0 10px;
 }
@@ -124,7 +86,7 @@ hr {
   color: white;
   text-align: left;
   padding: 10px;
-  margin-top: 45px;
+  margin-top: 5px;
   cursor: pointer;
 }
 .modal-content h2 {
@@ -133,4 +95,27 @@ hr {
 .modal-content p {
   margin-top: 0;
   white-space: pre-wrap;
+}
+
+@media (max-width: 800px) {
+  .add-task-button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  .table-container,
+  .table-afaire,
+  .table-encours,
+  .table-terminer {
+    margin-left: 10px;
+    width: 90vw;
+    height: auto;
+  }
+
+  .title h1,
+  .title input {
+    width: 80%;
+    font-size: 30px;
+    height: 60px;
+  }
 }

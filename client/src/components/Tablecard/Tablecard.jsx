@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { TiArrowSortedDown } from "react-icons/ti";
 import "./tablecard.css";
 import "./modal.css";
 
@@ -15,10 +14,6 @@ function Tablecard() {
 
   const handleAddTask = () => {
     setIsModalOpen(true);
-  };
-
-  const handleIconClick = (section) => {
-    alert(`Icon clicked for ${section}`);
   };
 
   const handleTitleChange = (e) => {
@@ -61,6 +56,7 @@ function Tablecard() {
       handleModalClose();
     }
   };
+
   const handleTaskClick = (task) => {
     setSelectedTask(task);
     setIsModalOpen(true);
@@ -69,17 +65,15 @@ function Tablecard() {
   const renderTasks = (section) =>
     tasks
       .filter((task) => task.section === section)
-      .map((task, value) => (
+      .map((task) => (
         <li
-          key={value.id}
+          key={task.id}
           role="presentation"
           onClick={() => handleTaskClick(task)}
         >
           <strong>{task.task}</strong>
-          <p>{task.description}</p>
         </li>
       ));
-
   return (
     <>
       <div className="title">
@@ -101,46 +95,22 @@ function Tablecard() {
         Ajouter une tâche
       </button>
       <div className="table-container">
-        <h1>
-          <TiArrowSortedDown
-            className="table-icon"
-            onClick={() => handleIconClick("Backlog")}
-          />
-          Backlog
-        </h1>
+        <h1>Backlog</h1>
         <hr />
         <ul className="task-list">{renderTasks("Backlog")}</ul>
       </div>
       <div className="table-afaire">
-        <h1>
-          <TiArrowSortedDown
-            className="table-icon"
-            onClick={() => handleIconClick("A Faire")}
-          />
-          A Faire
-        </h1>
+        <h1>A Faire</h1>
         <hr />
         <ul className="task-list">{renderTasks("A Faire")}</ul>
       </div>
       <div className="table-encours">
-        <h1>
-          <TiArrowSortedDown
-            className="table-icon"
-            onClick={() => handleIconClick("En Cours")}
-          />
-          En Cours
-        </h1>
+        <h1>En Cours</h1>
         <hr />
         <ul className="task-list">{renderTasks("En Cours")}</ul>
       </div>
       <div className="table-terminer">
-        <h1>
-          <TiArrowSortedDown
-            className="table-icon"
-            onClick={() => handleIconClick("Terminer")}
-          />
-          Terminer
-        </h1>
+        <h1>Terminer</h1>
         <hr />
         <ul className="task-list">{renderTasks("Terminer")}</ul>
       </div>

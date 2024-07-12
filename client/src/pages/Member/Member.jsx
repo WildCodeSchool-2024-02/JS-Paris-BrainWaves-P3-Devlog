@@ -7,8 +7,9 @@ function Member() {
     <>
       <Header />
 
-      <h1>Menber</h1>
+      <h1>Member</h1>
     </>
   );
 }
   export default Member;
+
