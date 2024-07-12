@@ -168,6 +168,7 @@ function TaskManager() {
                 type="button"
                 onClick={() => handleDelete(task.id)}
                 aria-label="Delete task"
+                
               >
                 <RiDeleteBin5Line />
               </button>

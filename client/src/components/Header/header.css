@@ -2,13 +2,14 @@
   background-color: #494949;
   color: white;
   padding-top: 0;
-  position: sticky;
+  position: fixed;
   top: 0;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100px;
+  width: 160vh;
 }
 
 .logo {
@@ -136,9 +137,10 @@
 }
 
 @media screen and (max-width: 600px) {
-  header {
-    width: 100%;
+  #header {
+    width: 450px;
     display: flex;
+    height: 70px;
   }
   .logo {
     display: none;

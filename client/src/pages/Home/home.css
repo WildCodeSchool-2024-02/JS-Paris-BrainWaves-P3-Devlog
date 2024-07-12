@@ -9,7 +9,7 @@
   top: 0;
 }
 #header {
-  position: sticky;
+  position: fixed;
 }
 .home-page h1 {
   font-size: 1.7rem;
