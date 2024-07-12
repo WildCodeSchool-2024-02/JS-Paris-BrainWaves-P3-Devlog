@@ -1,12 +1,14 @@
 import "./archive.css";
+import Header from "../../components/Header/Header";
 
 function Archive() {
   return (
     <>
+      <Header />
+
       <h1>Archive</h1>
-      <p>Need to added the Content.</p>
     </>
   );
-}
+  }
 
 export default Archive;

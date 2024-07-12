@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./LoginForm.css";
 import logo from "../../assets/images/logo.png";
 
@@ -22,7 +22,7 @@ function LoginForm() {
       })
         .then((res) => res.json())
         .then((json) => json);
-      if(resp.success){
+      if (resp.success) {
         toast("Success, logging in...");
       }
       if (resp.error) {

@@ -82,8 +82,11 @@
   padding: 5px;
   border-radius: 30px;
   width: 95%;
+  align-items: center;
+  flex-direction: column;
   scrollbar-color: rgba(187, 100, 255, 1) transparent;
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 .task-item {
   margin-bottom: 5px;

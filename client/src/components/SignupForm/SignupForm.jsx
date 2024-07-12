@@ -1,18 +1,15 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./SignupForm.css";
 import logo from "../../assets/images/logo.png";
 
-
-
 function SignupForm() {
-
-  async function sleep (ms) {
+  async function sleep(ms) {
     return new Promise((resolve) => {
-      setTimeout(resolve, ms)
-    })
+      setTimeout(resolve, ms);
+    });
   }
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -22,7 +19,7 @@ function SignupForm() {
 
   async function signup() {
     if (email && password) {
-      if(password !== cPassword){
+      if (password !== cPassword) {
         toast("Password and confirmation are not the same");
         return false;
       }
@@ -41,13 +38,11 @@ function SignupForm() {
         .then((res) => res.json())
         .then((json) => json);
 
-
-      
       toast("Signed up successfuly, redirecting...");
 
-      await sleep(1500)
+      await sleep(1500);
 
-      navigate("/login")
+      navigate("/login");
       return true;
     }
 

@@ -1,31 +1,37 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./project.css";
 import sproject from "../../assets/images/sproject.png";
 
 function Project() {
-
   const [dataProject, setDataProject] = useState([]);
 
-  const fetchDataProject = async () => {
-    try {
-      const response = await fetch("http://localhost:3311/api/projects");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const receptionData = await response.json();
-      setDataProject(receptionData);
-    } catch (error) {
-      console.error("Error fetching dataProject", error);
+  const navigate = useNavigate();
+
+const fetchDataProject = async () => {
+  try {
+    const response = await fetch("http://localhost:3311/api/projects");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+    const receptionData = await response.json();
+    setDataProject(receptionData);
+  } catch (error) {
+    console.error("Error fetching dataProject", error);
+  }
+};
 
-  useEffect(() => {
-    fetchDataProject();
-  }, []);
-  
+useEffect(() => {
+  fetchDataProject();
+}, []);
 
-  return (
-    <div className="project-container">
+const handleCreateProject = () => {
+  navigate("/table");
+};
+
+return (
+
+  <div className="project-container">
       <h1>Projets</h1>
       <ul className="project-list">
         {dataProject.map((value) => (
@@ -42,7 +48,7 @@ function Project() {
       <button
         className="create-project-button"
         type="button"
-    
+        onClick={handleCreateProject}
       >
         CRÉER UN PROJET
       </button>
