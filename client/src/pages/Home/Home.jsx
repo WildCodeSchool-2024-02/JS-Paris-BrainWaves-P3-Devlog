@@ -1,6 +1,7 @@
 import "./home.css";
 import TaskManager from "../../components/TaskManager/TaskManager";
 import Project from "../../components/Project/project";
+import Collaborator from "../../components/Collaborator/Collaborator";
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <p>Accueil</p>
       <TaskManager />
       <Project />
+      <Collaborator/>
     </div>
   );
 }

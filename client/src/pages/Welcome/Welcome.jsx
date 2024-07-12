@@ -13,14 +13,14 @@ function Welcome() {
           <button
             type="button"
             className="login-btn"
-            onClick={() => navigate("/Connection")}
+            onClick={() => navigate("/login")}
           >
             Login
           </button>
           <button
             type="button"
             className="signup-btn"
-            onClick={() => navigate("/Connection")}
+            onClick={() => navigate("/signup")}
           >
             Sign Up
           </button>

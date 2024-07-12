@@ -26,7 +26,6 @@ const router = createBrowserRouter([
         path: "/home",
         element: <Home />,
       },
-
       {
         path: "/archive",
         element: <Archive />,

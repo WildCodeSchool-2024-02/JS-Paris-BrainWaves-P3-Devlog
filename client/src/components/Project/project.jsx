@@ -3,7 +3,6 @@ import "./project.css";
 import sproject from "../../assets/images/sproject.png";
 
 function Project() {
-
   const [dataProject, setDataProject] = useState([]);
 
   const fetchDataProject = async () => {
@@ -22,7 +21,6 @@ function Project() {
   useEffect(() => {
     fetchDataProject();
   }, []);
-  
 
   return (
     <div className="project-container">
@@ -39,11 +37,7 @@ function Project() {
           </div>
         ))}
       </ul>
-      <button
-        className="create-project-button"
-        type="button"
-    
-      >
+      <button className="create-project-button" type="button">
         CRÉER UN PROJET
       </button>
     </div>

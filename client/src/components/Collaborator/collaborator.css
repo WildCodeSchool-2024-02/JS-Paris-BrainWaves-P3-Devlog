@@ -4,9 +4,10 @@
   align-items: center;
   justify-content: center;
   background-color: #1e1e1e;
-  border: 2px solid #6499ff;
-  border-radius: 10px;
+  border: 4px solid #6499ff;
+  border-radius: 20px;
   width: 40%;
+  height: 400px;
 }
 
 .collaborator-title {
@@ -14,18 +15,18 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .collaborator-list {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
   width: 90%;
-  height: 110px;
-  grid-template-columns: 40% 40%;
+  min-height: 50%;
   margin-left: 0%;
   margin-right: 0%;
-  grid-gap: 25%;
-  justify-items: center;
-  justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none;
@@ -36,20 +37,32 @@
   display: none; /* Pour masquer la barre de défilement sur Chrome, Safari et Opera */
 }
 
-.collaborator-list > div {
-  background-color: white;
-  padding: 5px;
-  border-radius: 3px;
-}
-
-.user-name {
+.collaborator-img {
   display: flex;
+  width: 30px;
+  border: 2px solid violet;
+  border-radius: 50px 50px 50px 50px;
 }
 
-.button-add {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 10px 70px;
+.collaborator-content-list {
+  display: flex;
+  justify-content: center;
+  width: 45%;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.collaborator-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 25%;
+}
+
+.collaborator-button-add {
+  margin-bottom: 5px;
+  padding: 9px 100px;
   font-size: 18px;
   color: #fff;
   background-color: #6499ff;
@@ -57,7 +70,7 @@
   cursor: pointer;
 }
 
-.input-add {
+.collaborator-input-add {
   margin-top: 15px;
   padding: 10px;
   width: 70%;
@@ -67,7 +80,7 @@
   outline: none;
 }
 
-.input-add:focus {
+.collaborator-input-add:focus {
   border-color: #457bff;
   box-shadow: 0 0 5px rgba(70, 130, 180, 0.5);
 }

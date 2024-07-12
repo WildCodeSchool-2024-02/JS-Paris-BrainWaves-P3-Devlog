@@ -1,5 +1,6 @@
 import "./collaborator.css";
 import { useState, useRef, useEffect } from "react";
+import noname from "../../assets/images/noname.jpeg";
 
 const initialCollab = [];
 
@@ -8,7 +9,7 @@ function Collaborator() {
   const [warning, setWarning] = useState(false);
   const [newUser, setNewUser] = useState("");
   const [showInput, setShowInput] = useState(false);
-  const [listHeight, setListHeight] = useState("110px");
+  const [listHeight, setListHeight] = useState("2200px");
 
   const fetchDataUser = async () => {
     try {
@@ -74,8 +75,15 @@ function Collaborator() {
   };
 
   const myUserList = collab.map((coll) => (
-    <div className="user-name" key={coll.id}>
-      {coll.name}
+    <div className="collaborator-content-list " key={coll.id}>
+      <figure className="collaborator-figure">
+        <img src={noname} alt="noname" className="collaborator-img" />
+      </figure>
+      <div>
+        <li className="user-name">
+          <div>{coll.name}</div>
+        </li>
+      </div>
     </div>
   ));
 
@@ -88,19 +96,16 @@ function Collaborator() {
         className="collaborator-list"
         style={{ maxHeight: listHeight }}
         ref={listRef}
-        id="collaborator-list"
       >
         {myUserList}
       </div>
       {warning && (
-        <p style={{ color: "red" }}>
-          Veuillez entrer un nom valide (10-15 caractères, avec une majuscule).
-        </p>
+        <p style={{ color: "red" }}>Veuillez entrer un nom valide .</p>
       )}
 
       {showInput && (
         <input
-          className="input-add"
+          className="collaborator-input-add"
           type="text"
           ref={inputRef}
           value={newUser}
@@ -110,13 +115,15 @@ function Collaborator() {
         />
       )}
 
-      <button
-        className="button-add"
-        type="button"
-        onClick={() => (showInput ? addNewUser() : handleAddButtonClick())}
-      >
-        INVITER
-      </button>
+      <div className="collaborator-button">
+        <button
+          className="collaborator-button-add"
+          type="button"
+          onClick={() => (showInput ? addNewUser() : handleAddButtonClick())}
+        >
+          INVITER
+        </button>
+      </div>
     </div>
   );
 }

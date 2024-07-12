@@ -35,7 +35,7 @@ function LoginForm() {
   }
 
   return (
-    <>
+    <div className="login-container">
       <form className="login-form">
         <img src={logo} alt="logo" className="logo" />
         <input
@@ -64,7 +64,7 @@ function LoginForm() {
         </p>
       </form>
       <ToastContainer />
-    </>
+    </div>
   );
 }
 
