@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { RiDeleteBin5Line } from "react-icons/ri";
 
 function TaskManager() {
   const [currentTab, setCurrentTab] = useState("todo");
@@ -9,11 +8,9 @@ function TaskManager() {
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
   const [tasks, setTasks] = useState({});
-  const [taskToDelete, setTaskToDelete] = useState(null);
 
   const taskListRef = useRef(null);
 
-  
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -37,32 +34,6 @@ function TaskManager() {
     };
     fetchTasks();
   }, []);
-
-  useEffect(() => {
-    if (taskToDelete !== null) {
-      const deleteTask = async () => {
-        try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks/delete/${taskToDelete}`, {
-            method: 'DELETE',
-          });
-          if (!response.ok) {
-            throw new Error('Failed to delete task');
-          }
-
-          const updatedTasks = {};
-          Object.keys(tasks).forEach((project) => {
-            updatedTasks[project] = tasks[project].filter((task) => task.id !== taskToDelete);
-          });
-
-          setTasks(updatedTasks);
-          setTaskToDelete(null);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      deleteTask();
-    }
-  }, [taskToDelete, tasks]);
 
   const scrollToTop = () => {
     if (taskListRef.current) {
@@ -91,9 +62,9 @@ function TaskManager() {
     setButtonVisible(true);
   }
 
-  const handleDelete = (taskId) => {
-    setTaskToDelete(taskId);
-  };
+ // const handleDelete = (taskId) => {
+    // This function is no longer needed since we're not handling deletion
+ // };
 
   return (
     <div className="task-manager">
@@ -163,17 +134,7 @@ function TaskManager() {
         {(tasks[currentTab] || []).map((task) => (
           <div key={task.Task_id} id={`task-${task.Task_id}`} className="task-item">
             <p>Task ID: {task.Task_id}</p>
-            <div id="button-delete">
-              <button
-                type="button"
-                onClick={() => handleDelete(task.id)}
-                aria-label="Delete task"
-                
-              >
-                <RiDeleteBin5Line />
-              </button>
             </div>
-          </div>
         ))}
       </div>
     </div>
