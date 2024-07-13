@@ -7,6 +7,7 @@ import Archive from "./pages/Archive/Archive";
 import Member from "./pages/Member/Member";
 import Table from "./pages/Table/Table";
 import Collaborater from "./components/Collaborater/Collaborater";
+import { AuthProvider } from "./services/context";
 
 import App from "./App";
 import LoginPage from "./pages/Login/Login";
@@ -57,6 +58,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
