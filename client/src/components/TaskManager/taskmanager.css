@@ -100,7 +100,9 @@
   width: 100%;
   height: 40%;
 }
-
+.input {
+  width: 100px;
+}
 @media screen and (max-width: 1060px) {
   .task-manager {
     width: 65vh;

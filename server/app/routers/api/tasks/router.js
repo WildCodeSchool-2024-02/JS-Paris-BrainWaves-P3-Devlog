@@ -2,12 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
-const { browse, addTask, deleteTask } = require("../../../controllers/taskActions");
+const { browse, addTask } = require("../../../controllers/taskActions");
 
-router.get("/", browse);
+const { verifyToken } = require("../../../services/auth");
 
-router.post("/add", addTask);
+router.get("/", verifyToken, browse);
 
-router.delete("/delete", deleteTask);
+router.post("/add", verifyToken, addTask);
+
 
 module.exports = router;

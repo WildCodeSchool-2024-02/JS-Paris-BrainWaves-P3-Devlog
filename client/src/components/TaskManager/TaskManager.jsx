@@ -2,20 +2,27 @@ import { useState, useRef, useEffect } from "react";
 import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
+
 function TaskManager() {
   const [currentTab, setCurrentTab] = useState("todo");
   const [newTaskText, setNewTaskText] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [tasks, setTasks] = useState({});
+  const [tasks, setTasks] = useState({todo:[], process:[], finish: [] });
 
   const taskListRef = useRef(null);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
+        const token = localStorage.getItem("token");
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tasks`
+          `${import.meta.env.VITE_API_URL}/api/tasks`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -49,23 +56,31 @@ function TaskManager() {
   function addTask() {
     if (!newTaskText.trim()) return;
     const newTask = {
-      userId: 1,
       text: newTaskText,
       status: "todo",
     };
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      todo: [...prevTasks.todo, newTask],
+
+    fetch(`${import.meta.env.VITE_API_URL}/api/tasks/add`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(newTask),
+    })
+    .then(response => response.json())
+    .then(data => {
+      setTasks((prevTasks) => ({
+        ...prevTasks,
+        todo: Array.isArray(prevTasks.todo) ? [...prevTasks.todo, data] : [data],
     }));
+
     setNewTaskText("");
     setInputVisible(false);
     setButtonVisible(true);
+  })
+  .catch((error) => console.error('Error:', error));
   }
-
- // const handleDelete = (taskId) => {
-    // This function is no longer needed since we're not handling deletion
- // };
-
   return (
     <div className="task-manager">
       <div className="span">Mes tâches</div>
@@ -132,13 +147,17 @@ function TaskManager() {
       </div>
       <div ref={taskListRef} className="task-list">
         {(tasks[currentTab] || []).map((task) => (
-          <div key={task.Task_id} id={`task-${task.Task_id}`} className="task-item">
+          <div
+            key={task.Task_id}
+            id={`task-${task.Task_id}`}
+            className="task-item"
+          >
             <p>Task ID: {task.Task_id}</p>
-            </div>
+            <p>Description: {task.text}</p>
+          </div>
         ))}
       </div>
     </div>
   );
 }
-
 export default TaskManager;
