@@ -1,6 +1,6 @@
 import "./collaborator.css";
 import { useState, useRef, useEffect } from "react";
-import noname from "../../assets/images/noname.jpeg";
+import avatar from "../../assets/images/avatar.jpg";
 
 const initialCollab = [];
 
@@ -30,6 +30,7 @@ function Collaborator() {
 
   const inputRef = useRef(null);
   const listRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     if (showInput && inputRef.current) {
@@ -65,6 +66,8 @@ function Collaborator() {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       addNewUser();
+    } else if (event.key === "Escape") {
+      setShowInput(false);
     }
   };
 
@@ -74,10 +77,23 @@ function Collaborator() {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+      setShowInput(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const myUserList = collab.map((coll) => (
     <div className="collaborator-content-list " key={coll.id}>
       <div className="collaborator-figure">
-        <img src={noname} alt="noname" className="collaborator-img" />
+        <img src={avatar} alt="avatar" className="collaborator-img" />
       </div>
       <div className="user-content">
         <div className="user-name">
@@ -88,7 +104,7 @@ function Collaborator() {
   ));
 
   return (
-    <div className="collaborator-container">
+    <div className="collaborator-container" ref={containerRef}>
       <div className="collaborator-title">
         <h1>Collaborateurs</h1>
       </div>
