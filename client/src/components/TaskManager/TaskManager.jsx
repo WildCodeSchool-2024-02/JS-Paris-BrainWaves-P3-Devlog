@@ -1,24 +1,29 @@
 import { useState, useRef, useEffect } from "react";
 import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { RiDeleteBin5Line } from "react-icons/ri";
 
 function TaskManager() {
   const [currentTab, setCurrentTab] = useState("todo");
   const [newTaskText, setNewTaskText] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [tasks, setTasks] = useState({});
-  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [tasks, setTasks] = useState({ todo: [], process: [], finish: [] });
+  const [projectId, setProjectId] = useState(null);
 
   const taskListRef = useRef(null);
 
-  
   useEffect(() => {
+    setProjectId(2);
     const fetchTasks = async () => {
       try {
+        const token = localStorage.getItem("token");
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tasks`
+          `${import.meta.env.VITE_API_URL}/api/tasks`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -38,63 +43,52 @@ function TaskManager() {
     fetchTasks();
   }, []);
 
-  useEffect(() => {
-    if (taskToDelete !== null) {
-      const deleteTask = async () => {
-        try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks/delete/${taskToDelete}`, {
-            method: 'DELETE',
-          });
-          if (!response.ok) {
-            throw new Error('Failed to delete task');
-          }
-
-          const updatedTasks = {};
-          Object.keys(tasks).forEach((project) => {
-            updatedTasks[project] = tasks[project].filter((task) => task.id !== taskToDelete);
-          });
-
-          setTasks(updatedTasks);
-          setTaskToDelete(null);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      deleteTask();
-    }
-  }, [taskToDelete, tasks]);
-
   const scrollToTop = () => {
     if (taskListRef.current) {
       taskListRef.current.scrollTop = 0;
     }
   };
 
-  function toggleInputVisible() {
+  const toggleInputVisible = () => {
     setInputVisible(!isInputVisible);
     setButtonVisible(!buttonVisible);
-  }
+  };
 
   function addTask() {
     if (!newTaskText.trim()) return;
     const newTask = {
-      userId: 1,
       text: newTaskText,
       status: "todo",
+      user: {
+        id: 1,
+        username: "test",
+      },
+      projectId,
     };
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      todo: [...prevTasks.todo, newTask],
-    }));
-    setNewTaskText("");
-    setInputVisible(false);
-    setButtonVisible(true);
+
+    fetch(`${import.meta.env.VITE_API_URL}/api/tasks/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(newTask),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTasks((prevTasks) => ({
+          ...prevTasks,
+          todo: Array.isArray(prevTasks.todo)
+            ? [...prevTasks.todo, data]
+            : [data],
+        }));
+
+        setNewTaskText("");
+        setInputVisible(false);
+        setButtonVisible(true);
+      })
+      .catch((error) => console.error("Error:", error));
   }
-
-  const handleDelete = (taskId) => {
-    setTaskToDelete(taskId);
-  };
-
   return (
     <div className="task-manager">
       <div className="span">Mes tâches</div>
@@ -161,23 +155,17 @@ function TaskManager() {
       </div>
       <div ref={taskListRef} className="task-list">
         {(tasks[currentTab] || []).map((task) => (
-          <div key={task.Task_id} id={`task-${task.Task_id}`} className="task-item">
+          <div
+            key={task.Task_id}
+            id={`task-${task.Task_id}`}
+            className="task-item"
+          >
             <p>Task ID: {task.Task_id}</p>
-            <div id="button-delete">
-              <button
-                type="button"
-                onClick={() => handleDelete(task.id)}
-                aria-label="Delete task"
-                
-              >
-                <RiDeleteBin5Line />
-              </button>
-            </div>
+            <p>Description: {task.text}</p>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
 export default TaskManager;

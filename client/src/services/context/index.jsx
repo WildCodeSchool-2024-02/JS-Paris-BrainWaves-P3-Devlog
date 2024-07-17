@@ -16,6 +16,5 @@ function AuthProvider({ children }) {
 AuthProvider.propTypes = {
   children: PropTypes.isRequired
 }
-
-export default () => useContext(AuthContext);
 export {AuthProvider};
+export default () => useContext(AuthContext);
