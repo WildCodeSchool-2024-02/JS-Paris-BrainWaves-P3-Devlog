@@ -108,6 +108,10 @@ function Home() {
 
   useEffect(() => {
     const updateUserName = async () => {
+      if (!user?.token) {
+        toast.error("User token is missing");
+        return;
+      }
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/users/update-name`,
