@@ -2,17 +2,18 @@ import { useState, useRef, useEffect } from "react";
 import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
-
 function TaskManager() {
   const [currentTab, setCurrentTab] = useState("todo");
   const [newTaskText, setNewTaskText] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [tasks, setTasks] = useState({todo:[], process:[], finish: [] });
+  const [tasks, setTasks] = useState({ todo: [], process: [], finish: [] });
+  const [projectId, setProjectId] = useState(null);
 
   const taskListRef = useRef(null);
 
   useEffect(() => {
+    setProjectId(2);
     const fetchTasks = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -48,19 +49,24 @@ function TaskManager() {
     }
   };
 
-  function toggleInputVisible() {
+  const toggleInputVisible = () => {
     setInputVisible(!isInputVisible);
     setButtonVisible(!buttonVisible);
-  }
+  };
 
   function addTask() {
     if (!newTaskText.trim()) return;
     const newTask = {
       text: newTaskText,
       status: "todo",
+      user: {
+        id: 1,
+        username: "test",
+      },
+      projectId,
     };
 
-    fetch(`${import.meta.env.VITE_API_URL}/api/tasks/add`,{
+    fetch(`${import.meta.env.VITE_API_URL}/api/tasks/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,18 +74,20 @@ function TaskManager() {
       },
       body: JSON.stringify(newTask),
     })
-    .then(response => response.json())
-    .then(data => {
-      setTasks((prevTasks) => ({
-        ...prevTasks,
-        todo: Array.isArray(prevTasks.todo) ? [...prevTasks.todo, data] : [data],
-    }));
+      .then((response) => response.json())
+      .then((data) => {
+        setTasks((prevTasks) => ({
+          ...prevTasks,
+          todo: Array.isArray(prevTasks.todo)
+            ? [...prevTasks.todo, data]
+            : [data],
+        }));
 
-    setNewTaskText("");
-    setInputVisible(false);
-    setButtonVisible(true);
-  })
-  .catch((error) => console.error('Error:', error));
+        setNewTaskText("");
+        setInputVisible(false);
+        setButtonVisible(true);
+      })
+      .catch((error) => console.error("Error:", error));
   }
   return (
     <div className="task-manager">

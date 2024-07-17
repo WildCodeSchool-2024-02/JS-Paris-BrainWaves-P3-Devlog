@@ -11,14 +11,16 @@ const browse = async (req, res, next) => {
 
 const addTask = async (req, res, next) => {
     try {
-        const { text, status } = req.body;
-        const {userId} = req.userId;
+        const { text, status, projectId } = req.body;
+        const userId = req.body.user.id;
 
-        if (!userId || !status ||!text) {
-            return res.status(400).json({ message: 'Missing required information: userId, status, or text' });
+
+        if (!userId || !status || !text || !projectId) {
+            return res.status(400).json({ message: 'Missing required information: userId, status, projectId or text' });
         }
-        const [results] = await tables.task.create({ text, status, userId });
-        res.status(201).json(results);
+
+        const newTask = await tables.task.create({ text, status, userId, projectId });
+        res.status(201).json(newTask);
     } catch (error) {
         next(error);
     } return true;

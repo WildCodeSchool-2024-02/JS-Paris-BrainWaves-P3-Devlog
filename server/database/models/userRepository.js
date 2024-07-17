@@ -12,7 +12,7 @@ class UserRepository extends AbstractRepository {
       [item.email, item.username, await argon2.hash(item.password)]
     );
 
-    if(result.insertId){
+    if (result.insertId) {
       return true
     }
     return false;
@@ -25,12 +25,11 @@ class UserRepository extends AbstractRepository {
     );
 
 
-    if(result[0] && result[0].password){
-      if(await argon2.verify(result[0].password, item.password)){
+    if (result[0] && result[0].password) {
+      if (await argon2.verify(result[0].password, item.password)) {
         return [true, result[0].id]
       }
     }
-
     return [false, result[0].id]
   }
 
@@ -44,11 +43,15 @@ class UserRepository extends AbstractRepository {
   }
 
   async updateUserName(id, newName) {
-    const [result] = await this.database.query('UPDATE user SET username=? WHERE id=?', [newName, id]
-    ); 
-    return result; 
- }
-  
+    const [result] = await this.database.query('UPDATE user SET user_name=? WHERE id=?', [newName, id]
+    );
+    return result.affectedRows >0;
+  }
+
+  async updateProfilePic(id, profilePic) {
+    const [result] = await this.database.query('UPDATE user SET profilePic=? WHERE id=?', [profilePic, id]);
+    return result.affectedRows > 0;
+  }
 }
 
 module.exports = UserRepository;
