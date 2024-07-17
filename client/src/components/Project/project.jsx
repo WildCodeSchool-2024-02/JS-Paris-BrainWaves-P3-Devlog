@@ -10,16 +10,7 @@ function Project() {
 
   const fetchDataProject = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/projects`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("http://localhost:3311/api/projects");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

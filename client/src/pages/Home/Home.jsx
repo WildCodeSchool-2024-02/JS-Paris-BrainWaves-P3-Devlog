@@ -3,11 +3,10 @@ import "./home.css";
 import { toast } from "react-toastify";
 import TaskManager from "../../components/TaskManager/TaskManager";
 import Project from "../../components/Project/project";
-import Collaborater from "../../components/Collaborater/Collaborater";
+import Collaborator from "../../components/Collaborator/Collaborator";
 import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
-import useAuth from "../../services/context/index";
 
 function Home() {
   const [isEditing, setIsEditing] = useState(false);
@@ -193,7 +192,7 @@ function Home() {
           <div id="pro-collab-section">
             <div className="projects-collaborators-section">
               <Project />
-              <Collaborater />
+              <Collaborator />
             </div>
           </div>
         </div>
