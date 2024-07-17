@@ -41,7 +41,7 @@ function Collaborator() {
   const addNewUser = () => {
     const hasUpperCase = /[A-Z]/.test(newUser);
     if (
-      newUser.trim().length < 8 ||
+      newUser.trim().length < 5 ||
       newUser.trim().length > 12 ||
       !hasUpperCase
     ) {
