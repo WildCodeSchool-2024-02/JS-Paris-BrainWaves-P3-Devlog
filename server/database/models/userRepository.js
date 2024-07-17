@@ -20,17 +20,18 @@ class UserRepository extends AbstractRepository {
 
   async login(item) {
     const [result] = await this.database.query(
-      "SELECT password FROM user WHERE user_name=?",
+      "SELECT id, password FROM user WHERE user_name=?",
       [item.username]
     );
 
+
     if(result[0] && result[0].password){
       if(await argon2.verify(result[0].password, item.password)){
-        return true
+        return [true, result[0].id]
       }
     }
 
-    return false
+    return [false, result[0].id]
   }
 
   async getById(id) {
@@ -41,6 +42,12 @@ class UserRepository extends AbstractRepository {
 
     return result;
   }
+
+  async updateUserName(id, newName) {
+    const [result] = await this.database.query('UPDATE user SET username=? WHERE id=?', [newName, id]
+    ); 
+    return result; 
+ }
   
 }
 

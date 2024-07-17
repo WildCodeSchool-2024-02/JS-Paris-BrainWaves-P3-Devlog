@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
-import { GiHamburgerMenu } from "react-icons/gi"; // Import de l'icône burger
+import { GiHamburgerMenu } from "react-icons/gi";
 import { IoHomeOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import "./header.css";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo_blanc.png";
 import profile from "../../assets/images/profile.jpg";
 
 function Header() {

@@ -9,6 +9,7 @@ function TaskManager() {
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
   const [tasks, setTasks] = useState({});
+  const [taskToDelete, setTaskToDelete] = useState(null);
 
   const taskListRef = useRef(null);
 
@@ -16,19 +17,20 @@ function TaskManager() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/tasks`
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
 
         const tasksOrganised = {
-          todo: data.filter(task => task.status === 'todo'),
-          process: data.filter(task => task.status === 'process'),
-          finish: data.filter(task => task.status === 'finish')
+          todo: data.filter((task) => task.status === "todo"),
+          process: data.filter((task) => task.status === "process"),
+          finish: data.filter((task) => task.status === "finish"),
         };
         setTasks(tasksOrganised);
-
       } catch (error) {
         console.error(error);
       }
@@ -36,9 +38,35 @@ function TaskManager() {
     fetchTasks();
   }, []);
 
+  useEffect(() => {
+    if (taskToDelete !== null) {
+      const deleteTask = async () => {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks/delete/${taskToDelete}`, {
+            method: 'DELETE',
+          });
+          if (!response.ok) {
+            throw new Error('Failed to delete task');
+          }
+
+          const updatedTasks = {};
+          Object.keys(tasks).forEach((project) => {
+            updatedTasks[project] = tasks[project].filter((task) => task.id !== taskToDelete);
+          });
+
+          setTasks(updatedTasks);
+          setTaskToDelete(null);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      deleteTask();
+    }
+  }, [taskToDelete, tasks]);
+
   const scrollToTop = () => {
     if (taskListRef.current) {
-    taskListRef.current.scrollTop = 0;
+      taskListRef.current.scrollTop = 0;
     }
   };
 
@@ -63,15 +91,9 @@ function TaskManager() {
     setButtonVisible(true);
   }
 
-  function deleteTask(taskId) {
-    const updatedTasks = {};
-    Object.keys(tasks).forEach((project) => {
-      updatedTasks[project] = tasks[project].filter(
-        (task) => task.id !== taskId
-      );
-    });
-    setTasks(updatedTasks);
-  }
+  const handleDelete = (taskId) => {
+    setTaskToDelete(taskId);
+  };
 
   return (
     <div className="task-manager">
@@ -144,8 +166,9 @@ function TaskManager() {
             <div id="button-delete">
               <button
                 type="button"
-                onClick={() => deleteTask(task.Task_id)}
+                onClick={() => handleDelete(task.id)}
                 aria-label="Delete task"
+                
               >
                 <RiDeleteBin5Line />
               </button>

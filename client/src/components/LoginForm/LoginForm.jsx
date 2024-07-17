@@ -1,33 +1,51 @@
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./LoginForm.css";
 import logo from "../../assets/images/logo.png";
+import useAuthContext from "../../services/context";
 
 function LoginForm() {
+  const { setAuth } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   async function login() {
     if (username && password) {
-      const resp = await fetch("http://localhost:3310/api/users/login", {
-        method: "POST",
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      const resp = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((json) => json);
-      if(resp.success){
+      if (resp.success) {
         toast("Success, logging in...");
+        try {
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/api/users/refresh`,
+            { method: "GET", credentials: "include" }
+          );
+          const token = response.headers.get("Authorization");
+          const user = await response.json();
+          setAuth({ isLogged: true, user, token });
+        } catch (error) {
+          toast.error("Une erreur est survenue");
+        }
       }
       if (resp.error) {
         toast("Invalid email or password");
       }
+
       return true;
     }
 

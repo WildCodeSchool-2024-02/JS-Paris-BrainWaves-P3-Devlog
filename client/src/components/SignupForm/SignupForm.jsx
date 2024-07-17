@@ -23,7 +23,7 @@ function SignupForm() {
         toast("Password and confirmation are not the same");
         return false;
       }
-      await fetch("http://localhost:3310/api/users/signup", {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/users/signup`, {
         method: "POST",
         body: JSON.stringify({
           toto: "toto",
