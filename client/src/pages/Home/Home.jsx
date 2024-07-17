@@ -1,19 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import "./home.css";
+import { toast } from "react-toastify";
 import TaskManager from "../../components/TaskManager/TaskManager";
 import Project from "../../components/Project/project";
 import Collaborater from "../../components/Collaborater/Collaborater";
 import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
-
+import useAuth from "../../services/context/index";
 
 function Home() {
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState("John Doe");
   const [inputValue, setInputValue] = useState(userName);
   const [profilePic, setProfilePic] = useState(profile);
-  const userId = 1;
+  const { user, setAuth } = useAuth();
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
 
@@ -36,42 +37,54 @@ function Home() {
     }
   };
 
-  const handleProfilePicClick = () => {
-    fileInputRef.current.click();
-  };
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const fileTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const formData = new FormData();
-      formData.append("profilePic", file);
-      formData.append("userId", userId);
+    if (fileTypes.includes(file.type)) {
+      document.querySelector(".user-pic").style.backgroundImage =
+        `url(${URL.createObjectURL(file)})`;
+
+      const form = new FormData();
+      form.append("avatar", file);
 
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/update-profile-pic`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("failed to update profile picture");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/update-profile-pic`, {
+          method: "PUT",
+          body: form,
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setProfilePic(data.avatar);
+          setAuth((prevState) => ({ ...prevState, user: data }));
+          toast.success("Modification successfully");
+        } else {
+          toast.warn("Please verify file type");
         }
-        await response.json();
-        setProfilePic(URL.createObjectURL(file));
       } catch (error) {
-        console.error(error);
+        toast.error("error");
       }
+    } else {
+      toast.warn("Plsease verify file type.");
     }
   };
+
+  useEffect(() => {
+    const currentFileInputRef = fileInputRef.current;
+    currentFileInputRef?.addEventListener("change", handleFileChange);
+
+    return () => {
+      if (currentFileInputRef) {
+        currentFileInputRef?.removeEventListener("change", handleFileChange);
+      }
+    };
+  });
 
   useEffect(() => {
     const fetchUserName = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/${userId}`
+          `${import.meta.env.VITE_API_URL}/api/users/`
         );
         if (!response.ok) {
           throw new Error("failed to fetch user data");
@@ -85,7 +98,7 @@ function Home() {
       }
     };
     fetchUserName();
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -95,29 +108,38 @@ function Home() {
 
   useEffect(() => {
     const updateUserName = async () => {
+      if (!user?.token) {
+        toast.error("User token is missing");
+        return;
+      }
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/users/update-name`,
           {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId, newName: inputValue }),
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
+            },
+            body: JSON.stringify({ newName: inputValue }),
           }
         );
         if (!response.ok) {
           throw new Error("Failed to update user name");
         }
         setUserName(inputValue);
+        setAuth((prev) => ({ ...prev, userName: inputValue }));
+        toast.success("Username updated successfully");
       } catch (error) {
         console.error(error);
+        toast.error("Failed to update username");
       }
     };
 
     if (!isEditing) {
       updateUserName();
     }
-  }, [userName, userId, isEditing, inputValue]);
-
+  }, [isEditing, inputValue, setAuth, user]);
   return (
     <>
       <Nav />
@@ -141,9 +163,9 @@ function Home() {
           <div
             className="user-pic"
             role="button"
-            onClick={handleProfilePicClick}
+            onClick={() => fileInputRef.current.click()}
             onKeyDown={(e) => {
-              if (e.key === "Enter") handleProfilePicClick();
+              if (e.key === "Enter") fileInputRef.current.click();
             }}
             tabIndex="0"
             style={{ backgroundImage: `url(${profilePic})` }}
