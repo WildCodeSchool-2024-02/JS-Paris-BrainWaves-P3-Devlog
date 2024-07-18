@@ -7,6 +7,6 @@ const router = express.Router();
 // router.get("/", ( req, res ) => {
 //     res.json("working")
 // });
-router.get("/", browse);
+router.get("/:id", browse);
 
 module.exports = router;

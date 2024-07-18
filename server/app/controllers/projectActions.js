@@ -4,8 +4,9 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
+    const { id } = req.params;
     // Fetch all items from the database
-    const project = await tables.projects.readAll();
+    const project = await tables.projects.read(id);
 
     // Respond with the items in JSON format
     res.json(project);

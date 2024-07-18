@@ -26,7 +26,7 @@ useEffect(() => {
 }, []);
 
 const handleCreateProject = () => {
-  navigate("/table");
+  navigate("/table/:id");
 };
 
 return (

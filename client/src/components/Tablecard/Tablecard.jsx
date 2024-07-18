@@ -1,17 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import "./tablecard.css";
 import "./modal.css";
 
-function Tablecard() {
-  const [tasks, setTasks] = useState([]);
-  const [title, setTitle] = useState("DEV LOG");
+function Tablecard({ projectId }) {
+  const [dataTask, setDataTask] = useState([]);
+  const [title, setTitle] = useState("");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newTask, setNewTask] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newSection, setNewSection] = useState("Backlog");
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const fetchDataTask = async () => {
+    try {
+      const response = await fetch("http://localhost:3311/api/tasks");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const receptionData = await response.json();
+
+      setDataTask(receptionData);
+    } catch (error) {
+      console.error("Error fetching dataTask", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchDataProject = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3311/api/projects/${projectId}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const dataProject = await response.json();
+        setTitle(dataProject.name);
+      } catch (error) {
+        console.error("Error fetching project data", error);
+      }
+    };
+    fetchDataTask();
+    fetchDataProject();
+  }, [projectId]);
 
   const handleAddTask = () => {
     setIsModalOpen(true);
@@ -43,13 +77,32 @@ function Tablecard() {
     setSelectedTask(null);
   };
 
-  const handleTaskSubmit = () => {
+  const handleTaskSubmit = async () => {
     if (newTask) {
-      setTasks([
-        ...tasks,
+      try {
+        const response = await fetch("http://localhost:3311/api/tasks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            task: newTask,
+            projectId,
+            description: newDescription,
+            section: newSection,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const receptionData = await response.json();
+        setDataTask(receptionData);
+      } catch (error) {
+        console.error("Error fetching dataTask", error);
+      }
+      setDataTask([
+        ...dataTask,
         {
-          id: tasks.length,
-          task: newTask,
+          id: dataTask.length,
+          name: newTask,
           description: newDescription,
           section: newSection,
         },
@@ -64,11 +117,11 @@ function Tablecard() {
   };
 
   const handleTaskDelete = (taskId) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
+    setDataTask(dataTask.filter((task) => task.id !== taskId));
   };
 
   const renderTasks = (section) =>
-    tasks
+    dataTask
       .filter((task) => task.section === section)
       .map((task) => (
         <li key={task.id} role="presentation">
@@ -77,7 +130,7 @@ function Tablecard() {
             role="presentation"
             onClick={() => handleTaskClick(task)}
           >
-            <strong>{task.task}</strong>
+            <strong>{task.name}</strong>
           </div>
           <RiDeleteBin6Line
             className="delete-icon"
@@ -176,5 +229,9 @@ function Tablecard() {
     </>
   );
 }
+
+Tablecard.propTypes = {
+  projectId: PropTypes.number.isRequired,
+};
 
 export default Tablecard;

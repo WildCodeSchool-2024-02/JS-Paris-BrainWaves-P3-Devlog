@@ -45,7 +45,7 @@ function Nav() {
         </button>
       </div>
       <div className="content">
-        <Link to="/connexion" className="team-btn">Consulter l'équipe</Link>
+        <Link to="/Member" className="team-btn">Consulter l'équipe</Link>
         <div className="boards">
           <p className="boards-title">Vos Tableaux</p>
           {tables.map(table => (
