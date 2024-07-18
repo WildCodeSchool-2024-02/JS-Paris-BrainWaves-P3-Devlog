@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `devlog`.`user_has_team` ;
 CREATE TABLE IF NOT EXISTS `devlog`.`user_has_team` (
   `User_id` INT NOT NULL,
   `Team_id` INT NOT NULL,
-  `role` ENUM('ADMIN', 'PO', 'SM', 'DEV') NOT NULL,
+  `role` ENUM("ADMIN", "PO", "SM", "DEV") NOT NULL,
   PRIMARY KEY (`User_id`, `Team_id`),
   INDEX `fk_User_has_Team_Team1_idx` (`Team_id` ASC) VISIBLE,
   INDEX `fk_User_has_Team_User1_idx` (`User_id` ASC) VISIBLE,
