@@ -29,11 +29,10 @@ function TaskManager() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-
         const tasksOrganised = {
-          todo: data.filter((task) => task.status === "todo"),
-          process: data.filter((task) => task.status === "process"),
-          finish: data.filter((task) => task.status === "finish"),
+          todo: data.filter((task) => task.is_archived === 0),
+          process: data.filter((task) => task.project_id1 === 0),
+          finish: data.filter((task) => task.is_archived === 1),
         };
         setTasks(tasksOrganised);
       } catch (error) {
@@ -59,6 +58,7 @@ function TaskManager() {
     const newTask = {
       text: newTaskText,
       status: "todo",
+      is_archived: 0,
       user: {
         id: 1,
         username: "test",
@@ -89,6 +89,7 @@ function TaskManager() {
       })
       .catch((error) => console.error("Error:", error));
   }
+
   return (
     <div className="task-manager">
       <div className="span">Mes tâches</div>

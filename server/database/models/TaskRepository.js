@@ -5,9 +5,9 @@ class TaskRepository extends AbstractRepository {
         super({ table: "Task" });
     }
 
-    async getAll() {
-        const query = `SELECT * FROM ${this.table}`;
-        const results = await this.database.query(query);
+    async getAll(projectId) {
+        const query = `SELECT * FROM ${this.table} WHERE Project_id1 = ?`;
+        const results = await this.database.query(query[projectId]);
         return results;
     }
 
@@ -21,7 +21,7 @@ class TaskRepository extends AbstractRepository {
     }
 
     async archive(taskId) {
-        const query = `UPDATE ${this.table} SET status = 'archived' WHERE Task_id = ?`;
+        const query = `UPDATE ${this.table} SET is_archived = 1 WHERE id = ?`;
         await this.database.execute(query, [taskId]);
     }
 }
