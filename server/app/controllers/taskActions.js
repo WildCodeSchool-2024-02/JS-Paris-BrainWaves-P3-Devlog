@@ -1,29 +1,60 @@
 const tables = require("../../database/tables");
 
 const browse = async (req, res, next) => {
-    try {
-        const [tasks] = await tables.task.getAll();
-        res.status(200).json(tasks);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const { id } = req.params;
+    const [tasks] = await tables.task.getAll(id);
+    res.status(200).json(tasks);
+  } catch (err) {
+    next(err);
+  }
 };
 
 const addTask = async (req, res, next) => {
-    try {
-        const { text, status, projectId } = req.body;
-        const userId = req.body.user.id;
-
-
-        if (!userId || !status || !text || !projectId) {
-            return res.status(400).json({ message: 'Missing required information: userId, status, projectId or text' });
-        }
-
-        const newTask = await tables.task.create({ text, status, userId, projectId });
-        res.status(201).json(newTask);
-    } catch (error) {
-        next(error);
-    } return true;
+  try {
+    const { task, projectId, section } = req.body;
+    const userId = req.body.user.id;
+    if (!userId || !section || !task || !projectId) {
+      return res
+        .status(400)
+        .json({ message: "Missing required information: userId and status" });
+    }
+    const [results] = await tables.task.create({ task, section, userId });
+    res.status(201).json(results);
+  } catch (error) {
+    next(error);
+  }
+  return true;
 };
 
-module.exports = { browse, addTask }; 
+const add = async (req, res, next) => {
+  const { task, description, projectId, section } = req.body;
+  try {
+    const result = await tables.task.create(
+      task,
+      description,
+      projectId,
+      section
+    );
+
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteTask = async (req, res, next) => {
+  try {
+    const { taskId } = req.params;
+    if (!taskId) {
+      return res.status(400).json({ message: "missing taskId" });
+    }
+    await tables.task.archive(taskId);
+    res.status(200).json({ message: "task archived succefully" });
+  } catch (error) {
+    next(error);
+  }
+  return true;
+};
+
+module.exports = { browse, addTask, deleteTask, add };

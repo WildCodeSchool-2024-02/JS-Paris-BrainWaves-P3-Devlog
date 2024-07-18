@@ -13,12 +13,12 @@ function Collaborator() {
 
   const fetchDataUser = async () => {
     try {
-      const response = await fetch("http://localhost:3311/api/user");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const receptionData = await response.json();
-      setCollab(receptionData);
+      await response.json();
+      setCollab([]);
     } catch (error) {
       console.error("Error fetching dataUser", error);
     }

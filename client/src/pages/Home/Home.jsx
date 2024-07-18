@@ -7,13 +7,14 @@ import Collaborator from "../../components/Collaborator/Collaborator";
 import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
+import useAuth from "../../services/context/index";
 
 function Home() {
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState("John Doe");
   const [inputValue, setInputValue] = useState(userName);
   const [profilePic, setProfilePic] = useState(profile);
-  const { user, setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
 
@@ -48,10 +49,13 @@ function Home() {
       form.append("avatar", file);
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/update-profile-pic`, {
-          method: "PUT",
-          body: form,
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/users/update-profile-pic`,
+          {
+            method: "PUT",
+            body: form,
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setProfilePic(data.avatar);
@@ -107,10 +111,6 @@ function Home() {
 
   useEffect(() => {
     const updateUserName = async () => {
-      if (!user?.token) {
-        toast.error("User token is missing");
-        return;
-      }
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/users/update-name`,
@@ -118,7 +118,7 @@ function Home() {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${auth?.user?.token}`,
             },
             body: JSON.stringify({ newName: inputValue }),
           }
@@ -135,10 +135,10 @@ function Home() {
       }
     };
 
-    if (!isEditing) {
+    if (isEditing) {
       updateUserName();
     }
-  }, [isEditing, inputValue, setAuth, user]);
+  }, [isEditing, inputValue, setAuth, auth]);
   return (
     <>
       <Nav />

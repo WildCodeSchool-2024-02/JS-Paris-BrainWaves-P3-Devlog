@@ -31,9 +31,9 @@ function TaskManager() {
         const data = await response.json();
 
         const tasksOrganised = {
-          todo: data.filter((task) => task.status === "todo"),
-          process: data.filter((task) => task.status === "process"),
-          finish: data.filter((task) => task.status === "finish"),
+          todo: data.filter((task) => task.section === "todo"),
+          process: data.filter((task) => task.section === "process"),
+          finish: data.filter((task) => task.section === "finish"),
         };
         setTasks(tasksOrganised);
       } catch (error) {
@@ -58,14 +58,14 @@ function TaskManager() {
     if (!newTaskText.trim()) return;
     const newTask = {
       text: newTaskText,
-      status: "todo",
+      section: "todo",
       user: {
         id: 1,
         username: "test",
       },
       projectId,
     };
-
+console.info(newTask)
     fetch(`${import.meta.env.VITE_API_URL}/api/tasks/add`, {
       method: "POST",
       headers: {
