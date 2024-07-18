@@ -29,6 +29,23 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
+-- Table `devlog`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `devlog`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `devlog`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `is_admin` TINYINT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
 -- Table `devlog`.`project`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`project` ;
@@ -38,11 +55,18 @@ CREATE TABLE IF NOT EXISTS `devlog`.`project` (
   `name` VARCHAR(50) NOT NULL,
   `is_archived` TINYINT NOT NULL,
   `Team_id` INT NOT NULL,
+  `User_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Project_Team1_idx` (`Team_id` ASC) VISIBLE,
+  INDEX `fk_project_user1_idx` (`User_id` ASC) VISIBLE,
   CONSTRAINT `fk_Project_Team1`
     FOREIGN KEY (`Team_id`)
-    REFERENCES `devlog`.`team` (`id`))
+    REFERENCES `devlog`.`team` (`id`),
+  CONSTRAINT `fk_project_user1`
+    FOREIGN KEY (`User_id`)
+    REFERENCES `devlog`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb3;
@@ -58,37 +82,15 @@ CREATE TABLE IF NOT EXISTS `devlog`.`task` (
   `name` VARCHAR(50) NOT NULL,
   `description` VARCHAR(250) NOT NULL,
   `is_archived` TINYINT NOT NULL,
-  `Project_id1` INT NULL DEFAULT NULL,
+  `Project_id` INT NULL,
   `section` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Task_Project1_idx` (`Project_id1` ASC) VISIBLE,
+  INDEX `fk_Task_Project1_idx` (`Project_id` ASC) VISIBLE,
   CONSTRAINT `fk_Task_Project1`
-    FOREIGN KEY (`Project_id1`)
-    REFERENCES `devlog`.`project` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 6
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
--- Table `devlog`.`user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `devlog`.`user` ;
-
-CREATE TABLE IF NOT EXISTS `devlog`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `user_name` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `is_admin` TINYINT NOT NULL,
-  `Project_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_User_Project1_idx` (`Project_id` ASC) VISIBLE,
-  CONSTRAINT `fk_User_Project1`
     FOREIGN KEY (`Project_id`)
     REFERENCES `devlog`.`project` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -121,7 +123,7 @@ DROP TABLE IF EXISTS `devlog`.`user_has_team` ;
 CREATE TABLE IF NOT EXISTS `devlog`.`user_has_team` (
   `User_id` INT NOT NULL,
   `Team_id` INT NOT NULL,
-  `role` ENUM("ADMIN", "PO", "SM", "DEV") NOT NULL,
+  `role` ENUM('ADMIN', 'PO', 'SM', 'DEV') NOT NULL,
   PRIMARY KEY (`User_id`, `Team_id`),
   INDEX `fk_User_has_Team_Team1_idx` (`Team_id` ASC) VISIBLE,
   INDEX `fk_User_has_Team_User1_idx` (`User_id` ASC) VISIBLE,

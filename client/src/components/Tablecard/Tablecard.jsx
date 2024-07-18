@@ -16,7 +16,9 @@ function Tablecard({ projectId }) {
 
   const fetchDataTask = async () => {
     try {
-      const response = await fetch("http://localhost:3311/api/tasks");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/tasks/project/${projectId}`
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -32,7 +34,7 @@ function Tablecard({ projectId }) {
     const fetchDataProject = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3311/api/projects/${projectId}`
+          `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -80,16 +82,19 @@ function Tablecard({ projectId }) {
   const handleTaskSubmit = async () => {
     if (newTask) {
       try {
-        const response = await fetch("http://localhost:3311/api/tasks", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            task: newTask,
-            projectId,
-            description: newDescription,
-            section: newSection,
-          }),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/tasks`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              task: newTask,
+              projectId,
+              description: newDescription,
+              section: newSection,
+            }),
+          }
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -122,7 +127,7 @@ function Tablecard({ projectId }) {
 
   const renderTasks = (section) =>
     dataTask
-      .filter((task) => task.section === section)
+      .filter((task) => task.section.toLowerCase() === section.toLowerCase())
       .map((task) => (
         <li key={task.id} role="presentation">
           <div

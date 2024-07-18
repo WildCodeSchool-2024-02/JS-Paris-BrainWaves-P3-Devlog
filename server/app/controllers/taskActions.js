@@ -1,8 +1,9 @@
 const tables = require("../../database/tables");
 
-const browse = async ({ res, next }) => {
+const browse = async (req, res, next) => {
   try {
-    const [tasks] = await tables.task.getAll();
+    const { id } = req.params;
+    const [tasks] = await tables.task.getAll(id);
     res.status(200).json(tasks);
   } catch (err) {
     next(err);
@@ -11,13 +12,14 @@ const browse = async ({ res, next }) => {
 
 const addTask = async (req, res, next) => {
   try {
-    const { userId, text, status } = req.body;
-    if (!userId || !status) {
+    const { task, projectId, section } = req.body;
+    const userId = req.body.user.id;
+    if (!userId || !section || !task || !projectId) {
       return res
         .status(400)
         .json({ message: "Missing required information: userId and status" });
     }
-    const [results] = await tables.task.create({ text, status, userId });
+    const [results] = await tables.task.create({ task, section, userId });
     res.status(201).json(results);
   } catch (error) {
     next(error);

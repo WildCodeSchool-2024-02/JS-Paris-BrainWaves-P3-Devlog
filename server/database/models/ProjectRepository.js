@@ -2,10 +2,17 @@ const AbstractRepository = require("./AbstractRepository");
 
 class ProjectRepository extends AbstractRepository {
   constructor() {
-    // Call the constructor of the parent class (AbstractRepository)
-    // and pass the table name "item" as configuration
     super({ table: "Project" });
   }
+
+  async getAll() { 
+    const query = `select * from ${this.table}`;
+    const results = await this.database.query(query); 
+    return results;
+   }
+
+
+
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
@@ -27,12 +34,5 @@ class ProjectRepository extends AbstractRepository {
   }
 }
 
-// async create(item)
-//   // Execute the SQL INSERT query to add a new item to the "item" table
-//   const [result] = await this.database.query(
-//     `insert into ${this.table} (name) values (?)`,
-//     [item.title,]
-//   );
-// };
 
 module.exports = ProjectRepository;

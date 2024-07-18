@@ -2,26 +2,19 @@ const AbstractRepository = require("./AbstractRepository");
 
 class TaskRepository extends AbstractRepository {
   constructor() {
-    super({ table: "User_has_Task" });
+    super({ table: "Task" });
   }
 
-  async getAll() {
-    const query = `SELECT * FROM Task`;
-    const results = await this.database.query(query);
+  async getAll(projectId) {
+    const query = `SELECT * FROM ${this.table} WHERE Project_id = ?`;
+    const results = await this.database.query(query, [projectId]);
     return results;
   }
 
-  async addTask(taskDetails) {
-    const { userId, status } = taskDetails;
-    const query = `INSERT INTO ${this.table} (User_id, status, Task_id) VALUES (?, ?)`;
-    const [result] = await this.database.execute(query, [userId, status]);
-    return { Task_id: result.insertId, userId, status };
-  }
-
-  async create(task, description, projectId, section) {
+  async create(taskName, section, projectId, description) {
     return this.database.query(
-      `INSERT INTO Task (name, description, is_archived, Project_id1, section) VALUES (?, ?, ?, ?, ?)`,
-      [task, description, 0, projectId, section]
+      `INSERT INTO Task (name, description, is_archived, Project_id, section) VALUES (?, ?, ?, ?, ?)`,
+      [taskName, description, 0, projectId, section]
     );
   }
 
