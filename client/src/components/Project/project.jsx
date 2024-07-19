@@ -7,29 +7,28 @@ import sproject from "../../assets/images/sproject.png";
 function Project() {
   const { auth } = useAuthContext();
   const [dataProject, setDataProject] = useState([]);
-
   const navigate = useNavigate();
 
   useEffect(() => {
-  const fetchDataProject = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/projects`,
-        {
-          headers: {
-            Authorization: `Bearer ${auth?.token}`,
-          },
+    const fetchDataProject = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/projects`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const receptionData = await response.json();
+        setDataProject(receptionData);
+      } catch (error) {
+        console.error(error);
       }
-      const receptionData = await response.json();
-      setDataProject(receptionData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
     fetchDataProject();
   }, []);
 
