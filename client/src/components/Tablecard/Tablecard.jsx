@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import useAuthContext from "../../services/context";
 import "./tablecard.css";
 import "./modal.css";
 
 function Tablecard({ projectId }) {
+  const { auth } = useAuthContext();
   const [dataTask, setDataTask] = useState([]);
   const [title, setTitle] = useState("");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -14,10 +16,16 @@ function Tablecard({ projectId }) {
   const [newSection, setNewSection] = useState("Backlog");
   const [selectedTask, setSelectedTask] = useState(null);
 
+  
   const fetchDataTask = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/tasks/project/${projectId}`
+        `${import.meta.env.VITE_API_URL}/api/tasks/project/${projectId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,7 +42,12 @@ function Tablecard({ projectId }) {
     const fetchDataProject = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`
+          `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+            },
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
