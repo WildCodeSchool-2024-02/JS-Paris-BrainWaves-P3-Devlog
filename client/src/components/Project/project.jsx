@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthContext from "../../services/context";
 import "./project.css";
 import sproject from "../../assets/images/sproject.png";
 
 function Project() {
+  const { auth } = useAuthContext();
   const [dataProject, setDataProject] = useState([]);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
   const fetchDataProject = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/projects`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -20,14 +30,12 @@ function Project() {
       console.error(error);
     }
   };
-
-  useEffect(() => {
     fetchDataProject();
   }, []);
 
-const handleCreateProject = () => {
-  navigate("/table/:id");
-};
+  const handleCreateProject = () => {
+    navigate("/table/:id");
+  };
 
   return (
     <div className="project-container">
