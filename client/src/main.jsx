@@ -12,6 +12,8 @@ import App from "./App";
 import LoginPage from "./pages/Login/Login";
 
 import SignupPage from "./pages/Signup/Signup";
+import Collaborator from "./components/Collaborator/Collaborator";
+import Archiveproject from "./components/Archiveproject/Archiveproject";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/table",
         element: <Table />,
+      },
+      {
+        path: "/adam",
+        element: <Archiveproject />,
+      },
+      {
+        path: "/collabo",
+        element: <Collaborator />,
       },
     ],
   },
