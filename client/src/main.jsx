@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <Member />,
       },
       {
-        path: "/table",
+        path: "/table/:id",
         element: <Table />,
       },
       {
