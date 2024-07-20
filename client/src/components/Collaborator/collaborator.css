@@ -1,0 +1,189 @@
+:root {
+  --primary-color: #6499ff;
+  --secondary-color: #1e1e1e;
+  --text-color: #ffffff;
+  --border-radius: 20px;
+}
+
+.collaborator-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  border: 4px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  width: 40%;
+  max-height: 400px;
+  padding: 10px;
+}
+
+.collaborator-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.collaborator-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-height: 20%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.collaborator-list::-webkit-scrollbar {
+  display: none;
+}
+
+.collaborator-figure {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  align-items: center;
+}
+
+.user-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+
+.user-name {
+  width: 75%;
+  font-size: 20px;
+  color: #000;
+  list-style-type: none;
+}
+
+.user-name > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  padding: 5px 15px;
+  margin: 5px 0;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.user-name > div:hover {
+  background-color: #f0f0f0;
+}
+
+.collaborator-img {
+  width: 90%;
+  height: 90%;
+  border: 2px solid violet;
+  border-radius: 50px;
+}
+
+.collaborator-content-list {
+  display: flex;
+  justify-content: center;
+  width: 44%;
+  height: 33%;
+  margin: 18px;
+}
+
+.collaborator-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  padding: 15px;
+}
+
+.collaborator-button-add {
+  margin-bottom: 5px;
+  padding: 9px 100px;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.collaborator-button-add:hover {
+  background-color: #457bff;
+  transform: scale(1.05);
+}
+
+.collaborator-input-add {
+  margin-top: 5px;
+  padding: 5px;
+  margin-bottom: 15px;
+  width: 55%;
+  font-size: 16px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.collaborator-input-add:focus {
+  border-color: #457bff;
+  box-shadow: 0 0 5px rgba(70, 130, 180, 0.5);
+}
+
+@media (max-width: 768px) {
+  .collaborator-container {
+    width: 100%;
+  }
+
+  .collaborator-content-list {
+    width: 90%;
+    height: auto;
+  }
+
+  .user-name {
+    font-size: 18px;
+  }
+
+  .collaborator-button-add {
+    padding: 9px 50px;
+  }
+
+  .collaborator-input-add {
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .collaborator-container {
+    width: 95%;
+  }
+
+  .collaborator-content-list {
+    width: 100%;
+    height: auto;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+
+  .collaborator-button-add {
+    padding: 9px 30px;
+  }
+
+  .collaborator-input-add {
+    width: 95%;
+  }
+}

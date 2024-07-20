@@ -6,6 +6,7 @@ const ItemRepository = require("./models/ItemRepository");
 
 const ProjectRepository = require("./models/ProjectRepository");
 
+const TaskHomeRepository = require("./models/TaskHomeRepository");
 
 // Create an empty object to hold data repositories for different tables
 const tables = {};
@@ -16,7 +17,7 @@ const tables = {};
 
 // Register each repository as data access point for its table
 tables.users = new UserRepository();
-
+tables.task = new TaskHomeRepository();
 tables.task = new TaskRepository(); 
 tables.item = new ItemRepository();
 tables.projects = new ProjectRepository(); 

@@ -2,12 +2,16 @@ const express = require("express");
 
 const router = express.Router();
 
-const { browse, addTask } = require("../../../controllers/taskActions");
+const {
+  browse,
+  deleteTask,
+  add,
+} = require("../../../controllers/taskActions");
 
+router.get("/project/:id", browse);
+router.post("/", add);
+router.delete("/", deleteTask);
 
-router.get("/", browse);
-
-router.post("/add", addTask);
 
 
 module.exports = router;

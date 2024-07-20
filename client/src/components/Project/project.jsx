@@ -10,23 +10,14 @@ function Project() {
 
   const fetchDataProject = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/projects`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const receptionData = await response.json();
       setDataProject(receptionData);
     } catch (error) {
-      console.error("Error fetching dataProject", error);
+      console.error(error);
     }
   };
 
@@ -34,9 +25,9 @@ function Project() {
     fetchDataProject();
   }, []);
 
-  const handleCreateProject = () => {
-    navigate("/table");
-  };
+const handleCreateProject = () => {
+  navigate("/table/:id");
+};
 
   return (
     <div className="project-container">

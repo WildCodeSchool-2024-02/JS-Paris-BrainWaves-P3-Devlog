@@ -6,7 +6,6 @@ import Home from "./pages/Home/Home";
 import Archive from "./pages/Archive/Archive";
 import Member from "./pages/Member/Member";
 import Table from "./pages/Table/Table";
-import Collaborater from "./components/Collaborater/Collaborater";
 import { AuthProvider } from "./services/context";
 
 import App from "./App";
@@ -36,12 +35,8 @@ const router = createBrowserRouter([
         element: <Member />,
       },
       {
-        path: "/table",
+        path: "/table/:id",
         element: <Table />,
-      },
-      {
-        path: "/collaborater",
-        element: <Collaborater />,
       },
     ],
   },

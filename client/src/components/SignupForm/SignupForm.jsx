@@ -50,7 +50,7 @@ function SignupForm() {
   }
 
   return (
-    <div className='container'>
+    <div className="signup-container">
       <form className="signup-form">
         <img src={logo} alt="logo" className="logo" />
 
