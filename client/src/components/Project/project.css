@@ -2,9 +2,8 @@
   background-color: #1e1e1e;
   border: 2px solid #6499ff;
   border-radius: 20px 20px 20px 20px;
-  width: 570px;
+  width: 48%;
   text-align: center;
-  height: 230px;
 }
 .project-container::-webkit-scrollbar {
   width: 12px;
@@ -13,8 +12,8 @@
 }
 .project-container::-webkit-scrollbar-thumb {
   background-color: #bb64ff;
-  border-radius: 10px;
-  border: 2px solid #1e1e1e;
+  border-radius: 5px;
+  border: 1px solid #1e1e1e;
 }
 h1 {
   margin-bottom: 20px;
@@ -30,6 +29,8 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0 0 20px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 .project-item {
   background-color: #fff;

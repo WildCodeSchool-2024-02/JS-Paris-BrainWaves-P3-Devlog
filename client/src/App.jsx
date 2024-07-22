@@ -1,12 +1,12 @@
-import { Outlet} from "react-router-dom";
-import {  useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
 import "./App.css";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import useAuthContext from "./services/context";
 
 function App() {
-  const {setAuth} = useAuthContext()
-  
+  const { setAuth } = useAuthContext();
+
   useEffect(() => {
     const getAuth = async () => {
       try {
@@ -16,6 +16,7 @@ function App() {
         );
         const token = response.headers.get("Authorization");
         const user = await response.json();
+        user.token = token;
         setAuth({ isLogged: true, user, token });
       } catch (error) {
         toast.error("Une erreur est survenue");
@@ -24,12 +25,11 @@ function App() {
     getAuth();
   }, [setAuth]);
 
-
-
   return (
     <main>
       <section>
-        <Outlet/>
+        <ToastContainer />
+        <Outlet />
       </section>
     </main>
   );

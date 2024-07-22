@@ -1,4 +1,4 @@
-const argon2 = require('argon2');
+const argon2 = require("argon2");
 const AbstractRepository = require("./AbstractRepository");
 
 class UserRepository extends AbstractRepository {
@@ -12,26 +12,24 @@ class UserRepository extends AbstractRepository {
       [item.email, item.username, await argon2.hash(item.password)]
     );
 
-    if(result.insertId){
-      return true
+    if (result.insertId) {
+      return result.insertId;
     }
     return false;
   }
 
   async login(item) {
-    const [result] = await this.database.query(
+    const [[result]] = await this.database.query(
       "SELECT id, password FROM user WHERE user_name=?",
       [item.username]
     );
 
-
-    if(result[0] && result[0].password){
-      if(await argon2.verify(result[0].password, item.password)){
-        return [true, result[0].id]
+    if (result) {
+      if (await argon2.verify(result.password, item.password)) {
+        return result;
       }
     }
-
-    return [false, result[0].id]
+    return null;
   }
 
   async getById(id) {
@@ -44,11 +42,20 @@ class UserRepository extends AbstractRepository {
   }
 
   async updateUserName(id, newName) {
-    const [result] = await this.database.query('UPDATE user SET username=? WHERE id=?', [newName, id]
-    ); 
-    return result; 
- }
-  
+    const [result] = await this.database.query(
+      "UPDATE user SET user_name=? WHERE id=?",
+      [newName, id]
+    );
+    return result.affectedRows > 0;
+  }
+
+  async updateProfilePic(id, profilePic) {
+    const [result] = await this.database.query(
+      "UPDATE user SET profilePic=? WHERE id=?",
+      [profilePic, id]
+    );
+    return result.affectedRows > 0;
+  }
 }
 
 module.exports = UserRepository;

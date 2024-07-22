@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginForm.css";
@@ -9,6 +10,7 @@ function LoginForm() {
   const { setAuth } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   async function login() {
     if (username && password) {
@@ -28,18 +30,16 @@ function LoginForm() {
       )
         .then((res) => res.json())
         .then((json) => json);
-      if (resp.success) {
+      if (resp.user) {
         toast("Success, logging in...");
         try {
-          const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/api/users/refresh`,
-            { method: "GET", credentials: "include" }
-          );
-          const token = response.headers.get("Authorization");
-          const user = await response.json();
+          const { user, token } = resp;
+          user.token = token;
+          console.info(user, token);
           setAuth({ isLogged: true, user, token });
+          navigate("/home");
         } catch (error) {
-          toast.error("Une erreur est survenue");
+          console.info(error);
         }
       }
       if (resp.error) {
@@ -81,6 +81,7 @@ function LoginForm() {
           </span>
         </p>
       </form>
+
       <ToastContainer />
     </div>
   );

@@ -1,27 +1,27 @@
 const AbstractRepository = require("./AbstractRepository");
 
 class TaskRepository extends AbstractRepository {
-    constructor() {
-        super({ table: "User_has_Task" });
-    }
- 
-    async getAll() {
-        const query = `SELECT * FROM ${this.table}`;
-        const results = await this.database.query(query);
-        return results;
-    }
+  constructor() {
+    super({ table: "Task" });
+  }
 
-    async addTask(taskDetails) {
-        const { userId, status } = taskDetails;
-        const query = `INSERT INTO ${this.table} (User_id, status, Task_id) VALUES (?, ?)`;
-        const [result] = await this.database.execute(query, [userId, status]);
-        return { Task_id: result.insertId, userId, status };
-    } 
+  async getAll(projectId) {
+    const query = `SELECT * FROM ${this.table} WHERE Project_id = ?`;
+    const results = await this.database.query(query, [projectId]);
+    return results;
+  }
 
-    async archive(taskId) {
-        const query = `UPDATE ${this.table} SET status = 'archived' WHERE Task_id = ?`;
-        await this.database.execute(query, [taskId]);
-    }
-} 
+  async create(taskName, section, projectId, description) {
+    return this.database.query(
+      `INSERT INTO Task (name, description, is_archived, Project_id, section) VALUES (?, ?, ?, ?, ?)`,
+      [taskName, description, 0, projectId, section]
+    );
+  }
+
+  async archive(taskId) {
+    const query = `UPDATE ${this.table} SET status = 'archived' WHERE Task_id = ?`;
+    await this.database.execute(query, [taskId]);
+  }
+}
 
 module.exports = TaskRepository;
