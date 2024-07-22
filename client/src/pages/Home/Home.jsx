@@ -40,38 +40,42 @@ function Home() {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     const fileTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
-
+  
     if (fileTypes.includes(file.type)) {
       document.querySelector(".user-pic").style.backgroundImage =
         `url(${URL.createObjectURL(file)})`;
-
+  
       const form = new FormData();
-      form.append("avatar", file);
-
+      form.append("profilePic", file); 
+  
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/users/update-profile-pic`,
+          `${import.meta.env.VITE_API_URL}/api/users/update-profile-pic`,
           {
             method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             body: form,
           }
         );
+  
         if (response.ok) {
           const data = await response.json();
-          setProfilePic(data.avatar);
+          setProfilePic(data.profile_pic);
           setAuth((prevState) => ({ ...prevState, user: data }));
           toast.success("Modification successfully");
         } else {
           toast.warn("Please verify file type");
         }
       } catch (error) {
-        toast.error("error");
+        toast.error("Error updating profile picture");
       }
     } else {
-      toast.warn("Plsease verify file type.");
+      toast.warn("Please verify file type.");
     }
   };
-
+  
   useEffect(() => {
     const currentFileInputRef = fileInputRef.current;
     currentFileInputRef?.addEventListener("change", handleFileChange);

@@ -3,11 +3,10 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  browse,
+  browse, read,
 } = require("../../../controllers/task-homeAction");
 
 router.get("/", browse);
-
-// router.post("/add", addTask);
+router.get("/:id", read);
 
 module.exports = router;

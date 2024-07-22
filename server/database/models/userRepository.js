@@ -51,7 +51,7 @@ class UserRepository extends AbstractRepository {
 
   async updateProfilePic(id, profilePic) {
     const [result] = await this.database.query(
-      "UPDATE user SET profilePic=? WHERE id=?",
+      "UPDATE user SET profile_pic=? WHERE id=?",
       [profilePic, id]
     );
     return result.affectedRows > 0;

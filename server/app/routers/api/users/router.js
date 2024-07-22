@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
+const setAuth = require("../../../services/auth");
 
 const {
   signupAction,
@@ -23,6 +24,6 @@ router.get("/logout", logoutAction);
 router.post("/signup", signupAction);
 router.post("/login", loginAction);
 router.get("/refresh", refresh);
-router.put("/update-name", updateUserName);
-router.put("/update-profile-pic", upload.single("profilePic"), updateProfilePic);
+router.put("/update-name",setAuth, updateUserName);
+router.put("/update-profile-pic", setAuth, upload.single("profilePic"), updateProfilePic);
 module.exports = router;

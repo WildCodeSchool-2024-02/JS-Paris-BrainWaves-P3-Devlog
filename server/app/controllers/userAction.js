@@ -71,13 +71,14 @@ const refresh = async (req, res) => {
 const logoutAction = async ({ res }) => {
   res.clearCookie("refreshToken").sendStatus(200);
 };
+
 const updateUserName = async (req, res, next) => {
   try {
     const { newName } = req.body;
     const userId = req.user.id;
-    const isUpdated = await UserRepository.updateUserName(userId, newName);
+    const isUpdated = await tables.users.updateUserName(userId, newName);
     if (isUpdated) {
-      const updatedUser = await UserRepository.getById(userId);
+      const updatedUser = await tables.users.getById(userId);
       const accessToken = jwt.sign({ id: userId }, process.env.APP_SECRET, {
         expiresIn: "1h",
       });
@@ -90,38 +91,35 @@ const updateUserName = async (req, res, next) => {
     next(error);
   }
 };
+
 const updateProfilePic = async (req, res, next) => {
   try {
-    console.info(req.file, req.user);
-    const uploadDest = `http://localhost:${process.env.PORT}/upload/`;
-    if (req.file) req.body.profile_pic = uploadDest + req.file.filename;
-    const isUpdated = await UserRepository.updateProfilePic(
+    if (!req.user || !req.user.id) {
+      throw new Error("User ID is missing from the request.");
+    }
+
+    if (req.file) {
+      const uploadDir = `${process.env.APP_HOST}/upload/${req.file.filename}`;
+      req.body.profile_pic = uploadDir;
+    }
+
+    const isUpdated = await tables.users.updateProfilePic(
       req.user.id,
       req.body.profile_pic
     );
+
     if (isUpdated) {
-      const updatedUser = await UserRepository.getById(req.user.id);
+      const updatedUser = await tables.users.getById(req.user.id);
       res.status(200).json(updatedUser[0]);
     } else {
       res.sendStatus(404);
     }
   } catch (error) {
+    console.error('Error in updateProfilePic:', error);
     next(error);
   }
 };
-/* const userId = req.user.id;
-  const profilePicPath = req.file.path;
-  const isUpdated = await UserRepository.updateProfilePic(userId, profilePicPath);
-  if (isUpdated) {
-    const updatedUser = await UserRepository.getById(userId);
-    res.json(updatedUser[0]);
-  } else {
-    res.status(400).json({ error: "failed to upload"});
-  }
-  } catch (error) {
-    next(error);
-  }
-}; */
+
 module.exports = {
   signupAction,
   loginAction,

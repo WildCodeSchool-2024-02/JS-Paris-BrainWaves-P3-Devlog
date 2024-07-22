@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./project.css";
 import sproject from "../../assets/images/sproject.png";
+import Popover from '../PopoverProject/Popover';  
 
 function Project() {
   const [dataProject, setDataProject] = useState([]);
-
+  const [showPopover, setShowPopover] = useState(false);  
   const navigate = useNavigate();
 
   const fetchDataProject = async () => {
@@ -25,9 +26,31 @@ function Project() {
     fetchDataProject();
   }, []);
 
-const handleCreateProject = () => {
-  navigate("/table/:id");
-};
+  const handleCreateProject = async (newProjectName) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/projects/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: newProjectName,
+          team_id: 3,
+          user_id: 2,
+          is_archive: 0
+         }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const newProject = await response.json();
+      setShowPopover(false);  
+      navigate(`/table/${newProject.id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="project-container">
@@ -47,10 +70,16 @@ const handleCreateProject = () => {
       <button
         className="create-project-button"
         type="button"
-        onClick={handleCreateProject}
+        onClick={() => setShowPopover(true)}  
       >
         CRÉER UN PROJET
       </button>
+      {showPopover && (
+        <Popover 
+          onClose={() => setShowPopover(false)} 
+          onCreate={handleCreateProject} 
+        />
+      )}
     </div>
   );
 }

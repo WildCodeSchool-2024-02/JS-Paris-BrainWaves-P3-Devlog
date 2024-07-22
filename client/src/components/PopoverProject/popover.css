@@ -1,0 +1,26 @@
+.popover {
+     position: fixed;
+     left: 30%;
+     top: 70%;
+     transform: translate(-60%, -60%);
+     background: white;
+     padding: 25px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     z-index: 1000;
+     padding-bottom: 20px;
+   }
+   
+   .popover-content {
+     display: flex;
+     flex-direction: column;
+   }
+   
+   .popover-content input {
+     margin-bottom: 10px;
+     width: 280px;
+   }
+   
+   .popover-content button {
+     margin-top: 5px;
+   }
+   

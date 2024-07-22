@@ -5,18 +5,24 @@ class TaskHomeRepository extends AbstractRepository {
     super({ table: "task" });
   }
 
-  async getAll(projectId) {
-    const query = `SELECT * FROM ${this.table} WHERE Project_id = ?`;
-    const results = await this.database.query(query, [projectId]);
-    return results;
+  async getAll() {
+    const query = `select * from ${this.table}`;
+    const [result] = await this.database.query(query);
+    console.log(result)
+    return rows;
   }
-/*
-  async create(name, description, projectId, section) {
-    return this.database.query(
-      `INSERT INTO task (name, description, is_archived, Project_id, section) VALUES (?, ?, 0, ?, ?)`,
-      [name, description, projectId, section]
-    );
-  } */
-} 
+
+  async readAll() {
+
+    const [rows] = await this.database.query(`select * from ${this.table}`);
+    return rows;
+  }
+
+  async read(id) {
+    const query = 'SELECT * FROM task WHERE task_id = ?';
+    const [rows] = await db.execute(query, [id]);
+    return rows;
+  }
+}
 
 module.exports = TaskHomeRepository;
