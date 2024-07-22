@@ -5,14 +5,21 @@ class ProjectRepository extends AbstractRepository {
     super({ table: "Project" });
   }
 
-  async getAll() { 
+  async getAll() {
     const query = `select * from ${this.table}`;
-    const results = await this.database.query(query); 
+    const results = await this.database.query(query);
     return results;
-   }
+  }
 
+  async deleteProject(id) {
+    const query = `delete from ${this.table} where id=${id}`;
+    return this.database.query(query);
+  }
 
-
+  async archive(id, isArchived) {
+    const query = `UPDATE ${this.table} SET is_archived=${isArchived} WHERE id=${id}`;
+    return this.database.query(query);
+  }
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
@@ -33,6 +40,5 @@ class ProjectRepository extends AbstractRepository {
     return rows[0];
   }
 }
-
 
 module.exports = ProjectRepository;

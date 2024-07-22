@@ -140,27 +140,6 @@ text {
   width: 1rem;
 }
 
-/* @media (max-width: 480px) {
-  .login-btn,
-  .signup-btn {
-    padding: 6px 15px;
-    font-size: 14px;
-  }
-
-  .test-logo,
-  .group-button {
-    width: 70%;
-  }
-  span.gradient-text {
-    font-size: 1.8vw;
-  }
-  .left-icon {
-    left: -20px;
-  }
-  .right-icon {
-    right: -20px;
-  }
-} */
 @media (max-width: 1440px) {
   .font-style {
     font-weight: 900;

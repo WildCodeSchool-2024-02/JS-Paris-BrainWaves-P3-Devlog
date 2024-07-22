@@ -3,7 +3,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const [tasks] = await tables.task.getAll(id);
+    const tasks = await tables.task.getAll(id);
     res.status(200).json(tasks);
   } catch (err) {
     next(err);
@@ -12,14 +12,20 @@ const browse = async (req, res, next) => {
 
 const addTask = async (req, res, next) => {
   try {
-    const { task, projectId, section } = req.body;
-    const userId = req.body.user.id;
-    if (!userId || !section || !task || !projectId) {
+    const { task, projectId, section, description } = req.body;
+
+    if (!section || !task || !projectId || !description) {
       return res
         .status(400)
         .json({ message: "Missing required information: userId and status" });
     }
-    const [results] = await tables.task.create({ task, section, userId });
+
+    const [results] = await tables.task.create({
+      task,
+      section,
+      projectId,
+      description,
+    });
     res.status(201).json(results);
   } catch (error) {
     next(error);
@@ -29,12 +35,13 @@ const addTask = async (req, res, next) => {
 
 const add = async (req, res, next) => {
   const { task, description, projectId, section } = req.body;
+
   try {
     const result = await tables.task.create(
       task,
-      description,
+      section,
       projectId,
-      section
+      description
     );
 
     res.status(201).json(result);

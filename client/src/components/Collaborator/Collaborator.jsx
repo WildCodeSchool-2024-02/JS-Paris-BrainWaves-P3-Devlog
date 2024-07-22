@@ -1,6 +1,7 @@
 import "./collaborator.css";
 import { useState, useRef, useEffect } from "react";
 import avatar from "../../assets/images/avatar.jpg";
+import useAuthContext from "../../services/context";
 
 const initialCollab = [];
 
@@ -10,13 +11,22 @@ function Collaborator() {
   const [newUser, setNewUser] = useState("");
   const [showInput, setShowInput] = useState(false);
   const [listHeight, setListHeight] = useState("2200px");
+  const { auth } = useAuthContext();
 
   const fetchDataUser = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users`);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       await response.json();
       setCollab([]);
     } catch (error) {

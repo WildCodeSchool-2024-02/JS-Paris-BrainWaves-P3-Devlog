@@ -3,37 +3,50 @@ import { Link } from "react-router-dom";
 import { RiArrowLeftSFill, RiArrowRightSFill } from "react-icons/ri";
 import { FiArchive } from "react-icons/fi";
 import "./nav.css";
-
-const fetchTables = async () =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { id: 1, name: "DEV_LOG", color: "pink" },
-        { id: 2, name: "Tableau 2", color: "purple" },
-        { id: 3, name: "Tableau 3", color: "green" },
-        { id: 4, name: "Tableau 4", color: "blue" },
-      ]);
-    }, 1000);
-  });
+import useAuthContext from "../../services/context";
 
 function Nav() {
-  const [isOpen, setIsOpen] = useState(true);
+  const { auth } = useAuthContext();
+  const [isOpen, setIsOpen] = useState(false);
   const [tables, setTables] = useState([]);
 
   useEffect(() => {
-    const getTables = async () => {
-      const data = await fetchTables();
-      setTables(data);
-    };
+    const fetchDataProject = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/projects`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const receptionData = await response.json();
 
-    getTables();
+        setTables(receptionData.filter((elem) => elem.is_archived !== 1));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDataProject();
   }, []);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const deleteTable = (id) => {
+  const deleteTable = async (id) => {
+    await fetch(
+      `${import.meta.env.VITE_API_URL}/api/projects/archive/${id}/1`,
+      {
+        headers: {
+          Authorization: `Bearer ${auth?.token}`,
+        },
+      }
+    );
     setTables(tables.filter((table) => table.id !== id));
   };
 
@@ -50,7 +63,9 @@ function Nav() {
         </button>
       </div>
       <div className="content">
-        <Link to="/Member" className="team-btn">Consulter l'équipe</Link>
+        <Link to="/Member" className="team-btn">
+          Consulter l'équipe
+        </Link>
         <div className="boards">
           <p className="boards-title">Vos Tableaux</p>
           {tables.map((table) => (

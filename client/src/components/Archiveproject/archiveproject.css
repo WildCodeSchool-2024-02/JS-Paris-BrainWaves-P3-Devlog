@@ -7,6 +7,7 @@
   border-radius: 10px;
   color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-top: 150px;
 }
 
 .archive-container h2 {
@@ -21,6 +22,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 
 .project-item {
@@ -31,6 +33,7 @@
   padding: 10px 15px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  width: 95%;
 }
 
 .project-logo {
