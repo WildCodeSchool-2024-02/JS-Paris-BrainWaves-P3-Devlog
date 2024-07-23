@@ -1,0 +1,72 @@
+.archive-container {
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+  background-color: #2e2e2e;
+  border: 4px solid var(--primary-color);
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-top: 150px;
+}
+
+.archive-container h2 {
+  text-align: center;
+  color: #6499ff;
+  border-bottom: 2px solid #6499ff;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3e3e3e;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  width: 95%;
+}
+
+.project-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.project-item span {
+  flex-grow: 1;
+  color: #ccc;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.project-item button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.project-item button:hover {
+  background-color: #0056b3;
+}
+
+.project-item button:focus {
+  outline: none;
+  box-shadow: 0 0 3px 2px rgba(0, 123, 255, 0.5);
+}

@@ -10,17 +10,13 @@ import profile from "../../assets/images/profile.jpg";
 import useAuth from "../../services/context/index";
 
 function Home() {
+  const { auth, setAuth } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
-  const [userName, setUserName] = useState("John Doe");
+  const [userName, setUserName] = useState(null);
   const [inputValue, setInputValue] = useState(userName);
   const [profilePic, setProfilePic] = useState(profile);
-  const { auth, setAuth } = useAuth();
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -73,6 +69,9 @@ function Home() {
   };
 
   useEffect(() => {
+    if (auth !== null && auth && auth.user && auth.user[0]) {
+      setUserName(auth.user[0].user_name);
+    }
     const currentFileInputRef = fileInputRef.current;
     currentFileInputRef?.addEventListener("change", handleFileChange);
 
@@ -82,26 +81,6 @@ function Home() {
       }
     };
   });
-
-  useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/users/`
-        );
-        if (!response.ok) {
-          throw new Error("failed to fetch user data");
-        }
-        const data = await response.json();
-        setUserName(data.userName);
-        setInputValue(data.userName);
-        setProfilePic(data.profilePic || profile);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserName();
-  }, []);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -177,13 +156,7 @@ function Home() {
             onChange={handleFileChange}
             accept="image/*"
           />
-          <button
-            type="button"
-            className="modify-btn"
-            onClick={handleEditClick}
-          >
-            Modifier
-          </button>
+          <br />
         </div>
         <div id="main-content">
           <div className="task-manager-section">

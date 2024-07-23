@@ -5,12 +5,13 @@ const UserRepository = require("../../database/models/userRepository");
 const signupAction = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-
     const dbResponse = await tables.users.create({ email, username, password });
     const createdUser = await tables.users.getById(dbResponse);
 
-    if (createdUser[0] === true) {
-      res.json(createdUser[1]);
+    if (createdUser[0].id) {
+      res.json({
+        ok: createdUser[0],
+      });
     } else {
       res.json({ error: "invalid" });
     }
@@ -72,8 +73,10 @@ const refresh = async (req, res) => {
 
   if (decoded.id) {
     const user = await tables.users.getById(decoded.id);
-    delete user[0].password;
-    return res.header("Authorization", accessToken).json(user);
+    if (user && user[0] && user[0].password) {
+      delete user[0].password;
+      return res.header("Authorization", accessToken).json(user);
+    }
   }
   return res.status(401).send("Access Denied.");
 };
@@ -123,20 +126,6 @@ const updateProfilePic = async (req, res, next) => {
     next(error);
   }
 };
-/* const userId = req.user.id;
-  const profilePicPath = req.file.path;
-
-  const isUpdated = await UserRepository.updateProfilePic(userId, profilePicPath);
-  if (isUpdated) {
-    const updatedUser = await UserRepository.getById(userId);
-    res.json(updatedUser[0]);
-  } else {
-    res.status(400).json({ error: "failed to upload"});
-  }
-  } catch (error) {
-    next(error);
-  }
-}; */
 
 module.exports = {
   signupAction,

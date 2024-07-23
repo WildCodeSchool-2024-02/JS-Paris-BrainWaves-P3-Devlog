@@ -24,7 +24,7 @@ function Project() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const receptionData = await response.json();
-        setDataProject(receptionData);
+        setDataProject(receptionData.filter((elem) => elem.is_archived !== 1));
       } catch (error) {
         console.error(error);
       }

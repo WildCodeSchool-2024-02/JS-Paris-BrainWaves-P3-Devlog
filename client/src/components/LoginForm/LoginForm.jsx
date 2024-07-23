@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./LoginForm.css";
 import logo from "../../assets/images/logo.png";
@@ -27,16 +27,19 @@ function LoginForm() {
             "Content-Type": "application/json",
           },
         }
-      );
-      if (resp.ok) {
+      )
+        .then((res) => res.json())
+        .then((json) => json);
+      if (resp.user) {
         toast("Success, logging in...");
         try {
-          const { user, token } = await resp.json();
+          const { user, token } = resp;
           user.token = token;
+          console.info(user, token);
           setAuth({ isLogged: true, user, token });
           navigate("/home");
         } catch (error) {
-          toast.error("Une erreur est survenue");
+          console.info(error);
         }
       }
       if (resp.error) {
@@ -78,6 +81,8 @@ function LoginForm() {
           </span>
         </p>
       </form>
+
+      <ToastContainer />
     </div>
   );
 }

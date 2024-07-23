@@ -13,14 +13,14 @@ class UserRepository extends AbstractRepository {
     );
 
     if (result.insertId) {
-      return true;
+      return result.insertId;
     }
     return false;
   }
 
   async login(item) {
     const [[result]] = await this.database.query(
-      "SELECT id, password FROM user WHERE email=?",
+      "SELECT id, password FROM user WHERE user_name=?",
       [item.username]
     );
 

@@ -3,11 +3,10 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
+SET FOREIGN_KEY_CHECKS=0;
 -- -----------------------------------------------------
 -- Schema devlog
 -- -----------------------------------------------------
-
 -- -----------------------------------------------------
 -- Schema devlog
 -- -----------------------------------------------------
@@ -18,7 +17,6 @@ USE `devlog` ;
 -- Table `devlog`.`team`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`team` ;
-
 CREATE TABLE IF NOT EXISTS `devlog`.`team` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(55) NOT NULL,
@@ -119,7 +117,6 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- Table `devlog`.`user_has_team`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `devlog`.`user_has_team` ;
-
 CREATE TABLE IF NOT EXISTS `devlog`.`user_has_team` (
   `User_id` INT NOT NULL,
   `Team_id` INT NOT NULL,

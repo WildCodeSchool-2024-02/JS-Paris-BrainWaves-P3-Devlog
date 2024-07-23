@@ -7,39 +7,32 @@ function TaskManager() {
   const [newTaskText, setNewTaskText] = useState("");
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [tasks, setTasks] = useState({ todo: [], process: [], finish: [] });
-  const [projectId, setProjectId] = useState(null);
-
+  const [tasks, setTasks] = useState([]);
+  const [projectId ] = useState(3);
   const taskListRef = useRef(null);
 
-  useEffect(() => {
-    setProjectId(2);
-    const fetchTasks = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/tasks`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+  const fetchTasks = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/tasks/project/${projectId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-        const data = await response.json();
-
-        const tasksOrganised = {
-          todo: data.filter((task) => task.section === "todo"),
-          process: data.filter((task) => task.section === "process"),
-          finish: data.filter((task) => task.section === "finish"),
-        };
-        setTasks(tasksOrganised);
-      } catch (error) {
-        console.error(error);
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
+      const data = await response.json();
+
+      setTasks(data.filter((elem) => elem.Project_id === projectId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
     fetchTasks();
   }, []);
 
@@ -56,16 +49,14 @@ function TaskManager() {
 
   function addTask() {
     if (!newTaskText.trim()) return;
+
     const newTask = {
-      text: newTaskText,
+      task: newTaskText,
       section: "todo",
-      user: {
-        id: 1,
-        username: "test",
-      },
+      description: "description",
       projectId,
     };
-console.info(newTask)
+
     fetch(`${import.meta.env.VITE_API_URL}/api/tasks/add`, {
       method: "POST",
       headers: {
@@ -75,19 +66,11 @@ console.info(newTask)
       body: JSON.stringify(newTask),
     })
       .then((response) => response.json())
-      .then((data) => {
-        setTasks((prevTasks) => ({
-          ...prevTasks,
-          todo: Array.isArray(prevTasks.todo)
-            ? [...prevTasks.todo, data]
-            : [data],
-        }));
-
-        setNewTaskText("");
-        setInputVisible(false);
-        setButtonVisible(true);
+      .then(() => {
+        fetchTasks();
       })
       .catch((error) => console.error("Error:", error));
+    setInputVisible(false);
   }
   return (
     <div className="task-manager">
@@ -154,14 +137,13 @@ console.info(newTask)
         )}
       </div>
       <div ref={taskListRef} className="task-list">
-        {(tasks[currentTab] || []).map((task) => (
+        {tasks.map((task) => (
           <div
             key={task.Task_id}
             id={`task-${task.Task_id}`}
             className="task-item"
           >
-            <p>Task ID: {task.Task_id}</p>
-            <p>Description: {task.text}</p>
+            <p>{task.name}</p>
           </div>
         ))}
       </div>

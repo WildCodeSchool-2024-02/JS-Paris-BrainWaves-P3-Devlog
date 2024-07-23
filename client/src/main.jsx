@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Welcome from "./pages/Welcome/Welcome";
 import Home from "./pages/Home/Home";
-import Archive from "./pages/Archive/Archive";
 import Member from "./pages/Member/Member";
 import Table from "./pages/Table/Table";
 import { AuthProvider } from "./services/context";
@@ -12,6 +11,7 @@ import App from "./App";
 import LoginPage from "./pages/Login/Login";
 
 import SignupPage from "./pages/Signup/Signup";
+import Archiveproject from "./components/Archiveproject/Archiveproject";
 
 const router = createBrowserRouter([
   {
@@ -27,16 +27,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/archive",
-        element: <Archive />,
-      },
-      {
         path: "/member",
         element: <Member />,
       },
       {
         path: "/table/:id",
         element: <Table />,
+      },
+      {
+        path: "/archive",
+        element: <Archiveproject />,
       },
     ],
   },
