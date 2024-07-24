@@ -43,6 +43,22 @@ function Welcome() {
         </div>
 
         <text>(DAMN, Did I write that myself??)</text>
+        <section className="responsive-group-button">
+          <button
+            type="button"
+            className="responsive-login-btn"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            className="responsive-signup-btn"
+            onClick={() => navigate("/signup")}
+          >
+            Sign Up
+          </button>
+        </section>
       </div>
       <Footer />
     </main>

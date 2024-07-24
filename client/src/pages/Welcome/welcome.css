@@ -24,7 +24,6 @@
   top: 20px;
   right: 20px;
 }
-
 .login-btn {
   background: linear-gradient(
     70deg,
@@ -63,11 +62,13 @@
   font-size: 10vw;
   color: #d3cdee;
   font-family: "Anek Bangla", sans-serif;
-  margin-bottom: -30px;
+  margin-bottom: -80px;
+  margin-top: 10%;
+  padding: 0px;
 }
 
 .logo-devlog {
-  width: 208px;
+  width: 150px;
   margin-bottom: 50px;
 }
 
@@ -127,12 +128,6 @@ text {
   }
 }
 
-.login-btn,
-.signup-btn {
-  padding: 8px 20px;
-  font-size: 16px;
-}
-
 .logo-devlog {
   width: 150px;
 }
@@ -140,26 +135,63 @@ text {
   width: 1rem;
 }
 
-@media (max-width: 1440px) {
+.group-button {
+  display: none;
+}
+
+.responsive-login-btn {
+  background: linear-gradient(
+    70deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
+  color: #e8e8e8;
+  border: none;
+  padding: 10px 30px;
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0;
+}
+.responsive-signup-btn {
+  background: linear-gradient(
+    70deg,
+    rgba(100, 153, 255, 1) 0%,
+    rgba(187, 100, 255, 1) 100%
+  );
+  color: #e8e8e8;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+@media (min-width: 990px) {
   .font-style {
     font-weight: 900;
     font-size: 10vw;
     color: #d3cdee;
     font-family: "Anek Bangla", sans-serif;
-    margin-bottom: -30px;
+    margin-bottom: -10px;
+    margin-top: 20px;
+    padding: 0px;
   }
 
-  .login-btn,
-  .signup-btn {
-    padding: 12px 25px;
-    font-size: 18px;
+  .responsive-group-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
   }
-  .group-button {
-    top: 15px;
-    right: 15px;
-  }
+
   .logo-devlog {
-    width: 150px;
+    width: 220px;
+    margin-top: -10px;
   }
   .test-logo {
     display: flex;
