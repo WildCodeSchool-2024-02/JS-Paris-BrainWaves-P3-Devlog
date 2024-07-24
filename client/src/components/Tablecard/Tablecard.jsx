@@ -16,7 +16,6 @@ function Tablecard({ projectId }) {
   const [newSection, setNewSection] = useState("Backlog");
   const [selectedTask, setSelectedTask] = useState(null);
 
-  
   const fetchDataTask = async () => {
     try {
       const response = await fetch(
@@ -137,7 +136,6 @@ function Tablecard({ projectId }) {
   const handleTaskDelete = (taskId) => {
     setDataTask(dataTask.filter((task) => task.id !== taskId));
   };
-
   const renderTasks = (section) =>
     dataTask
       .filter((task) => task.section.toLowerCase() === section.toLowerCase())

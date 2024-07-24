@@ -38,10 +38,10 @@ const add = async (req, res, next) => {
 
   try {
     const result = await tables.task.create(
-      task,
+    {  task,
       section,
       projectId,
-      description
+      description}
     );
 
     res.status(201).json(result);

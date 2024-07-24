@@ -17,6 +17,7 @@ function Home() {
   const [profilePic, setProfilePic] = useState(profile);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
+  
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);

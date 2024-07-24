@@ -71,7 +71,7 @@ function Header() {
             <div className="popover">
               <div className="popoverWriting">
                 <ul>
-                  <li>Compte</li>
+                  <li className="account">Compte</li>
                   <div className="popoverMailImg">
                     <li>
                       <img src={profile} alt="profile" className="profile" />
@@ -81,7 +81,7 @@ function Header() {
                       <p>John.Doe@gmail.com</p>
                     </div>
                   </div>
-                  <li>Déconnexion</li>
+                  <li className="deconnection">Déconnexion</li>
                 </ul>
               </div>
             </div>
