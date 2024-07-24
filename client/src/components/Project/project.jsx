@@ -58,6 +58,7 @@ function Project() {
       console.error(error);
     }
   };
+  
   return (
     <div className="project-container">
       <h1>Projets</h1>
