@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
 import useAuth from "../../services/context/index";
+import BlockRoute from "../../services/auth";
 
 function Home() {
   const { auth, setAuth } = useAuth();
@@ -17,7 +18,6 @@ function Home() {
   const [profilePic, setProfilePic] = useState(profile);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
-  
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -171,6 +171,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <BlockRoute />
     </>
   );
 }

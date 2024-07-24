@@ -1,4 +1,5 @@
 const express = require("express");
+const { auth } = require("../../../services/auth");
 
 const {
   browse,
@@ -10,10 +11,10 @@ const {
 
 const router = express.Router();
 
-router.get("/", browse);
-router.post("/create", create);
-router.delete("/:id", deleteProject);
-router.get("/archive/:id/:isArchived", archive);
-router.get("/:id", read);
+router.get("/", auth, browse);
+router.post("/create", auth, create);
+router.delete("/:id", auth, deleteProject);
+router.get("/archive/:id/:isArchived", auth, archive);
+router.get("/:id", auth, read);
 
 module.exports = router;

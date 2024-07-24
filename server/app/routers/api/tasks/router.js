@@ -1,4 +1,5 @@
 const express = require("express");
+const { auth } = require("../../../services/auth");
 
 const router = express.Router();
 
@@ -9,9 +10,9 @@ const {
   add,
 } = require("../../../controllers/taskActions");
 
-router.get("/project/:id", browse);
-router.post("/", add);
-router.delete("/", deleteTask);
-router.post("/add", addTask);
+router.get("/project/:id", auth, browse);
+router.post("/", auth, add);
+router.delete("/", auth, deleteTask);
+router.post("/add", auth, addTask);
 
 module.exports = router;

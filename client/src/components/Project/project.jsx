@@ -35,7 +35,7 @@ function Project() {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/projects/create`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${auth?.token}`,
@@ -44,7 +44,7 @@ function Project() {
             name: newProjectName,
             team_id: 3,
             user_id: 2,
-            is_archive: 0
+            is_archive: 0,
           }),
         }
       );
@@ -58,13 +58,18 @@ function Project() {
       console.error(error);
     }
   };
-  
+
   return (
     <div className="project-container">
       <h1>Projets</h1>
       <ul className="project-list">
         {dataProject.map((value) => (
-          <div key={`data-${value.id}`} className="container-item">
+          <div
+            key={`data-${value.id}`}
+            className="container-item"
+            role="presentation"
+            onClick={() => navigate(`/table/${value.id})`)}
+          >
             <figure className="project-figure">
               <img src={sproject} alt="sproject" className="project-img" />
             </figure>
