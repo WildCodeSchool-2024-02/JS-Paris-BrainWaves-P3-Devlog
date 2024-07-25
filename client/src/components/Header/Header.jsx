@@ -24,9 +24,9 @@ function Header() {
     navigate("/login");
   }
   useEffect(() => {
-    if (auth !== null && auth && auth.user && auth.user[0]) {
-      setEmail(auth.user[0].email);
-      setUserName(auth.user[0].user_name);
+    if (auth !== null && auth && auth.user) {
+      setEmail(auth.user.email);
+      setUserName(auth.user.user_name);
     }
   }, [setUserName, auth]);
   const handleNavigate = () => {
