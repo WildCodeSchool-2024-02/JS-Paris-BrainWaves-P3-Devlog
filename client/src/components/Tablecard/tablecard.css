@@ -83,7 +83,6 @@ hr {
 
 .title {
   text-align: center;
-  margin-top: 6em;
 }
 
 .title h1,
@@ -95,7 +94,6 @@ hr {
   background-color: #bb64ff;
   text-align: center;
   margin: 0;
-  width: 250px;
   padding: 0 10px;
 }
 
@@ -154,5 +152,10 @@ hr {
     width: 80%;
     font-size: 30px;
     height: 60px;
+  }
+  .title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
   }
 }

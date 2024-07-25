@@ -1,8 +1,9 @@
 const express = require("express");
+const { auth } = require("../../../services/auth");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
   res.json("working");
 });
 

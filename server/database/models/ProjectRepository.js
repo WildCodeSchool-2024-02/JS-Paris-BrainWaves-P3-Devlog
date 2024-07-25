@@ -2,7 +2,7 @@ const AbstractRepository = require("./AbstractRepository");
 
 class ProjectRepository extends AbstractRepository {
   constructor() {
-    super({ table: "Project" });
+    super({ table: "project" });
   }
 
   async getAll() {
@@ -22,22 +22,27 @@ class ProjectRepository extends AbstractRepository {
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "item" table
     const [rows] = await this.database.query(`select * from ${this.table}`);
-
-    // Return the array of items
     return rows;
   }
 
   async read(id) {
-    // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await this.database.query(
       `select * from ${this.table} where id = ?`,
       [id]
     );
-
-    // Return the first row of the result, which represents the item
     return rows[0];
+  }
+
+  async create(name, userId, isArchived = 0) {
+    // defaut value for is_archive is 0 = not archived
+    const query = `insert into ${this.table} (name, user_id, is_archived) values (?, ?, ?)`;
+    const [result] = await this.database.query(query, [
+      name,
+      userId,
+      isArchived,
+    ]);
+    return result.insertId;
   }
 }
 

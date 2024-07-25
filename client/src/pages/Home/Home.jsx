@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
 import useAuth from "../../services/context/index";
+import BlockRoute from "../../services/auth";
 
 function Home() {
   const { auth, setAuth } = useAuth();
@@ -69,8 +70,8 @@ function Home() {
   };
 
   useEffect(() => {
-    if (auth !== null && auth && auth.user && auth.user[0]) {
-      setUserName(auth.user[0].user_name);
+    if (auth !== null && auth && auth.user) {
+      setUserName(auth.user.user_name);
     }
     const currentFileInputRef = fileInputRef.current;
     currentFileInputRef?.addEventListener("change", handleFileChange);
@@ -170,6 +171,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <BlockRoute />
     </>
   );
 }
