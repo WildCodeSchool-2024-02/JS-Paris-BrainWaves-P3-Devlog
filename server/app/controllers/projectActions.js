@@ -33,17 +33,11 @@ const read = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { name, team_id, user_id, is_archived = 0 } = req.body;
-
-    if (!name || !team_id || !user_id) {
+    const { name, user_id, is_archived = 0 } = req.body;
+    if (!name || !user_id) {
       return res.status(400).json({ error: "missing required fields " });
     }
-    const projectId = await tables.projects.create(
-      name,
-      team_id,
-      user_id,
-      is_archived
-    );
+    const projectId = await tables.projects.create(name, user_id, is_archived);
     const newProject = await tables.projects.read(projectId);
     res.status(201).json(newProject);
   } catch (error) {

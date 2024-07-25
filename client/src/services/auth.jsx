@@ -15,7 +15,7 @@ function BlockRoute() {
           { method: "GET", credentials: "include" }
         );
         const token = response.headers.get("Authorization");
-        const user = await response.json();
+        const [user] = await response.json();
         user.token = token;
         setAuth({ isLogged: true, user, token });
       } catch (error) {
