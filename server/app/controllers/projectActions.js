@@ -3,7 +3,7 @@ const tables = require("../../database/tables");
 
 const browse = async (req, res, next) => {
   try {
-    const [tasks] = await tables.projects.getAll();
+    const [tasks] = await tables.projects.getAll(req.auth.id);
     res.status(200).json(tasks);
   } catch (err) {
     next(err);

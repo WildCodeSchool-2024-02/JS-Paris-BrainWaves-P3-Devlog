@@ -2,8 +2,7 @@ const tables = require("../../database/tables");
 
 const readAll = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const tasks = await tables.task.getAll(id);
+    const tasks = await tables.task.getAll(req.auth.id);
     res.status(200).json(tasks);
   } catch (err) {
     next(err);

@@ -3,6 +3,7 @@ import "./archiveproject.css";
 import useAuthContext from "../../services/context";
 import sproject from "../../assets/images/sproject.png";
 import Header from "../Header/Header";
+import BlockRoute from "../../services/auth";
 
 function ArchiveProject() {
   const { auth } = useAuthContext();
@@ -38,8 +39,8 @@ function ArchiveProject() {
     }
   };
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (auth?.isLogged) fetchProjects();
+  }, [auth]);
 
   const deleteProject = async (projectId) => {
     try {
@@ -76,6 +77,7 @@ function ArchiveProject() {
             </div>
           ))}
         </div>
+        <BlockRoute />
       </div>
     </>
   );

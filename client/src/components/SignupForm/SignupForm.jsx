@@ -43,7 +43,7 @@ function SignupForm() {
       await sleep(1500);
 
       navigate("/login");
-      return true;
+      return true; 
     }
 
     return false;

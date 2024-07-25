@@ -5,9 +5,9 @@ class ProjectRepository extends AbstractRepository {
     super({ table: "project" });
   }
 
-  async getAll() {
-    const query = `select * from ${this.table}`;
-    const results = await this.database.query(query);
+  async getAll(id) {
+    const query = `select * from ${this.table} WHERE project.User_id = ?`;
+    const results = await this.database.query(query, [id]);
     return results;
   }
 

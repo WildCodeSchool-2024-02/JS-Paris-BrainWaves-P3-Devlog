@@ -5,9 +5,9 @@ class TaskRepository extends AbstractRepository {
     super({ table: "task" });
   }
 
-  async getAll() {
-    const query = `SELECT * FROM ${this.table}`;
-    const [results] = await this.database.query(query, []);
+  async getAll(id) {
+    const query = `SELECT * FROM ${this.table} JOIN project ON project.id = task.Project_id WHERE project.User_id = ?`;
+    const [results] = await this.database.query(query, [id]);
     return results;
   }
 
