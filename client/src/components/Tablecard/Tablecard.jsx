@@ -38,6 +38,7 @@ function Tablecard({ projectId }) {
   };
 
   useEffect(() => {
+   
     const fetchDataProject = async () => {
       try {
         const response = await fetch(
@@ -97,8 +98,11 @@ function Tablecard({ projectId }) {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/tasks`,
           {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+              "Content-Type": "application/json"
+            },
             method: "POST",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               task: newTask,
               projectId,
@@ -115,6 +119,7 @@ function Tablecard({ projectId }) {
       } catch (error) {
         console.error("Error fetching dataTask", error);
       }
+      
       setDataTask([
         ...dataTask,
         {

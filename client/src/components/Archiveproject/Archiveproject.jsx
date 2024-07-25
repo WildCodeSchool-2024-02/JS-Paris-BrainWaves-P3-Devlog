@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./archiveproject.css";
 import useAuthContext from "../../services/context";
+import sproject from "../../assets/images/sproject.png";
 import Header from "../Header/Header";
 
 function ArchiveProject() {
@@ -22,7 +23,12 @@ function ArchiveProject() {
   const fetchProjects = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/projects`
+        `${import.meta.env.VITE_API_URL}/api/projects`,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth?.token}`,}
+        }
+
       );
       const data = await response.json();
       setProjects(data.filter((elem) => elem.is_archived === 1));
@@ -31,14 +37,19 @@ function ArchiveProject() {
     }
   };
   useEffect(() => {
-    fetchProjects();
+   fetchProjects();
   }, []);
 
   const deleteProject = async (projectId) => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/projects/${projectId}`, {
         method: "DELETE",
-      });
+
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth?.token}`,}
+        }
+      );
       fetchProjects();
     } catch (error) {
       console.error("Error deleting project:", error);
@@ -54,7 +65,7 @@ function ArchiveProject() {
           {projects.map((project) => (
             <div key={project.id} className="project-item">
               <img
-                src={project.logo}
+                src={sproject}
                 alt={project.name}
                 className="project-logo"
               />

@@ -25,7 +25,7 @@ function BlockRoute() {
     }
 
     block();
-  });
+  }, [navigate, setAuth]);
 
   return <ToastContainer />;
 }

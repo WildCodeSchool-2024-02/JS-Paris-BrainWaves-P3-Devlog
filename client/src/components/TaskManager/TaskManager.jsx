@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
+
 function TaskManager() {
   const [currentTab, setCurrentTab] = useState("todo");
   const [newTaskText, setNewTaskText] = useState("");

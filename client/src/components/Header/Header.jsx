@@ -21,6 +21,7 @@ function Header() {
       method: "GET",
       credentials: "include",
     });
+    navigate("/login");
   }
   useEffect(() => {
     if (auth !== null && auth && auth.user && auth.user[0]) {

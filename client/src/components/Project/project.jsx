@@ -9,12 +9,18 @@ function Project() {
   const { auth } = useAuthContext();
   const [dataProject, setDataProject] = useState([]);
   const [showPopover, setShowPopover] = useState(false);
+
   const navigate = useNavigate();
 
   const fetchDataProject = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/projects`
+        `${import.meta.env.VITE_API_URL}/api/projects`,
+        {
+          headers: {
+            Authorization: `Bearer ${auth?.token}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -27,8 +33,8 @@ function Project() {
   };
 
   useEffect(() => {
-    fetchDataProject();
-  }, []);
+    if (auth?.isLogged) fetchDataProject();
+  }, [auth]);
 
   const handleCreateProject = async (newProjectName) => {
     try {
@@ -68,7 +74,7 @@ function Project() {
             key={`data-${value.id}`}
             className="container-item"
             role="presentation"
-            onClick={() => navigate(`/table/${value.id})`)}
+            onClick={() => navigate(`/table/${value.id}`)}
           >
             <figure className="project-figure">
               <img src={sproject} alt="sproject" className="project-img" />

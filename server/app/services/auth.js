@@ -1,20 +1,29 @@
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
-  const { refreshToken } = req.cookies;
+  try {
+    const authorizationHeader = req.get("Authorization");
 
-  if (!refreshToken) {
+    if (authorizationHeader == null) {
+      throw new Error("Authorization header is missing");
+    }
+
+    const [type, token] = authorizationHeader.split(" ");
+
+    if (type !== "Bearer") {
+      throw new Error("Authorization header has not the 'Bearer' type");
+    }
+
+    try {
+      req.auth = jwt.verify(token, process.env.APP_SECRET);
+    } catch {
+      throw new Error("Authorization header is invalid");
+    }
+
     next();
-    return false;
+  } catch (error) {
+    next(error);
   }
-  const decoded = jwt.verify(refreshToken, process.env.APP_SECRET);
-
-  if (!decoded.id) {
-    res.status(401).send("Access Denied.");
-  } else {
-    next();
-  }
-
   return true;
 };
 
