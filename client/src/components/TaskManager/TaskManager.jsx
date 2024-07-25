@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import "./taskmanager.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import "./taskmanager.css";
+import useAuthContext from "../../services/context";
 
 function TaskManager() {
   const [currentTab, setCurrentTab] = useState("todo");
@@ -8,14 +9,15 @@ function TaskManager() {
   const [isInputVisible, setInputVisible] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
   const [tasks, setTasks] = useState([]);
-  const [projectId ] = useState(3);
+  const [projectId] = useState();
   const taskListRef = useRef(null);
+  const { auth } = useAuthContext();
 
   const fetchTasks = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = auth?.token;
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/tasks/project/${projectId}`,
+        `${import.meta.env.VITE_API_URL}/api/tasks`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -27,14 +29,14 @@ function TaskManager() {
       }
       const data = await response.json();
 
-      setTasks(data.filter((elem) => elem.Project_id === projectId));
+      setTasks(data);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    if (auth?.isLogged) fetchTasks();
+  }, [auth]);
 
   const scrollToTop = () => {
     if (taskListRef.current) {
@@ -61,7 +63,7 @@ function TaskManager() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${auth?.token}`,
       },
       body: JSON.stringify(newTask),
     })
@@ -151,3 +153,4 @@ function TaskManager() {
   );
 }
 export default TaskManager;
+

@@ -16,7 +16,6 @@ function Tablecard({ projectId }) {
   const [newSection, setNewSection] = useState("Backlog");
   const [selectedTask, setSelectedTask] = useState(null);
 
-  
   const fetchDataTask = async () => {
     try {
       const response = await fetch(
@@ -39,6 +38,7 @@ function Tablecard({ projectId }) {
   };
 
   useEffect(() => {
+   
     const fetchDataProject = async () => {
       try {
         const response = await fetch(
@@ -98,8 +98,11 @@ function Tablecard({ projectId }) {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/tasks`,
           {
+            headers: {
+              Authorization: `Bearer ${auth?.token}`,
+              "Content-Type": "application/json"
+            },
             method: "POST",
-            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               task: newTask,
               projectId,
@@ -116,6 +119,7 @@ function Tablecard({ projectId }) {
       } catch (error) {
         console.error("Error fetching dataTask", error);
       }
+      
       setDataTask([
         ...dataTask,
         {
@@ -137,7 +141,6 @@ function Tablecard({ projectId }) {
   const handleTaskDelete = (taskId) => {
     setDataTask(dataTask.filter((task) => task.id !== taskId));
   };
-
   const renderTasks = (section) =>
     dataTask
       .filter((task) => task.section.toLowerCase() === section.toLowerCase())

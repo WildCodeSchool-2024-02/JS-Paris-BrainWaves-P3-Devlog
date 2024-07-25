@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import Nav from "../../components/Nav/Nav";
 import profile from "../../assets/images/profile.jpg";
 import useAuth from "../../services/context/index";
+import BlockRoute from "../../services/auth";
 
 function Home() {
   const { auth, setAuth } = useAuth();
@@ -170,6 +171,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <BlockRoute />
     </>
   );
 }

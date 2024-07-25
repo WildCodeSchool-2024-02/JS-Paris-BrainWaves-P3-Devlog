@@ -43,7 +43,6 @@ h1 {
 .project-img {
   display: flex;
   width: 30px;
-  border: 2px solid violet;
 }
 .project-item:hover {
   background-color: #f0f0f0;
