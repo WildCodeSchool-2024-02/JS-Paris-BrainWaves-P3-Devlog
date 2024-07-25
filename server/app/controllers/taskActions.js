@@ -1,9 +1,19 @@
 const tables = require("../../database/tables");
 
-const browse = async (req, res, next) => {
+const readAll = async (req, res, next) => {
   try {
     const { id } = req.params;
     const tasks = await tables.task.getAll(id);
+    res.status(200).json(tasks);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const browse = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const tasks = await tables.task.getById(id);
     res.status(200).json(tasks);
   } catch (err) {
     next(err);
@@ -37,12 +47,12 @@ const add = async (req, res, next) => {
   const { task, description, projectId, section } = req.body;
 
   try {
-    const result = await tables.task.create(
-    {  task,
+    const result = await tables.task.create({
+      task,
       section,
       projectId,
-      description}
-    );
+      description,
+    });
 
     res.status(201).json(result);
   } catch (err) {
@@ -64,4 +74,4 @@ const deleteTask = async (req, res, next) => {
   return true;
 };
 
-module.exports = { browse, addTask, deleteTask, add };
+module.exports = { browse, addTask, deleteTask, add, readAll };
