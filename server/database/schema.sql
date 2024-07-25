@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `devlog`.`task` (
   INDEX `fk_Task_Project1_idx` (`Project_id` ASC) VISIBLE,
   CONSTRAINT `fk_Task_Project1`
     FOREIGN KEY (`Project_id`)
-    REFERENCES `devlog`.`project` (`id`))
+    REFERENCES `devlog`.`project` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb3;
