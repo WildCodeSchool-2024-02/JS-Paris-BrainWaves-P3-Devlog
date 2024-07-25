@@ -34,9 +34,14 @@ class ProjectRepository extends AbstractRepository {
     return rows[0];
   }
 
-  async create(name, teamId, userId, isArchived =0) { // defaut value for is_archive is 0 = not archived
-    const query = `insert into ${this.table} (name, team_id, user_id, is_archived) values (?, ?, ?, ?)`;
-    const [result] = await this.database.query(query, [name, teamId, userId, isArchived]);
+  async create(name, userId, isArchived = 0) {
+    // defaut value for is_archive is 0 = not archived
+    const query = `insert into ${this.table} (name, user_id, is_archived) values (?, ?, ?)`;
+    const [result] = await this.database.query(query, [
+      name,
+      userId,
+      isArchived,
+    ]);
     return result.insertId;
   }
 }

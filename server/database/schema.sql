@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `devlog`.`project` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `is_archived` TINYINT NOT NULL,
-  `Team_id` INT NOT NULL,
+  `Team_id` INT NULL DEFAULT NULL,
   `User_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Project_Team1_idx` (`Team_id` ASC) VISIBLE,

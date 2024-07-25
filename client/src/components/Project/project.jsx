@@ -48,8 +48,7 @@ function Project() {
           },
           body: JSON.stringify({
             name: newProjectName,
-            team_id: 3,
-            user_id: 2,
+            user_id: auth?.user?.id,
             is_archive: 0,
           }),
         }
