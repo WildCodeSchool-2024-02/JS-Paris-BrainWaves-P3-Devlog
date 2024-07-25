@@ -1,0 +1,214 @@
+#header {
+  background-color: #494949;
+  color: white;
+  padding-top: 0;
+  position: fixed;
+  top: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+}
+
+.logo {
+  width: 100px;
+  cursor: pointer;
+}
+.profile {
+  width: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.rounded-button {
+  border-radius: 30px;
+  color: #e3e3e3;
+  background-color: #6499ff;
+  width: 150px;
+  cursor: pointer;
+  margin-left: 70px;
+  padding: 10px 30px;
+  font-weight: 500;
+  font-size: x-large;
+}
+
+.logo-home {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 150px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 23px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  color: aliceblue;
+  font-size: 17px;
+  pointer-events: none;
+}
+
+#header input[type="text"] {
+  border-radius: 30px;
+  background-color: #494949;
+  border-color: #6499ff;
+  border-width: 3px;
+  border-style: solid;
+  padding: 8px 16px 8px 40px;
+  width: 300px;
+  color: white;
+}
+
+#header input[type="text"]::placeholder {
+  color: #e3e3e3;
+}
+
+.img-container {
+  position: relative;
+  margin-right: 50px;
+}
+
+.popover {
+  position: absolute;
+  background-color: #2c2c2c;
+  width: 300px;
+  padding-bottom: 50px;
+  right: 2.5px;
+  border-radius: 20px;
+  margin-top: 21vh;
+  margin-left: -3vw;
+}
+.account {
+  margin-bottom: 15px;
+}
+
+.deconnection {
+  margin-left: 85px;
+}
+
+.popoverWriting {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: -6px 8px 9px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
+.popoverMailImg {
+  display: flex;
+  flex-direction: row;
+}
+
+.popoverName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.popoverWriting ul {
+  list-style: none;
+}
+
+.home-icon {
+  display: none;
+}
+.burger-icon {
+  display: none;
+}
+@media screen and (max-width: 1060px) {
+  #header {
+    width: 100%;
+    height: 80px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .profile {
+    width: 50px;
+    margin-right: 100%;
+  }
+
+  .rounded-button {
+    margin-left: 10px;
+    width: 120px;
+    padding: 8px 20px;
+    font-size: large;
+  }
+
+  .search-container {
+    margin-right: 100px;
+  }
+
+  #header input[type="text"] {
+    width: 200px;
+    padding: 6px 12px 6px 30px;
+  }
+
+  .search-icon {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .home-icon {
+    display: block;
+    padding-left: 10px;
+  }
+
+  .search-container {
+    width: 100%;
+    margin-right: 0;
+    margin-inline-start: 10px;
+  }
+
+  .profile {
+    width: 40px;
+    margin-left: 100%;
+  }
+
+  .rounded-button {
+    display: none;
+  }
+
+  #header input[type="text"] {
+    width: 100%;
+    padding-left: 30px;
+    margin-left: 0;
+  }
+
+  .search-icon {
+    left: 10px;
+    font-size: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .burger-icon {
+    display: block;
+    width: 20px;
+  }
+}
